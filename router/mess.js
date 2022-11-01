@@ -11,7 +11,7 @@ router.post("/tweetmess",async(req,res)=>{
     let counter = 0;
     try{
         const newtweet = await new Tweet({
-            threadId:req.body.threadId,
+            threadSubId:req.body.threadSubId,
             tweetId2:uuid.v4(),
             returnTo:req.body.returnTo,
             messText:req.body.messText,
@@ -22,12 +22,34 @@ router.post("/tweetmess",async(req,res)=>{
         //投稿したユーザーの履歴に追加する
         const tweetUser = await User.findById(req.body.userId);
         for (let i = 0;tweetUser.history.length>i;i++){
-            if (tweetUser.history[i] == req.body.threadId){
+            if (tweetUser.history[i] == req.body.threadSubId){
                 counter +=1;
             }
         }
-        const thread = await Thread.findById(req.body.threadId);
+        //履歴が７件を超えていたら削除
+        let historyCounter = tweetUser.history.length;
+        let oldHistory = tweetUser.history[0];
+        if (historyCounter >=7){
+            await tweetUser.updateOne({
+                $pull:{
+                    history:oldHistory
+                }
+            })
+        }
+
+        const thread = await Thread.findOne({threadSubId:req.body.threadSubId});
         if (counter == 0){
+            await tweetUser.updateOne({
+                $push:{
+                    history:thread.threadSubId
+                }
+            })
+        }else{
+            await tweetUser.updateOne({
+                $pull:{
+                    history:thread.threadSubId
+                }
+            });
             await tweetUser.updateOne({
                 $push:{
                     history:thread.threadSubId
@@ -79,21 +101,25 @@ router.get("/gettweet",async(req,res)=>{
         let page = req.body.page;
         let TweetList = await Thread.find({_id:threadId},{tweets:1,_id:0});
         let TweetList2 = []
-        if (TweetList[0].tweets.length>10 && TweetList[0].tweets.length+1 >=10*page){
+        console.log(TweetList[0].tweets.length)
+        if (TweetList[0].tweets.length>10 && TweetList[0].tweets.length >=10*page+1){
             for (let i = 9;0<=i;i--){
                 let getThreadSubId = TweetList[0].tweets[TweetList[0].tweets.length-page*10-(i+1)]
                 let getThread = await Tweet.findOne({tweetId2:getThreadSubId})
                 TweetList2.push(getThread)
             }
+            console.log("1")
             return res.status(200).json(TweetList2);
         }else if (TweetList[0].tweets.length<10){
             TweetList[0].tweets.map((i)=>{
                 let getThread2 = Tweet.findOne({tweetId2:i})
                 TweetList2.push(getThread2)
             })
+            console.log("2")
             return res.status(200).json(TweetList2);
-        }else if (TweetList[0].tweets.length+1 <=10*page){
+        }else{
             console.log("メッセージがありません")
+            
             return res.status(200).json("メッセージが見つかりません")
         }
     }catch{
@@ -127,6 +153,12 @@ router.get("/test1",async(req,res)=>{
         console.log(test3)
     }catch{
         console.log("取得失敗")
+    }
+})
+router.post("/deletetweetall",async(req,res)=>{
+    let tweetLIst = await Tweet.find();
+    for (let i =0;tweetLIst.length>i;i++){
+        await Tweet.remove({tweetId2:tweetLIst[i].tweetId2})
     }
 })
 module.exports = router

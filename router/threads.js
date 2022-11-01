@@ -82,9 +82,19 @@ router.post("/deletethread",async(req,res)=>{
                 wasdelete:true
             }
         })
+        //let deleteMinithread = await MiniThread.findOne({threadSubId:deleteThread.threadSubId})
+        await MiniThread.remove({threadSubId:deleteThread.threadSubId})
         return res.status(200).json("削除されました")
     }catch(err){
         return res.status(500).json(err)
+    }
+})
+router.get("/getfirstthread",async(req,res)=>{
+    try{
+        let firstThreadList = await Thread.find({wasdelete:false}).sort({$natural:-1}).limit(10)
+        return res.status(200).json(firstThreadList)
+    }catch{
+        return res.status(500).json("エラー")
     }
 })
 //取得するときに、threadNumから取得できるように、subThreadIdで登録する

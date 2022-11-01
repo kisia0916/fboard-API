@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const messageSchma = new mongoose.Schema({
-    threadId:{
+    threadSubId:{
         type:String,
         required:true
     },

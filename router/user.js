@@ -41,6 +41,7 @@ router.get("/gethistory",async(req,res)=>{
         let userId = req.body.userId;
         let getUser = await User.findById(userId)
         let historyList = getUser.history;
+
         let gethistory = []
         for (let i = 0;historyList.length>i;i++){
             let his1 = await Thread.findById(historyList[i]);
@@ -56,6 +57,7 @@ router.get("/gethistory2",async(req,res)=>{
         let userId = req.body.userId;
         let getUser = await User.findById(userId)
         let historyList = getUser.history;
+        console.log(historyList)
         let gethistory = []
         for (let i = 0;historyList.length>i;i++){
             let his1 = await MiniThread.findOne({threadId:historyList[i]});

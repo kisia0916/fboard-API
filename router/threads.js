@@ -133,17 +133,17 @@ router.post("/setlike",async(req,res)=>{
                     likes:req.body.userId
                 }
             })
+            const MiniThread1 = await MiniThread.findOne({threadSubId:threadId})
+            await MiniThread1.updateOne({
+                $set:{
+                    likenNum:MiniThread1.likenNum+1
+                }
+            })
+            console.log(MiniThread1)
         }
         await likeUser.updateOne({
             $push:{
                 like:threadId///お気に入りにサブIDを指定する
-            }
-        })
-        const MiniThread1 = await MiniThread.findOne({threadSubId:threadId})
-        console.log(MiniThread1)
-        await MiniThread1.updateOne({
-            $set:{
-                likenNum:MiniThread1.likenNum+1
             }
         })
         return res.status(200).json("お気に入りに追加しました")

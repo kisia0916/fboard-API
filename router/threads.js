@@ -46,7 +46,8 @@ router.post("/newthread",async(req,res)=>{
         const NewMiniThread = await new MiniThread({
             threadId:threadId,
             madeBy:req.body.username,
-            threadName:req.body.threadname
+            threadName:req.body.threadname,
+            threadNum:setNum
         })
         const NewMiniThread1 = NewMiniThread.save()
         res.status(200).json("正常にスレッドが作成されました");
@@ -204,7 +205,7 @@ router.get("/getthread1",async(req,res)=>{
     }
 })
 //こっちでは最後のスレッド番号以下の物を取得する
-router.get("/getthread2",async(req,res)=>{
+router.post("/getthread2",async(req,res)=>{
     let rastThread = req.body.rastThread;
     if (rastThread != 0){
         try{
@@ -223,6 +224,21 @@ router.get("/getthread2",async(req,res)=>{
             return res.status(500).json("エラー")
         }
             
+    }
+})
+router.post("/getthread3",async(req,res)=>{
+    let rastNum = req.body.rastNum;
+    try{
+        if (rastNum > 0){
+            let mainThreadList = await MiniThread.find({threadNum:{$lt:rastNum}}).sort({$natural:-1}).limit(6)
+            return res.status(200).json(mainThreadList)
+        }else if (rastNum == -1){
+            let mainThreadList2 = await MiniThread.find().sort({$natural:-1}).limit(6)
+            return res.status(200).json(mainThreadList2)
+        }
+
+    }catch{
+        res.status(500).json("エラー")
     }
 })
 

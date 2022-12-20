@@ -8,6 +8,10 @@ const MiniThreadSchma = new mongoose.Schema({
         type:String,
         required:true
     },
+    threadNum:{
+        type:Number,
+        required:true
+    },
     madeBy:{
         type:String,
         required:true

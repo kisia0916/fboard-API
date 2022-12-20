@@ -1,0 +1,116 @@
+.LeftBarThread{
+    background-color: #3c3c3d;
+    width: 92%;
+    margin-top: 18px;
+    margin-left: 4.1%; 
+    border-radius: 15px;
+    margin-bottom: 0;
+    padding: 0;
+}
+.LeftBarThreadTitle{
+    color: white;
+    font-family: "Franklin Gothic";
+    font-size: 150%;
+    font-weight: 650;
+    margin-top: 10px;
+}
+.LeftBarThreadTop{
+    display: flex;
+}
+.LeftBarImg{
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.LeftBarThreadName{
+    color: white;
+    display: flex;
+    align-items: center;
+    font-family: "Franklin Gothic";
+    font-weight: 600;
+    font-size: 115%;
+    margin-top: 8px;
+    margin-left: 8px;
+}
+.leftBarBottom{
+    width: 100%;
+}
+.LeftBarThreadBottom{
+    display: flex;
+}
+.LeftThreadTweetCounter{
+    display: flex;
+    margin-left: 11%;
+}
+
+.LeftThreadTweetIcon{
+    margin-left: 13%;
+    color: white;
+    margin-top: 4px;
+    font-size: 90%;
+}
+.LeftTweetCounterText{
+    align-items: center;
+    font-family: "Franklin Gothic";
+    color: white;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    margin-left: 1%;
+    font-weight: 590;
+}
+.LeftTweetCounterText{
+    margin-left: 5px;
+}
+.delteThreadButton{
+    height: 25px;
+    width: 55px;
+    border-radius: 6px;
+    margin-left: 6%;
+    margin-top: 4px;
+    background-color:rgba(255, 233, 92, 0.828);
+}
+.LeftThreadDelete{
+    font-family: "Franklin Gothic";
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    margin-left: 20%;
+}
+.LeftHreadMain{
+    margin-left:50px;
+    margin-right: 10px;
+}
+.LeftBarThread{
+    overflow: auto;
+}
+
+.leftBarBottomWapp{
+    /* background-color: red; */
+
+}
+.sddsdsd{
+    /* background-color: blue; */
+    overflow: auto;
+    height: 60vh;
+}
+
+@media screen and (min-height: 900px) {
+    .last_box{
+        height: 30px;
+
+        display: flex;
+    }
+}
+@media screen and (max-height: 900px) {
+    .last_box{
+        height: 70px;
+
+        display: flex;
+    }
+}
+@media screen and (max-height: 850px) {
+    .last_box{
+        height: 100px;
+
+        display: flex;
+    }
+}

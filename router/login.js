@@ -6,6 +6,9 @@ let login_page = fs.readFileSync("./viwes/login.ejs","utf-8")
 let create_page = fs.readFileSync("./viwes/newUser.ejs","utf-8")
 const cookie = require("cookie")
 const sesstion = require("express-session")
+const profilePhotoList = [
+
+]
 router.get("/",(req,res)=>{
     let login_render = ejs.render(login_page,{
         title:"login",
@@ -23,10 +26,13 @@ router.post("/",async(req,res,text)=>{
         const user = await User.findOne({
             name:name
         })
+        let userId = user._id;
+        console.log(user._id)
         if (user.pass == pass){
             console.log("ログイン成功")
             req.session.name1 = name;
             req.session.pass1 = pass;
+            req.session.userId = userId;
             res.redirect('/')
 
         }else{
@@ -76,7 +82,7 @@ router.post("/newuser",async(req,res)=>{
             if (pass2.length >=3){
                     const newuser = await new User({
                         name:name2,
-                        pass:pass2
+                        pass:pass2,
                     })
                     const user = newuser.save()
                     counter +=1;

@@ -26,6 +26,11 @@ const userSchma = new mongoose.Schema({
         type:Array,
         default:[]
     },
+    profliePhoto:{
+        type:String,
+        default:"",
+    }
+
 },
     {timestamps:true}
 )

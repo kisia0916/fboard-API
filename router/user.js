@@ -19,11 +19,12 @@ router.get("/getLike",async(req,res)=>{
         return res.status(500).json("エラー")
     }
 })
-router.get("/getLike2",async(req,res)=>{
+router.post("/getLike2",async(req,res)=>{
     try{
         let userId = req.body.userId;
         let user = await User.findById(userId);
         let likeList = user.like;
+        likeList.reverse()
         let threadList= []
         console.log(likeList)
         for (let i = 0;likeList.length>i;i++){
@@ -52,15 +53,16 @@ router.get("/gethistory",async(req,res)=>{
         return res.status(500).json("エラー")
     }
 })
-router.get("/gethistory2",async(req,res)=>{
+router.post("/gethistory2",async(req,res)=>{
     try{
         let userId = req.body.userId;
         let getUser = await User.findById(userId)
         let historyList = getUser.history;
+        historyList.reverse()
         console.log(historyList)
         let gethistory = []
         for (let i = 0;historyList.length>i;i++){
-            let his1 = await MiniThread.findOne({threadId:historyList[i]});
+            let his1 = await MiniThread.findOne({threadId:historyList[i]})
             gethistory.push(his1)
         }
         return res.status(200).json(gethistory)
@@ -85,11 +87,12 @@ router.get("/getmythread",async(req,res)=>{
     }
 
 })
-router.get("/getmythread2",async(req,res)=>{
+router.post("/getmythread2",async(req,res)=>{
     let userId = req.body.userId;
     try{
         let myuser =await User.findById(userId);
         let myThreadList = myuser.myMess;
+        myThreadList.reverse()
         let threadList = [];
         for (let i = 0;myThreadList.length>i;i++){
             let mythread =await MiniThread.findOne({threadId:myThreadList[i]})
@@ -101,4 +104,14 @@ router.get("/getmythread2",async(req,res)=>{
     }
 
 })
+//ユーザー情報を取得
+router.post("/getuserdata",async(req,res)=>{
+    try{
+        let data = await User.findById(req.body.userId);
+        return res.status(200).json(data);
+    }catch{
+        return res.status(500).json("エラー");
+    }
+})
 module.exports = router
+

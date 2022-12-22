@@ -67,6 +67,7 @@ async function change_date(){
 //お気に入りスレッドを取得 して表示
 const leftThreadWappDom = document.getElementById("liftBarWP")
 const setLikeThread = async()=>{
+
             let likeThread = await axios.post("/api/user/getlike2",{
                 userId:window.sessionStorage.getItem(['userId'])
             })
@@ -148,9 +149,11 @@ const setHistoryThread = async()=>{
 
 //MyThreadを取得して表示
 const setMyThread = async()=>{
+    console.log("zltukooooooooooooo")
     let MyThread = await axios.post("/api/user/getmythread2",{
         userId:window.sessionStorage.getItem(['userId'])
     });
+    console.log(MyThread)
     let MyThreadList = MyThread.data.map((i)=>{
         let ThreadName = i.threadName;
         let MadeBy = i.madeBy;

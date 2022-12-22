@@ -1,6 +1,3 @@
-
-
-//メインスペースに、いろいろ描画する
 /*
 let mainScreen = document.querySelector(".mainScreen");
 let ThreadListRast = 0;

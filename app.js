@@ -10,6 +10,9 @@ const login_router = require("./router/login")
 const therad_page =require("./router/threads")
 const user_page = require("./router/user")
 const mess_page = require("./router/mess")
+const home_page = require("./router_pages/home")
+const threadlist_page = require("./router_pages/threadList")
+const thread_page = require("./router_pages/thread._page");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const http = require("http");
@@ -19,6 +22,7 @@ const path = require("path");
 const router = require("./router/login");
 const User = require("./module/User");
 const { escape } = require("querystring");
+
 app.set('trust proxy', 1)
 app.use(session({
     secret: 'secret',
@@ -38,9 +42,11 @@ app.use("/viwes",express.static("views"))
 app.use("/style",express.static("style"));
 app.use("/profilePhotos",express.static("profilePhotos"));
 app.use("/front-scripts",express.static("front-scripts"));
+app.use("/router_pages",express.static("router_pages"));
 app.use(body_pase.json());//////////////////////////////   ここ重要
 app.use(body_pase.urlencoded({ extended: true }));//////
 app.use(express.static(path.join(__dirname, "js")));
+
 app.get("/",async(req,res)=>{
     let userdata =req.session.name1
     let userName = null;
@@ -50,16 +56,19 @@ app.get("/",async(req,res)=>{
         userName = "Gest"
         res.end()
     }else{
-        console.log("tset")
-        let userData = await User.findById(req.session.userId);
-        let index_render = ejs.render(index_page,{
-            UserName:req.session.name1,
-        })
-        //setCookie("userId",req.session.userId,res);
-        res.clearCookie("userId1")
-        res.cookie("userId1",req.session.userId,{})
-        res.writeHead(200,{"Content-Type":"text/html"});
-        res.write(index_render)
+        // console.log("tset")
+        //let userData = await User.findById(req.session.userId);
+        // let index_render = ejs.render(index_page,{
+        //     UserName:req.session.name1,
+        // })
+        // //setCookie("userId",req.session.userId,res);
+        // res.clearCookie("userId1")
+        // res.cookie("userId1",req.session.userId,{})
+        // res.writeHead(200,{"Content-Type":"text/html"});
+        // res.write(index_render)
+        // res.end()
+        //homeにリダイレクト
+        res.redirect('/home')
         res.end()
     }
 });
@@ -81,10 +90,18 @@ app.get("/debug",(req,res)=>{
     res.write(index_render)
     res.end()
 })
+//404
+
 app.use("/login",login_router)
 app.use("/api/thread",therad_page)
 app.use("/api/tweet",mess_page)
 app.use("/api/user",user_page)
+
+//ここからページのルーティング設定
+app.use("/home",home_page)
+app.use("/threadlist",threadlist_page)
+app.use("/thread",thread_page)
+
 io.on("connection",(socket)=>{
     console.log("socket")
 })

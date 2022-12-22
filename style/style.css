@@ -1,3 +1,6 @@
+html{
+
+}
 .topBar{
     background-color: #2d2d2ffa;
     height: 73px;
@@ -13,7 +16,7 @@ body{
 .mainSpace{
     display: flex;
     background-color: #343435;
-
+    position:relative;
 }
 .leftBar{
     flex:2.45;
@@ -136,7 +139,7 @@ margin-right: 3%;
 .profilePhoto{
     border-radius: 50%; 
     /* margin-top:6.5%; */
-    margin-top: 6.5%;
+    margin-top: 6%;
     margin-bottom: 0%;
 }
 .NameTag{
@@ -335,4 +338,10 @@ margin-right: 3%;
 }
 .leftNameWapp{
 
+}
+.loading{
+    position:relative;
+    background-color: red;
+    width: 600px;
+    height: 100vh;
 }

@@ -242,17 +242,27 @@ router.post("/getthread3",async(req,res)=>{
     }
 })
 
-router.get("/test",async(req,res)=>{
+// router.get("/test",async(req,res)=>{
+//     try{
+//         let lastPage = req.body.lastPage;
+//         let getthread = await ThreadNum.find({wasdelete:false}).limit(20);
+//         for (let i = 0;getthread.length>i;i++){
+//             await ThreadNum.remove({threadId:getthread[i].threadId})
+//         }
+//         return res.status(200).json("削除")
+//     }catch{
+//         return res.status(500).json("エラー")
+//     }
+// })
+
+router.get("/gethomethread",async(req,res)=>{
     try{
-        let lastPage = req.body.lastPage;
-        let getthread = await ThreadNum.find({wasdelete:false}).limit(20);
-        for (let i = 0;getthread.length>i;i++){
-            await ThreadNum.remove({threadId:getthread[i].threadId})
-        }
-        return res.status(200).json("削除")
+        let newThread = await Thread.find({}).sort({$natural:-1}).limit(10);
+        return res.status(200).json(newThread);
     }catch{
         return res.status(500).json("エラー")
     }
-})
 
+
+})
 module.exports = router

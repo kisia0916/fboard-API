@@ -1,0 +1,210 @@
+.HomemainSpaceTop{
+}
+
+.home_page_title{
+    font-family: 'Franklin Gothic';
+    color: white;
+    font-weight: 900;
+    font-size: 190%;
+    margin-top: 15px;
+    margin-left: 3%;
+}
+.home_advertisement{
+    background-color:#3C3C3D;
+    display: flex;
+    height: 220px;
+    margin-top: 30px;
+    width: 90%;
+    margin-left:4%;
+    border-radius: 20px;
+}
+.HomenewThread{
+    background-color: blue;
+    height: 500px;
+    margin-top: 24px;
+    margin-left: 4%;
+    width: 90%;
+    border-radius: 20px;
+}
+.home_topics{
+    background-color: #3C3C3D;
+
+    margin-top: 20px;
+    width: 90%;
+    margin-left:4%;
+    border-radius: 20px;
+}
+.home_new_thread{
+    background-color: #3C3C3D;
+
+
+    margin-top: 24px;
+    width: 90%;
+    margin-left:4%;
+    border-radius: 20px;
+}
+.home_content_text1{
+    
+    color: white;
+    font-family: 'Franklin Gothic';
+    font-size: 150%;
+    font-weight: 660;
+    margin-top: 15px;
+    margin-left: 30px;
+}
+.home_advertisement_wapp{
+    padding-bottom: 40px;
+    width: 93%;
+    margin-left: 2.5%;
+    border-bottom:solid 2px #424243;
+}
+.home_tag{
+    background-color: red;
+}
+.home_content_text2{
+    
+    color: white;
+    font-family: 'Franklin Gothic';
+    font-size: 150%;
+    font-weight: 660;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.home_content_text_wapp{
+    display: flex;
+    margin-top: 15px;
+    justify-content: space-between;
+}
+.home_content_news_wapp{
+
+    padding-top: 12px;
+}
+.home_content_moreload{
+    display: flex;
+    margin-right: 3%;
+    margin-top: 15px;
+    color: rgb(247, 229, 114);
+    cursor:pointer;
+}
+.new_threads{
+    margin-left: 2.5%;
+    margin-top: 20px;
+}
+.newThreadWapp{
+    background-color: rgb(55, 55, 55);
+    width: 97%;
+    margin-top: 15px;
+    border-radius: 20px;
+    
+}
+.home_thread_userName{
+    font-family: 'Franklin Gothic';
+    color: white;
+    font-size: 170%;
+    height: 30%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+}
+.newThreadProfilePhoto{
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    object-fit: cover;
+    margin-left: 22px;
+}
+.home_thread_userName{
+    font-family: 'Franklin Gothic';
+    color: white;
+    font-size: 150%;
+    font-weight: 650;
+    margin-left: 11px;
+    margin-top: 1px;
+}
+.homeThreadTop1{
+    display: flex;
+    padding-top: 11px;
+}
+.home_thread_text{
+    color: white;
+    font-size: 155%;
+    font-weight: 660;
+    /* margin-left: 5.4%; */
+    table-layout: fixed;
+    word-wrap: break-word;
+
+}
+.home_thread_bottom{
+    display: flex;
+    margin-left: 4.5%;
+}
+.home_thread_create{
+
+}
+.home_thread_create_text{
+    display: flex;
+    color: white;
+    font-family: 'Franklin Gothic';
+    padding-left: 5.5%;
+    margin-top:4px;
+    padding-bottom: 12px;
+    white-space: nowrap
+}
+.home_thread_tweet_counter{
+    display: flex;
+}
+.home_thread_tweet_num{
+    display: flex;
+    color: white;
+    font-family: 'Franklin Gothic';
+    font-size: 105%;
+    margin-left: 5px;
+    margin-top: 5.5px;
+}
+.home_thread_tweetIcon{
+    margin-left: 30px;
+    margin-top: 4px;
+    color: white;
+}
+.fefefeefefefe{
+
+}
+
+.home_news_texts{
+    background-color: rgb(55, 55, 55);
+    margin-top: 15px;
+
+    width: 93%;
+    max-height: 120px;
+    /* height: 120px; */
+    margin-left: 3.5%;
+    border-radius: 11px;
+    overflow:auto;
+
+}
+.home_news_bottom_space{
+    height: 15px;
+}
+.home_page_bottom{
+    height: 60px;
+    background-color: #312f2f;
+    margin-top: 60px;
+    flex-flow: column;
+}
+.lgotpgjmfkld{
+    height: 10px;
+}
+.home_thread_main{
+    display: flex;
+}
+.fkglr{
+    background-color: #343333;
+    height: 100%;
+    width: 5.5%;
+}
+.home_bottom_text{
+    display: flex;
+    color: white;
+    padding-top: 15px;
+    margin-left: 35%;
+}

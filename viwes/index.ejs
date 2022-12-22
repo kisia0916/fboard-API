@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="../style/mainStyle.css">
     <link rel="stylesheet" href="../style/LeftBar.css">
     <link rel="stylesheet" href="../style/Tweet.css">
+    <link rel="stylesheet" href="../style/home.css">
+    <link rel="stylesheet" href="../style/thread_page.css">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -16,8 +19,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <script src="../front-scripts/finish_load.js"></script>
 
 <body>
+    <!-- <div class="loading">
+
+    </div> -->
     <div class="mainWapp">        
         <div class="topBar">
             <div class="mainBox">
@@ -47,7 +54,7 @@
 
                 <div class="phtoWapp">
                     <div class="photoWapp2">
-                        <img src="../profilePhotos/R (1).png" class="profilePhoto" width="125px" height="125px">
+                        <img src="../profilePhotos/R (1).png" class="profilePhoto" width="123px" height="123px" id="sampling">
                     </div>
                     <div class="leftNameWapp" id="leftNameWapp">
                         <span class="NameTag" id="NameTag"><%=UserName%></span> 
@@ -125,6 +132,14 @@
         </div>
     </div>
     <script src = "../front-scripts/dataFunctions/writeThreadLIst.js"></script>
+    <script src="../front-scripts/dataFunctions/write_home.js"></script>
+    <script src="../front-scripts/dataFunctions/write_thread_page.js"></script>
+
+    <script src="../front-scripts/DOM_htmls/home_new_thread.js"></script>
+    <script src="../front-scripts/DOM_htmls/thread_page.js"></script>
+    <script src="../front-scripts/DOM_htmls/home_page.js"></script>
+    <script src="../front-scripts/DOM_htmls/thread_tweet_page.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../front-scripts/load_first/setUserData.js"></script>
     <script src="../front-scripts/loadData.js"></script>
@@ -132,5 +147,7 @@
     <script src="../front-scripts/setLike.js"></script>
     <script src="../front-scripts/load_first/analysis_url.js"></script>
 
+
+    <script src="../front-scripts/dataFunctions/writeThreadLIst.js"></script>
 </body>
 </html>

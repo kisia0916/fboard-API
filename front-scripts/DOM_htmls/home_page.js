@@ -33,7 +33,7 @@ const return_home_html = ()=>{
             <div class="home_new_thread">
                 <div class="home_content_text_wapp">
                     <span class="home_content_text1">最新のスレッド</span>
-                    <span class="home_content_moreload"><u>さらに読み込む</u></span>
+                    <span class="home_content_moreload" onclick = "move_url('threadlist')"><u>さらに読み込む</u></span>
                 </div>
                 <div class="new_threads">
 

@@ -3,7 +3,7 @@ const writeThreadList = ()=>{
     let mainScreen = document.querySelector(".mainScreen");
     ThreadListRast = 0;
 
-    if (window.sessionStorage.getItem(["nowMainLink"]) == "/"){
+    if (true){
             const ThreadList = `
                 <div class="mainScreenWapp">
                             <div class="ThreadListTop">

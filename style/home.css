@@ -29,7 +29,7 @@
 .home_topics{
     background-color: #3C3C3D;
 
-    margin-top: 20px;
+    margin-top: 12px;
     width: 90%;
     margin-left:4%;
     border-radius: 20px;
@@ -38,7 +38,7 @@
     background-color: #3C3C3D;
 
 
-    margin-top: 24px;
+    margin-top: 19px;
     width: 90%;
     margin-left:4%;
     border-radius: 20px;
@@ -47,9 +47,9 @@
     
     color: white;
     font-family: 'Franklin Gothic';
-    font-size: 150%;
+    font-size: 145%;
     font-weight: 660;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-left: 30px;
 }
 .home_advertisement_wapp{
@@ -65,19 +65,19 @@
     
     color: white;
     font-family: 'Franklin Gothic';
-    font-size: 150%;
+    font-size: 145%;
     font-weight: 660;
-    margin-top: 10px;
+    margin-top: 8px;
     margin-left: 30px;
 }
 .home_content_text_wapp{
     display: flex;
-    margin-top: 15px;
+    margin-top: 0px;
     justify-content: space-between;
 }
 .home_content_news_wapp{
 
-    padding-top: 12px;
+    padding-top: 8px;
 }
 .home_content_moreload{
     display: flex;
@@ -93,15 +93,15 @@
 .newThreadWapp{
     background-color: rgb(55, 55, 55);
     width: 97%;
-    margin-top: 15px;
+    margin-top: 12px;
     border-radius: 20px;
     
 }
 .home_thread_userName{
     font-family: 'Franklin Gothic';
     color: white;
-    font-size: 170%;
-    height: 30%;
+    font-size: 160%;
+    height: 20%;
     margin-bottom: 0;
     padding-bottom: 0;
 
@@ -116,19 +116,20 @@
 .home_thread_userName{
     font-family: 'Franklin Gothic';
     color: white;
-    font-size: 150%;
+    font-size: 140%;
     font-weight: 650;
     margin-left: 11px;
-    margin-top: 1px;
+    margin-top: 2px;
 }
 .homeThreadTop1{
     display: flex;
     padding-top: 11px;
+
 }
 .home_thread_text{
     color: white;
-    font-size: 155%;
-    font-weight: 660;
+    font-size: 150%;
+    font-weight: 550;
     /* margin-left: 5.4%; */
     table-layout: fixed;
     word-wrap: break-word;
@@ -196,6 +197,7 @@
 }
 .home_thread_main{
     display: flex;
+
 }
 .fkglr{
     background-color: #343333;

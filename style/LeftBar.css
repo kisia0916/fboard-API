@@ -1,16 +1,28 @@
 .LeftBarThread{
-    background-color: #3c3c3d;
+    background-color: #3c3c3d; 
+    background-color: #3e3e3ee2; 
+    /* background-color: #3f3f3fe2;  */
+    background-color: #3C3C3D;
+
+
     width: 92%;
-    margin-top: 18px;
+    margin-top: 15px;
     margin-left: 4.1%; 
     border-radius: 15px;
     margin-bottom: 0;
     padding: 0;
+    transform: translateY(-1px);
+    box-shadow: 2px 3px 15px -5px #2e2e2e;
+    cursor: pointer;
+}
+.LeftBarThread:hover{
+    transform: translateY(-2.5px);
+    
 }
 .LeftBarThreadTitle{
     color: white;
     font-family: "Franklin Gothic";
-    font-size: 150%;
+    font-size: 135%;
     font-weight: 650;
     margin-top: 10px;
 }
@@ -90,7 +102,7 @@
 .sddsdsd{
     /* background-color: blue; */
     overflow: auto;
-    height: 60vh;
+    height: 80vh;
 }
 
 @media screen and (min-height: 900px) {
@@ -102,7 +114,7 @@
 }
 @media screen and (max-height: 900px) {
     .last_box{
-        height: 70px;
+        height: 40px;
 
         display: flex;
     }
@@ -114,3 +126,66 @@
         display: flex;
     }
 }
+.yokonisitai{
+    display: flex;
+
+    margin-top: 10px;
+
+}
+.yokonisitai2{
+    display: flex; 
+    margin-left: 25px;
+}
+
+.barFollownum{
+display: flex;
+width:86%;
+
+
+margin-left: 6.5%;
+margin-bottom: 10px;
+border-radius: 10px;
+}
+.yokonisitai-1{
+    border-bottom: solid 1px #505051;
+}
+.follownumbar{
+
+}
+.profileTera{
+    width: 100%;
+    height: 100%;
+    background-color: #3c3c3d;
+    color: white;
+    height: 60px;
+    font-size: 106%;
+    min-height: 30px;
+}
+.profileTera {
+    border:none;
+    border-radius:7px;
+    box-shadow: none;
+    padding: 2px 8px;
+    border: 1px solid rgba(255, 233, 92, 0.828);
+    resize: vertical;
+  }
+  
+.profileTera:focus {
+    outline: none;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 20px;
+    }
+    ::-webkit-scrollbar-track {
+    background-color: #3c3c3d;
+    border-radius: 100px;
+    }
+    ::-webkit-scrollbar-thumb {
+    background: #2d2d2d;
+    border-radius: 100px;
+    width: 130px;
+    } 
+    .fsegefesgetr{
+        height:3px;
+    }

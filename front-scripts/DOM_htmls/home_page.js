@@ -2,7 +2,7 @@ const return_home_html = ()=>{
     const html = `
             <div class = "HomemainSpaceTop">
             <div class="home_page_title">
-                Home - FBoardにようこそ
+                <span class = "home_page_title_text">Home - FBoardにようこそ</span>
             </div>
             <div class="home_button">
 

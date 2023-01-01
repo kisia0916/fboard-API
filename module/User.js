@@ -29,8 +29,11 @@ const userSchma = new mongoose.Schema({
     profliePhoto:{
         type:String,
         default:"",
-    }
-
+    },
+    profileMess:{
+        type:String,
+        default:"",
+    },
 },
     {timestamps:true}
 )

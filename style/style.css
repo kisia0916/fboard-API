@@ -3,7 +3,7 @@ html{
 }
 .topBar{
     background-color: #2d2d2ffa;
-    height: 68px;
+    height: 64px;
 }
 body{
     margin: 0;
@@ -12,6 +12,7 @@ body{
 .mainWapp{
     height: 100vh;
     overflow: hidden;
+    position: relative;
 }
 .mainSpace{
     display: flex;
@@ -22,7 +23,10 @@ body{
     flex:2.45;
     min-width: 320px;
     background-color:#373738; 
-    border-right: 1px solid #39393b;
+    /* border-right: 1px solid #39393b; */
+    border-right: 1px solid  #3d3d3d;
+    /* border-bottom: solid 1px #505051; */
+
     resize: both;
     height: 100vh;
 
@@ -75,7 +79,7 @@ body{
 .TopTitile{
     color: white;
 
-    font-size: 180%;
+    font-size: 170%;
     /* font-size: 1.5em; */
     font-weight: 800;
     font-family: 'Franklin Gothic';
@@ -137,7 +141,7 @@ margin-right: 3%;
 }
 
 .profilePhoto{
-    border-radius: 10px; 
+    border-radius: 12px; 
     /* margin-top:6.5%; */
     margin-top: 5%;
     margin-bottom: 0%;
@@ -145,14 +149,15 @@ margin-right: 3%;
 .NameTag{
 
     color: white;
-    font-size: 170%;
+    font-size: 140%;
     /* font-size: 1.5em; */
     font-weight: 550;
-    font-family: 'Franklin Gothic';
+    /* font-family: 'Franklin Gothic'; */
+    margin-left: 15px;
 }
 .leftNameWapp{
-    text-align: center;
-    margin-top: 4px;
+
+    margin-top: 3px;
 }
 .photoWapp2{
     text-align: center;
@@ -167,19 +172,23 @@ margin-right: 3%;
     font-family: 'Franklin Gothic';
 }
 .MybirthDay{
-    display:flex;
-    justify-content: center;
-    margin-top: 1%;
+    display: flex;
+    margin-top: 0%;
+    margin-left: 15px;
+    
 }
 .Toolbar{
     margin-top:2%;
     display: flex;
     justify-content: space-between;
-    user-select:none
+    user-select:none;
+    padding-bottom: 12px;
+    box-shadow: 0px 8px 15px -10px #1d1d1d;
+
 }
 .toolbarLine{
-    background-color: rgba(255, 233, 92, 0.828);
-    height: 7px;
+    /* background-color: rgba(255, 233, 92, 0.828); */
+    /* height: 7px; */
 
 }
 .material-symbols-outlined{
@@ -211,7 +220,7 @@ margin-right: 3%;
 }
 .toolHistory{
     display: flex;
-    margin-left: 10px;
+    margin-left: 0px;
 }
 .history{
     color: white;
@@ -247,8 +256,8 @@ margin-right: 3%;
 }
 
 .toolBarLine{
-    background-color: rgba(255, 233, 92, 0.828);
-    height: 5px;
+    /* background-color: rgba(255, 233, 92, 0.828); */
+    /* height: 5px; */
     margin-bottom: 8px;
     border-radius: 40%,40%,40%,40%;
 }
@@ -258,30 +267,42 @@ margin-right: 3%;
 .selectBox1{
 
 }
-.tab_radio:checked + .selectBox1 {
-    background-color:rgba(255, 233, 92, 0.828);
+.tab_radio:checked + .toolTextWappLike {
+    background-color: rgba(255, 233, 92, 0.828);
+    border-radius: 7px;
+    /* background-color:rgba(255, 233, 92, 0.828);
     padding-left: 16px;
-    position: absolute;
+
     height: 30px;
-    width: 4%;
+    width: 3%;
     min-width: 50px;
     align-items: center;
     border-radius: 6px 6px 0 0;
-    min-width: 70px;
-}  
-.tab_radio2:checked + .selectBox1 {
-    background-color:rgba(255, 233, 92, 0.828);
+    min-width: 70px;  */
+} 
+.gggg1{
+    margin-right: 12px;
+}
+.bbb1{
+    margin-left: 3px;
+}
+.tab_radio2:checked + .toolTextWappHistory{
+    background-color: rgba(255, 233, 92, 0.828);
+    border-radius: 7px;
+    /* background-color:rgba(255, 233, 92, 0.828);
     margin: 0;
     padding: 0;
     position: absolute;
     height: 30px;
-    width: 6%;
+    width: 5%;
     min-width: 92px;
     
-    border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;  */
 } 
-.tab_radio3:checked + .selectBox1 {
-    background-color:rgba(255, 233, 92, 0.828);
+.tab_radio3:checked + .toolTextWappMyThread {
+    background-color: rgba(255, 233, 92, 0.828);
+    border-radius: 7px;
+    /* background-color:rgba(255, 233, 92, 0.828);
     margin: 0;
     padding: 0;
     position: absolute;
@@ -293,7 +314,7 @@ margin-right: 3%;
     word-break: break-all;
 
     min-width: 100px;
-    border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;  */
 } 
 
 .toolTextWapp{
@@ -301,7 +322,7 @@ margin-right: 3%;
     /* position: relative; */
 }
 .toolTextWappHistory{
-    margin-left: 6%;
+    margin-left: 20%;
     align-items: center;
 
     position: relative;
@@ -318,7 +339,7 @@ margin-right: 3%;
     align-items: center;
     text-align: center;
     position: relative;
-    left: 4%;
+    left: 12%;
 
 }
 
@@ -337,7 +358,7 @@ margin-right: 3%;
     padding-bottom: 0;
 }
 .leftNameWapp{
-
+    margin-bottom: 10px;
 }
 .loading{
     position:relative;

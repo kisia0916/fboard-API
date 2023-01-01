@@ -113,5 +113,27 @@ router.post("/getuserdata",async(req,res)=>{
         return res.status(500).json("エラー");
     }
 })
+router.post("/getprofile",async(req,res)=>{
+    try{
+        let hostuser = await User.findById(req.body.userId);
+        let profileText = hostuser.profileMess;
+        return res.status(200).json(profileText)
+    }catch{
+        return res.status(500).json("エラー")
+    }
+})
+router.post("/setprofile",async(req,res)=>{
+    try{
+        let hostuser = await User.findById(req.body.userId);
+        await hostuser.updateOne({
+            $set:{
+                profileMess:req.body.newProfile
+            }
+        })
+        return res.status(200).json(hostuser)
+    }catch{
+        return res.status(500).json("エラー")
+    }
+})
 module.exports = router
 

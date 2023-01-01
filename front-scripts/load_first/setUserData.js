@@ -5,6 +5,7 @@ let userHistory = null;
 let userThread = null;
 let create_date = ""
 let counter = 0;
+let rast_profile = ""
 for (let i= 0;cookie_data.length>i;i++){
     if (counter == 1){
         userId+=cookie_data[i];
@@ -34,6 +35,8 @@ const getUserdata = async()=>{
         window.sessionStorage.setItem(['userThread'],data.data.myMess);
         window.sessionStorage.setItem(['profilePhoto'],data.data.profliePhoto)
         window.sessionStorage.setItem(['createAt'],data.data.createdAt);
+        window.sessionStorage.setItem(['profile'],data.data.profileMess);
+
         console.log(data.data);
         change_date();
         console.log(window.sessionStorage.getItem(['Name']))
@@ -61,12 +64,34 @@ async function change_date(){
     console.log(create_year)
     console.log(create_month)
     create_date = create_year+"年"+" "+create_month+"月に登録";
+    //プロフィールを表示
+    let profile = window.sessionStorage.getItem(['profile'])
+    let box = document.querySelector(".profileTera")
+    box.value = profile
+    console.log(profile)
+    rast_profile = profile
+    box.addEventListener('blur',async function(){// 第一引数にblurを指定
+        // 処理を記述
+        //profileを保存
+        let ptext = document.querySelector(".profileTera");
+        if(ptext.value != rast_profile){
+            console.log(ptext.value)
+            await axios.post("/api/user/setprofile",{
+                userId:window.sessionStorage.getItem(['userId']),
+                newProfile:ptext.value
+            })
+            rast_profile = ptext.value
+        }
+      });
 }
+
+
 //////
 
 //お気に入りスレッドを取得 して表示
 const leftThreadWappDom = document.getElementById("liftBarWP")
 const setLikeThread = async()=>{
+    window.sessionStorage.setItem(["nowLeftBarLink1"],"/like")
 
             let likeThread = await axios.post("/api/user/getlike2",{
                 userId:window.sessionStorage.getItem(['userId'])
@@ -77,7 +102,7 @@ const setLikeThread = async()=>{
                 let LikeThreadMadeBy = i.madeBy;
                 let LikeThreadTweetNum = i.tweetCounter
                 return `
-                    <div class="LeftBarThread">
+                    <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
                     <div class="LeftBarThreadTop">
                         <img src="../profilePhotos/no-userimage (1).png" width="32px" height="32px" class="LeftBarImg">
                         <span class="LeftBarThreadName">${LikeThreadMadeBy}</span>
@@ -108,6 +133,7 @@ const setLikeThread = async()=>{
 
 //履歴を取得して表示
 const setHistoryThread = async()=>{
+    window.sessionStorage.setItem(["nowLeftBarLink1"],"/history")
     let History = await axios.post("/api/user/gethistory2",{
         userId:window.sessionStorage.getItem(['userId'])
     });
@@ -116,7 +142,7 @@ const setHistoryThread = async()=>{
         let MadeBy = i.madeBy;
         let TweetCounter = i.tweetCounter;
         return`
-                <div class="LeftBarThread">
+                <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
                 <div class="LeftBarThreadTop">
                     <img src="../profilePhotos/no-userimage (1).png" width="32px" height="32px" class="LeftBarImg">
                     <span class="LeftBarThreadName">${MadeBy}</span>
@@ -143,12 +169,14 @@ const setHistoryThread = async()=>{
     }).join("")
     leftThreadWappDom.innerHTML = HistoryThreadList;
     console.log(History.data);
+
 }
 //setHistoryThread()
 //////
 
 //MyThreadを取得して表示
 const setMyThread = async()=>{
+    window.sessionStorage.setItem(["nowLeftBarLink1"],"/mythread")
     console.log("zltukooooooooooooo")
     let MyThread = await axios.post("/api/user/getmythread2",{
         userId:window.sessionStorage.getItem(['userId'])
@@ -159,7 +187,7 @@ const setMyThread = async()=>{
         let MadeBy = i.madeBy;
         let TweetCounter = i.tweetCounter;
         return`
-                <div class="LeftBarThread">
+                <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
                 <div class="LeftBarThreadTop">
                     <img src="../profilePhotos/no-userimage (1).png" width="32px" height="32px" class="LeftBarImg">
                     <span class="LeftBarThreadName">${MadeBy}</span>
@@ -187,16 +215,18 @@ const setMyThread = async()=>{
     leftThreadWappDom.innerHTML = MyThreadList;
     console.log(History.data);
 }
+//profileを取得して表示
 let radio_button1 = document.getElementById("tab_radio_A").checked;
 let radio_button2 = document.getElementById("tab_radio_B").checked;
 let radio_button3 = document.getElementById("tab_radio_C").checked;
+
 if (radio_button1){
     setLikeThread()
-    window.sessionStorage.setItem(["nowLeftBarLink"],"/like")
+    window.sessionStorage.setItem(["nowLeftBarLink1"],"/like")
 }else if(radio_button2){
     setLikeThread()
-    window.sessionStorage.setItem(["nowLeftBarLink"],"/history")
+    window.sessionStorage.setItem(["nowLeftBarLink1"],"/history")
 }else if(radio_button3){
     setMyThread()
-    window.sessionStorage.setItem(["nowLeftBarLink"],"/mythread")
+    window.sessionStorage.setItem(["nowLeftBarLink1"],"/mythread")
 }

@@ -1,5 +1,7 @@
 let ThreadListRast = 0;
+let ThreadListFirst = 0
 const writeThreadList = ()=>{
+    document.title = "FBoard-ThreadList"
     let mainScreen = document.querySelector(".mainScreen");
     ThreadListRast = 0;
 
@@ -16,10 +18,8 @@ const writeThreadList = ()=>{
                                     </div>
                                     <div class="sendThreadButton">
 
-                                                <span class="material-symbols-outlined createThreadIcon">
-                                                    add_comment
-                                                </span>
-                                            <span class="createThreadButton">スレッドを投稿</span>
+
+                                            <span class="createThreadButton" onclick = "write_prompt()">スレッドを投稿</span>
                                     </div>
                             </div>
                             <span class="ThreaCounterText">4件のスレッド</span>
@@ -35,6 +35,7 @@ const writeThreadList = ()=>{
                 })
                 //console.log(data.data)
                 ThreadListRast = data.data[5].threadNum;
+                ThreadListFirst = data.data[0].threadNum;
                 let ThreadData = data.data;
                 //console.log(ThreadData)
                 let mapThread = ThreadData.map((i)=>{
@@ -55,11 +56,27 @@ const writeThreadList = ()=>{
                         }
                     }
                     let createedAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
+                    let likeList = window.sessionStorage.getItem(["userLike"])
+                    let likeList1 = likeList.split(",")
+                    let thread_htmlId = null
+                    // if (likeList1.indexOf(i.threadId) == 0){
+                    //     thread_htmlId = "likeNum2"
+                    // }else{
+                    //     thread_htmlId = "likeNum"
+                    // }
+                    for (let s= 0;likeList1.length>s;s++){
+                        if(i.threadId == likeList1[s]){
+                            thread_htmlId = "likeNum2"
+                        }
+                    }
+                    if (thread_htmlId == null){
+                        thread_htmlId = "likeNum"
+                    }
                     return`
-                    <div class=${"inWapp"+i.threadNum} id = "${i.threadId}" onclick = setLike(this.id)>
-                    <div class="Thread">
+                    <div class=${"inWapp"+i.threadNum}>
+                    <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
                     <div class="ThreadHead">
-                        <img src="./DbubPH_XkAIyVdP.png" width="40px" height="40px" class="ThreadIcon">
+                        <img src="http://localhost:3000/profilePhotos/R%20(1).png" width="39px" height="39px" class="ThreadIcon">
                         <span class="ThreadUserName">${i.madeBy}</span>
                     </div>
                     <div class="ThreadBody">
@@ -75,11 +92,11 @@ const writeThreadList = ()=>{
                                         </span>
                                     <span class="TweetCounterText">${i.tweetCounter}</span>
                                 </div>
-                                <div class="likeNum" onmouseover="setflg()" onmouseleave="resetflg()">
+                                <div id = "+${i.threadId}"class="${thread_htmlId} lineNUM" onmouseover="setflg()" onmouseleave="resetflg()" onclick ="setLike(this.id)">
                                     <span class="material-symbols-outlined ThreadLikeCounterIcon">
                                         bookmark
                                         </span>
-                                        <span class="LileCounterText">${i.likenNum}</span>
+                                        <span class="LileCounterText" id = "*${i.threadId}">${i.likenNum}</span>
                                 </div>
                             </div>
                     </div>
@@ -91,6 +108,7 @@ const writeThreadList = ()=>{
                 writeSpace.innerHTML = mapThread;
             }
             setMainThread()
+
     }
 } 
 
@@ -107,10 +125,15 @@ const reloadThread = async()=>{
         rastNum:rast
     })
     console.log(moreThread.data)
+    readCounter = 0
     return moreThread;
 }
 document.getElementById('mainScreen').onscroll = async event => {
-    if (isFullScrolled(event) && ThreadListRast != 0) {
+    //readCounter = 0
+    console.log("nowscloring")
+    if(window.sessionStorage.getItem(["nowMainLink"]) == "/threadlist" && readCounter == 0){
+     if (isFullScrolled(event)  && ThreadListRast != 0) {
+        //readCounter = 0
         console.log("loadddddddding")
         let mainSc = document.querySelector(".inWapp"+ThreadListRast)
         const list2 =await reloadThread()
@@ -130,12 +153,29 @@ document.getElementById('mainScreen').onscroll = async event => {
                   createday+=i.createdAt[s];
               }
             }
+            let likeList = window.sessionStorage.getItem(["userLike"])
+            let likeList1 = likeList.split(",")
+            let thread_htmlId = null
+            // if (likeList1.indexOf(i.threadId) == 0){
+            //     thread_htmlId = "likeNum2"
+            // }else{
+            //     thread_htmlId = "likeNum"
+            // }
+            for (let s= 0;likeList1.length>s;s++){
+                if(i.threadId == likeList1[s]){
+                    thread_htmlId = "likeNum2"
+                }
+            }
+            if (thread_htmlId == null){
+                thread_htmlId = "likeNum"
+            }
             let createdAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
             return`
-            <div class="Thread" id = "${i.threadId}" onclick = setLike(this.id)>
+            <div class=${"inWapp"+i.threadNum}>
+            <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
             <div class = "clickButton">
                 <div class="ThreadHead">
-                    <img src="./DbubPH_XkAIyVdP.png" width="40px" height="40px" class="ThreadIcon">
+                    <img src="http://localhost:3000/profilePhotos/R%20(1).png" width="39px" height="39px" class="ThreadIcon">
                     <span class="ThreadUserName">${i.madeBy}</span>
                 </div>
                 <div class="ThreadBody">
@@ -152,7 +192,7 @@ document.getElementById('mainScreen').onscroll = async event => {
                                 </span>
                             <span class="TweetCounterText">${i.tweetCounter}</span>
                         </div>
-                        <div class="likeNum" onmouseover="setflg()" onmouseleave="resetflg()">
+                        <div id = "+${i.threadId}"class="${thread_htmlId}" onmouseover="setflg()" onmouseleave="resetflg()"onclick = "setLike(this.id)">
                             <span class="material-symbols-outlined ThreadLikeCounterIcon">
                                 bookmark
                                 </span>
@@ -162,12 +202,16 @@ document.getElementById('mainScreen').onscroll = async event => {
                     </div>
             </div>
             </div>
+            </div>
             `
         }).join("")
         ThreadListRast = data[data.length-1].threadNum
         mainSc.insertAdjacentHTML('afterend',undata)
-        readCounter = 0;
+        //readCounter = 0;
+        console.log(ThreadListRast)
+        // send_thread()
     }
+}
   }
   
   function isFullScrolled(event) {
@@ -179,5 +223,52 @@ document.getElementById('mainScreen').onscroll = async event => {
         readCounter = 1;
         return positionWithAdjustmentValue >= event.target.scrollHeight
     }
-    
   }
+
+const write_new_thread_one = async(i)=>{
+    let mainSc = document.querySelector(".inWapp"+ThreadListFirst)
+    let writeSpace = document.querySelector(".WriteHread");
+    console.log(ThreadListFirst)
+    let return_html = `
+    <div class=${"inWapp"+i.threadNum}>
+    <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
+    <div class = "clickButton">
+        <div class="ThreadHead">
+            <img src="http://localhost:3000/profilePhotos/R%20(1).png" width="39px" height="39px" class="ThreadIcon">
+            <span class="ThreadUserName">${i.madeBy}</span>
+        </div>
+        <div class="ThreadBody">
+            <span class="ThreadTitle">${i.threadName}</span>
+        </div>
+
+    <div class="ThreadBottom">
+            <span class="ThreadCreateSend">投稿日：</span>
+            <span class="ThreadCreateDate">${"test"}</span>
+            <div class="ThreadButton">
+                <div class="seeNum">
+                    <span class="material-symbols-outlined ThreadTweetNumIcon">
+                        forum
+                        </span>
+                    <span class="TweetCounterText">${i.tweetCounter}</span>
+                </div>
+                <div id = "+${i.threadId}"class="${"lineNum"}" onmouseover="setflg()" onmouseleave="resetflg()"onclick = "setLike(this.id)">
+                    <span class="material-symbols-outlined ThreadLikeCounterIcon">
+                        bookmark
+                        </span>
+                        <span class="LileCounterText">${i.likenNum}</span>
+                </div>
+            </div>
+            </div>
+    </div>
+    </div>
+    </div>
+    `
+    mainSc.insertAdjacentHTML('beforebegin',return_html)
+    //ThreadListFirst+=1
+}
+const write_create_thread_prom = ()=>{
+    let html = return_create_thread()
+    let mainScreen = document.querySelector(".mainWapp");
+    mainScreen.insertAdjacentHTML('beforebegin',html)
+}
+// write_create_thread_prom()

@@ -108,18 +108,32 @@ router.post("/setlike",async(req,res)=>{
     let counter = 0;
     try{
         const likeUser = await User.findOne({_id:userId})
+        const MiniThread1 = await MiniThread.findOne({threadId:threadId})
+        const likeThread = await Thread.findOne({threadSubId:threadId})
         let deleteLike = likeUser.like[0];
         for (let i = 0;likeUser.like.length>i;i++){
             if (likeUser.like[i] == req.body.subThreadId){
                 console.log("aaaaaaa")
                 counter+=1;
+                await MiniThread1.updateOne({
+                    $set:{
+                        likenNum:MiniThread1.likenNum-1
+                    }
+                })
                 await likeUser.updateOne({
                     $pull:{
                         like:req.body.subThreadId
                     }
                 })
+                //minithreadから削除
+
+                //threadから削除
+                await likeThread.updateOne({
+                    $pull:{
+                        likes:req.body.userId
+                    }
+                })
             }
-        }
         if (likeUser.like.length>=10){
             await likeUser.updateOne({
                 $pull:{
@@ -127,26 +141,30 @@ router.post("/setlike",async(req,res)=>{
                 }
             })
         }
-        const likeThread = await Thread.findOne({threadSubId:threadId})
+    }
+
         if (counter == 0){
-            await likeThread.updateOne({
-                $push:{
-                    likes:req.body.userId
-                }
-            })
-            const MiniThread1 = await MiniThread.findOne({threadSubId:threadId})
             await MiniThread1.updateOne({
                 $set:{
                     likenNum:MiniThread1.likenNum+1
                 }
             })
+            await likeThread.updateOne({
+                $push:{
+                    likes:req.body.userId
+                }
+            })
+            //MiniThread1 = await MiniThread.findOne({threadId:threadId})
+
             console.log(MiniThread1)
         }
-        await likeUser.updateOne({
-            $push:{
-                like:threadId///お気に入りにサブIDを指定する
-            }
-        })
+        if (counter == 0){
+            await likeUser.updateOne({
+                $push:{
+                    like:threadId///お気に入りにサブIDを指定する
+                }
+            })
+        }
         return res.status(200).json("お気に入りに追加しました")
     }catch(err){
         return res.status(500).json("エラーが発生しました");
@@ -241,7 +259,26 @@ router.post("/getthread3",async(req,res)=>{
         res.status(500).json("エラー")
     }
 })
-
+router.post("/getthread4",async(req,res)=>{
+    try{
+        let thread_data = await Thread.findOne({
+            threadSubId:req.body.threadId
+        });
+        return res.status(200).json(thread_data)
+    }catch{
+        return res.status(500).json("エラー")
+    }
+})
+router.post("/getthread5",async(req,res)=>{
+    try{
+        let thread_data = await MiniThread.findOne({
+            threadId:req.body.threadId
+        });
+        return res.status(200).json(thread_data)
+    }catch{
+        return res.status(500).json("エラー")
+    }
+})
 // router.get("/test",async(req,res)=>{
 //     try{
 //         let lastPage = req.body.lastPage;
@@ -258,6 +295,16 @@ router.post("/getthread3",async(req,res)=>{
 router.get("/gethomethread",async(req,res)=>{
     try{
         let newThread = await Thread.find({}).sort({$natural:-1}).limit(10);
+        return res.status(200).json(newThread);
+    }catch{
+        return res.status(500).json("エラー")
+    }
+
+
+})
+router.get("/getnewthread",async(req,res)=>{
+    try{
+        let newThread = await MiniThread.find({}).sort({$natural:-1}).limit(1);
         return res.status(200).json(newThread);
     }catch{
         return res.status(500).json("エラー")

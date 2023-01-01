@@ -53,58 +53,86 @@
                 <div class="leftBarTop">
 
                 <div class="phtoWapp">
-                    <div class="photoWapp2">
-                        <img src="../profilePhotos/R (1).png" class="profilePhoto" width="120px" height="120px" id="sampling">
-                    </div>
-                    <div class="leftNameWapp" id="leftNameWapp">
-                        <span class="NameTag" id="NameTag"><%=UserName%></span> 
-                        <span class="MybirthDay"></span>
-                    </div>
+                    <div class="yokonisitai-1">
+                        <div class="yokonisitai">
+                            <div class="yokonisitai2">
+                                <div class="photoWapp2">
+                                    <img src="../profilePhotos/R (1).png" class="profilePhoto" width="55px" height="55px" id="sampling">
+                                </div>
+                                <div class="leftNameWapp" id="leftNameWapp">
+                                    <span class="NameTag" id="NameTag"><%=UserName%></span> 
+                                    <span class="MybirthDay"></span>
+                                </div>
+                            </div>
 
+                        </div>
+                        <div class="barFollownum">
+                            <!-- <div class="follownumbar">
+                                <span class="follownumbar_text"></span>
+                            </div> -->
+                            <textarea class="profileTera" placeholder="自己紹介を入力しましょう!"></textarea>
+                        </div>
+                        <div class="barFollownum2">
+
+                        </div>
+                    </div>
                     <div class="Toolbar">
 
                         <div class="toolStar box1">
                                 <input type="radio" name="tab_item" id="tab_radio_A" class="tab_radio" onclick="setLikeThread()" checked>
-
+<!-- 
                             <div class="selectBox1">
-                            </div>
+                            </div> -->
                             <div class="toolTextWapp toolTextWappLike">
-                                <span class="material-symbols-outlined like toolText">
+                                <span class="material-symbols-outlined like toolText bbb1">
                                     bookmark
                                     </span>
                                 <label class="likeText toolText" id ="LikeText"  for="tab_radio_A">Like</label>
+                                <div class="gggg1">
+
+                                </div>
                         </div>
                         </div>
                         <div class="toolHistory">
                                 <input type="radio" name="tab_item" id="tab_radio_B" class="tab_radio2" >
-                            <div class="selectBox1">
+                            <!-- <div class="selectBox1">
 
-                            </div>
+                            </div> -->
                             <div class="toolTextWapp toolTextWappHistory">
                                 <span class="material-symbols-outlined history">
                                     history
                                 </span>
 
                             <label class="historyText toolText" for="tab_radio_B" onclick="setHistoryThread()">History</label>
-                        </div>
-                        </div>
-                        <div class="toolThread">
-                                <input type="radio" name="tab_item" id="tab_radio_C" class="tab_radio3" onclick="setMyThread()">
-                            <div class="selectBox1">
+                            <div class="gggg1">
 
                             </div>
+                        </div>
+                        </div>
+
+                        <div class="toolThread">
+                                <input type="radio" name="tab_item" id="tab_radio_C" class="tab_radio3" onclick="setMyThread()">
+                            <!-- <div class="selectBox1">
+
+                            </div> -->
                             <div class="toolTextWapp toolTextWappMyThread">
                                 <span class="material-symbols-outlined myThread">
                                     person_pin
                                     </span>
                                 <label class="MyThreadText toolText" for = "tab_radio_C">MyThread</label>
+                                <div class="gggg1">
 
+                                </div>
                             </div>
+
                         </div>
                         </div>
 
-                        <div class="toolBarLine">
+                        <!-- <div class="toolBarLine">
                         
+                        </div> -->
+                        <div class="fsegefesgetr">
+
                         </div>
                         <div class="sddsdsd">
                             <div>
@@ -122,7 +150,7 @@
                 </div>
             </div>
     
-
+            
             <div class="mainScreen" id = "mainScreen">
 
 
@@ -131,16 +159,19 @@
 
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../front-scripts/DOM_htmls/create_thread_prom.js"></script>
     <script src = "../front-scripts/dataFunctions/writeThreadLIst.js"></script>
     <script src="../front-scripts/dataFunctions/write_home.js"></script>
     <script src="../front-scripts/dataFunctions/write_thread_page.js"></script>
-
+    <script src="../front-scripts/load_first/pange_page.js"></script>
+    <script src = "../front-scripts/send_functions/send_thread.js"></script>
     <script src="../front-scripts/DOM_htmls/home_new_thread.js"></script>
     <script src="../front-scripts/DOM_htmls/thread_page.js"></script>
     <script src="../front-scripts/DOM_htmls/home_page.js"></script>
     <script src="../front-scripts/DOM_htmls/thread_tweet_page.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="../front-scripts/load_first/setUserData.js"></script>
     <script src="../front-scripts/loadData.js"></script>
     <script src="../front-scripts/clickThread.js"></script>

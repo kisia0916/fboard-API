@@ -80,26 +80,31 @@ const search_thread_write = async(url)=>{
 //     }
 // })
 const fff10_func = async()=>{
-    let search_text = document.getElementById("searchThread").value
+    let ss_text = location.pathname.split("/")
+    let search_text = decodeURI(ss_text[2]).replace("&"," ")
+    search_text = decodeURI(ss_text[2]).replace(","," ")
     let mainSpace = document.querySelector(".mainScreen")
     if(search_text){
-        let text2 =search_text.replace(/\s+/g,",")
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaa")
+        let text2 =search_text.replace("&",",")
+        text2 = text2.replace("&",",")
+        text2 = text2.replace(/\s+/g,",")
         console.log(text2)
 
         let threadList = await axios.post(`/api/thread/search/${text2}`,{
 
         }) 
-        console.log(threadList.data[0])
+        console.log(threadList.data)
         let url = text2.replace(",","&")
         search_flg = true
-        move_url_search_thread(url) 
+        // move_url_search_thread(url) 
         let num = threadList.data
         let ss = num.length
         if (threadList.data[0] == null){
             ss = 0
         }
         console.log(ss)
-        let seatch_page_dom = return_search_page(search_text,ss)
+        let seatch_page_dom = return_search_page(text2,ss)
         mainSpace.innerHTML = seatch_page_dom
         // document.querySelector(".ThreaCounterText").textContent
         if(ss>0){

@@ -46,7 +46,7 @@ const move_url_search_thread_2 = (text)=>{
     let next = "/search/"+text2
     window.history.pushState(null,"test",location.pathname)
     history.replaceState('','',next);
-    analysis_url(location.pathname)
+    // analysis_url(location.pathname)
 
 }
 const set_leftFLG = ()=>{

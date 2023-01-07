@@ -22,12 +22,14 @@ const analysis_url = (now_url)=>{
         write_thread_page(url_contents[2])
         window.sessionStorage.setItem(["nowMainLink"],"/thread/"+url_contents[2])
     }else if(url_contents[1] == "search"){
+
         console.log("rw")
         let sendURl = decodeURI(url_contents[2])
         sendURl = sendURl.replace(",","&")
+        document.title = "FBoard-search-"+decodeURI(url_contents[2]).replace("&",",")
         if(!search_flg){
-            move_url_search_thread_2(url_contents[2])
-            search_thread_write(sendURl)
+            move_url_search_thread_2(sendURl)
+            fff10_func()
             console.log("unnnnnnnnnnnnnnnnnnnnnnnnnnn")
         }
         search_flg = false

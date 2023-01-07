@@ -2,7 +2,8 @@ const router = require("express").Router();
 const User = require("../module/User")
 const Thread = require("../module/Threds")
 const MiniThread = require("../module/MiniThread")
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const ThreadNums = require("../module/ThreadNums");
 router.get("/getLike",async(req,res)=>{
     try{
         let userId = req.body.userId;
@@ -28,8 +29,18 @@ router.post("/getLike2",async(req,res)=>{
         let threadList= []
         console.log(likeList)
         for (let i = 0;likeList.length>i;i++){
-            let likeThread = await MiniThread.findOne({threadId:likeList[i]})
-            threadList.push(likeThread)
+            let wad = await ThreadNums.findOne({threadId:likeList[i]})
+            if(wad.wasdelete == false){
+                let likeThread = await MiniThread.findOne({threadId:likeList[i]})
+                threadList.push(likeThread)
+            }else{
+                await user.updateOne({
+                    $pull:{
+                        like:likeList[i]
+                    }
+                })
+                console.log("fffffffffffffffffffffffff")
+            }
         }
         return res.status(200).json(threadList)
     }catch{

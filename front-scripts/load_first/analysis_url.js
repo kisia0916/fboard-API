@@ -21,14 +21,21 @@ const analysis_url = (now_url)=>{
         //urlの後につくスレッドのidを解析して描画
         write_thread_page(url_contents[2])
         window.sessionStorage.setItem(["nowMainLink"],"/thread/"+url_contents[2])
-    }
-    else if (url_contents[0] == "/" || url_contents[0] == ""){
-        console.log("test")
+    }else if(url_contents[1] == "search"){
+        console.log("rw")
+        let sendURl = decodeURI(url_contents[2])
+        sendURl = sendURl.replace(",","&")
+        if(!search_flg){
+            move_url_search_thread_2(url_contents[2])
+            search_thread_write(sendURl)
+            console.log("unnnnnnnnnnnnnnnnnnnnnnnnnnn")
+        }
+        search_flg = false
+        console.log("unkookooko")
+        window.sessionStorage.setItem(["nowMainLink"],"/search/"+url_contents[2])
 
-        //write_home_page()
-    }
-    else {
-        //404ページを描画する
+    }else{
+        //404
     }
     console.log(url_contents)
 }

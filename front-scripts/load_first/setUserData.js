@@ -88,6 +88,37 @@ async function change_date(){
 
 //////
 
+const delet_like = async(id)=>{
+    let threadid = id.split(":")
+
+    await axios.post("/api/thread/deletelike",{
+        userId:window.sessionStorage.getItem(["userId"]),
+        subThreadId:threadid[1]
+    })
+    setLikeThread()
+
+    if(window.sessionStorage.getItem(["nowMainLink"]) == "/threadlist"){
+        console.log("fdfdfdfdffdfdfd")
+        let delete_like_list_text = document.getElementById(`*${threadid[1]}`)
+        delete_like_list_text.textContent = Number(delete_like_list_text.textContent)-1
+        let delete_like_list = document.getElementById(`+${threadid[1]}`)
+ 
+        delete_like_list.style.border = "none"
+
+    }
+
+    // console.log(delete_like_list_text.textContent)
+    let b_like = window.sessionStorage.getItem(["userLike"])
+    let like = b_like.split(",")
+    for (let i = 0;like.length>i;i++){
+        if(like[i] == threadid[1]){
+            like.splice(i,1)
+        }
+    }
+    window.sessionStorage.setItem(["userLike"],like)
+
+    // console.log(delete_like_list)
+}
 //お気に入りスレッドを取得 して表示
 const leftThreadWappDom = document.getElementById("liftBarWP")
 const setLikeThread = async()=>{
@@ -102,7 +133,7 @@ const setLikeThread = async()=>{
                 let LikeThreadMadeBy = i.madeBy;
                 let LikeThreadTweetNum = i.tweetCounter
                 return `
-                    <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
+                    <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
                     <div class="LeftBarThreadTop">
                         <img src="../profilePhotos/no-userimage (1).png" width="32px" height="32px" class="LeftBarImg">
                         <span class="LeftBarThreadName">${LikeThreadMadeBy}</span>
@@ -117,8 +148,8 @@ const setLikeThread = async()=>{
                                     </span>
                                 <span class="LeftTweetCounterText">${LikeThreadTweetNum}</span>
                             </div>
-                            <div class="delteThreadButton">
-                                <span class="LeftThreadDelete">削除</span>
+                            <div class="delteThreadButton" id = "left:${i.threadId}" onclick= "delet_like(this.id)" onmouseover="set_leftFLG()" onmouseleave="reset_leftFLG()">
+                                <span class="LeftThreadDelete" >解除</span>
                             </div>
                     </div>
 
@@ -157,9 +188,6 @@ const setHistoryThread = async()=>{
                                 </span>
                             <span class="LeftTweetCounterText">${TweetCounter}</span>
                         </div>
-                        <div class="delteThreadButton">
-                            <span class="LeftThreadDelete">削除</span>
-                        </div>
                 </div>
 
             </div>
@@ -187,7 +215,7 @@ const setMyThread = async()=>{
         let MadeBy = i.madeBy;
         let TweetCounter = i.tweetCounter;
         return`
-                <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
+                <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
                 <div class="LeftBarThreadTop">
                     <img src="../profilePhotos/no-userimage (1).png" width="32px" height="32px" class="LeftBarImg">
                     <span class="LeftBarThreadName">${MadeBy}</span>
@@ -202,7 +230,7 @@ const setMyThread = async()=>{
                                 </span>
                             <span class="LeftTweetCounterText">${TweetCounter}</span>
                         </div>
-                        <div class="delteThreadButton">
+                        <div class="delteThreadButton" id = "mythread:${i.threadId}" onclick = "delete_thread(this.id)" onmouseover="set_leftFLG()" onmouseleave="reset_leftFLG()">
                             <span class="LeftThreadDelete">削除</span>
                         </div>
                 </div>

@@ -10,9 +10,13 @@ const send_thread = async()=>{
         profile:firstTweet
     })
     let new_thread = await axios.get("/api/thread/getnewthread")
-    await write_new_thread_one(new_thread)
+    ThreadListFirst = new_thread.data[0].threadNum-1
+    console.log(new_thread.data[0])
+    await write_new_thread_one(new_thread.data[0])
     delete_prompt1()
-    threadName.value = ""
+    if (window.sessionStorage.getItem(["nowLeftBarLink1"]) == "/mythread"){
+        setMyThread()
+    }
 }
 const write_prompt = ()=>{
     let mainScreen = document.querySelector(".mainWapp")
@@ -32,6 +36,7 @@ const delete_prompt = ()=>{
 const delete_prompt1 = ()=>{
         let remove_dom = document.querySelector(".loadOrPrompt")
         remove_dom.remove()
+        document.querySelector(".createThreadInput").value = ""
 }
 const set_thread_flg = ()=>{
     thread_flg = true
@@ -44,4 +49,4 @@ const reset_thrad_flg = ()=>{
 }
 // write_prompt()
 
-// send_thread("あけましておめでとう！！！","捨て垢","あけましておめでとう2023年もよろしく")
+// send_thread("あけましておめでとう！！！","捨て垢","あけましておめでとう2023年もよろしく")np

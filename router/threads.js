@@ -10,85 +10,126 @@ const { findById, findOne } = require("../module/User");
 const { find } = require("../module/ThreadNums");
 const getThreadNum = 7;
 router.post("/newthread",async(req,res)=>{
+
     try{
-        //ここでスレッドを作成
-        let setNum = 0;
-        let threadcount = await Thread.find().count()
-        if (threadcount>0){
-            const mostNewThread =await  Thread.find({wasdelete:false}).sort({ $natural: -1 }).limit(1);
-            setNum = mostNewThread[0].threadNum+1
-        }else{
-            setNum = 0;
-        }
-        const newthread = await new Thread({
-                threadNname:req.body.threadname,
-                threadSubId:uuid.v4(),
-                madeBy:req.body.username,
-                threadNum:setNum,
-                profile:req.body.profile
-            })
-        let threadNumCounter = await ThreadNum.find().count()
-        const newThreadNum = await new ThreadNum({
-            threadId:newthread.threadSubId,/////////threadNumにはさぶIDで登録してるので注意
-            threadNum:threadNumCounter+1,
-        })
-        const thread = newthread.save();
-        const threadNum = newThreadNum.save()
-        let threadId = newthread.threadSubId;
-        const user = await User.findOne({name:req.body.username})
-        //製作者にスレッドのIDを入れる
-        await user.updateOne({
-            $push:{
-                myMess:threadId
+        if(req.body.threadname && req.body.username && req.body.profile){
+            //ここでスレッドを作成
+            let setNum = 0;
+            let threadcount = await Thread.find().count()
+            if (threadcount>0){
+                const mostNewThread =await  Thread.find({wasdelete:false}).sort({ $natural: -1 }).limit(1);
+                setNum = mostNewThread[0].threadNum+1
+            }else{
+                setNum = 0;
             }
-        })
-        //Minithreadに追加
-        const NewMiniThread = await new MiniThread({
-            threadId:threadId,
-            madeBy:req.body.username,
-            threadName:req.body.threadname,
-            threadNum:setNum
-        })
-        const NewMiniThread1 = NewMiniThread.save()
-        res.status(200).json("正常にスレッドが作成されました");
+            const newthread = await new Thread({
+                    threadNname:req.body.threadname,
+                    threadSubId:uuid.v4(),
+                    madeBy:req.body.username,
+                    threadNum:setNum,
+                    profile:req.body.profile
+                })
+            let threadNumCounter = await ThreadNum.find().count()
+            const newThreadNum = await new ThreadNum({
+                threadId:newthread.threadSubId,/////////threadNumにはさぶIDで登録してるので注意
+                threadNum:threadNumCounter+1,
+            })
+            const thread = newthread.save();
+            const threadNum = newThreadNum.save()
+            let threadId = newthread.threadSubId;
+            const user = await User.findOne({name:req.body.username})
+            //製作者にスレッドのIDを入れる
+            await user.updateOne({
+                $push:{
+                    myMess:threadId
+                }
+            })
+            //Minithreadに追加
+            const NewMiniThread = await new MiniThread({
+                threadId:threadId,
+                madeBy:req.body.username,
+                threadName:req.body.threadname,
+                threadNum:setNum
+            })
+            const NewMiniThread1 = NewMiniThread.save()
+            res.status(200).json("正常にスレッドが作成されました");
+        }else{
+            return res.status(500).json("エラーが発生しました")    
+        }
     }catch{
         return res.status(500).json("エラーが発生しました")        
     }
 })
-router.post("/deletethread",async(req,res)=>{
-    try{
-        const deleteThread = await Thread.findById(req.body.threadId)
-        let threadSubId = deleteThread.threadSubId
-        let deleteThreadUser = await User.findOne({name:deleteThread.madeBy})
-        await deleteThreadUser.updateOne({
-            $pull:{
-                myMess:deleteThread.threadSubId,
-                like:deleteThread.threadId,
-            }
-        })
-        await Thread.remove({_id:req.body.threadId})
+// router.post("/deletethread",async(req,res)=>{
+//     try{
+//         const deleteThread = await Thread.findOne({threadSubId:req.body.threadSubId})
+//         let threadSubId = deleteThread.threadSubId
+//         let deleteThreadUser = await User.findOne({name:deleteThread.madeBy})
+//         await deleteThreadUser.updateOne({
+//             $pull:{
+//                 myMess:deleteThread.threadSubId,
+//                 like:deleteThread.threadSubId,
+//             }
+//         })
+//         await Thread.remove({_id:req.body.threadId})
 
-        //myMessからそのスレを削除する
-        let Tweets = await Tweet.find({threadId:req.body.threadId});
-        console.log(Tweets)
-        let fuser = null;
-        for (let i = 0;Tweets.length>i;i++){
-            await Tweet.remove({threadId:Tweets[i].threadId});
-        }
-        //wasdeleteから削除
-        //let ThreadNumTest = await ThreadNum.find({threadId:threadSubId})
-        //console.log(ThreadNumTest)
-        await ThreadNum.update({threadId:threadSubId},{
+//         //myMessからそのスレを削除する
+//         let Tweets = await Tweet.find({threadSubId:req.body.threadSubId});
+//         console.log(Tweets)
+//         let fuser = null;
+//         for (let i = 0;Tweets.length>i;i++){
+//             await Tweet.remove({threadSubId:Tweets[i].threadSubId});
+//         }
+//         //wasdeleteから削除
+//         //let ThreadNumTest = await ThreadNum.find({threadId:threadSubId})
+//         //console.log(ThreadNumTest)
+//         await ThreadNum.update({threadId:threadSubId},{
+//             $set:{
+//                 wasdelete:true
+//             }
+//         })
+//         //let deleteMinithread = await MiniThread.findOne({threadSubId:deleteThread.threadSubId})
+//         await MiniThread.remove({threadSubId:deleteThread.threadSubId})
+//         return res.status(200).json("削除されました")
+//     }catch(err){
+//         return res.status(500).json(err)
+//     }
+// })
+router.post("/alldelete",async(req,res)=>{
+    try{
+        await ThreadNum.remove({})
+        return res.status(200).json("完了")
+    }catch{
+        return res.status(500).json("失敗")
+    }
+})
+router.post("/deletethread2",async(req,res)=>{
+    let threadid = req.body.threadId
+    let userid =req.body.userId
+    try{
+        await Thread.remove({
+            threadSubId:threadid
+        })
+        await MiniThread.remove({
+            threadId:threadid
+        })
+        let deleteThreadNum = await ThreadNum.findOne({threadId:threadid})
+        await deleteThreadNum.updateOne({
             $set:{
                 wasdelete:true
             }
         })
-        //let deleteMinithread = await MiniThread.findOne({threadSubId:deleteThread.threadSubId})
-        await MiniThread.remove({threadSubId:deleteThread.threadSubId})
-        return res.status(200).json("削除されました")
-    }catch(err){
-        return res.status(500).json(err)
+        let delete_user = await User.findById(userid)
+        await delete_user.updateOne({
+            $pull:{
+                myMess:threadid
+            }
+        })
+        return res.status(200).json("削除")
+    }catch{
+        return res.status(500).json("エラー")
     }
+
 })
 router.get("/getfirstthread",async(req,res)=>{
     try{
@@ -187,6 +228,7 @@ router.post("/deletelike",async(req,res)=>{
             }
         })
         if (counter != 0){
+            console.log("test1")
             await likeThread1.updateOne({
                 $pull:{
                     likes:req.body.userId
@@ -198,7 +240,7 @@ router.post("/deletelike",async(req,res)=>{
                     like:threadId1
                 }
             })
-            const likeMiniThread = await MiniThread.findOne({threadSubId:threadId1});
+            const likeMiniThread = await MiniThread.findOne({threadId:threadId1});
             await likeMiniThread.updateOne({
                 $set:{
                     likenNum:likeMiniThread.likenNum-1
@@ -311,5 +353,39 @@ router.get("/getnewthread",async(req,res)=>{
     }
 
 
+})
+router.post("/search/:text",async(req,res)=>{
+    let t4 = req.params.text
+    // let t5 = t4.d
+    let search_contents = req.params.text
+    console.log(search_contents)
+    let search_contents_list = search_contents.split(",")
+    let return_list = []
+    console.log(search_contents_list)
+    try{
+        for (let i =0;search_contents_list.length>i;i++){
+            let test = null
+            try{
+                test = await MiniThread.find({threadName: { $regex:search_contents_list[i]}}) 
+            }catch{
+                test = [null]
+            }
+            //search_listの中身を複数含むスレッドがあると複数取得されるから直す
+            let co =0
+            if(test[0] != null){
+                for (let s = 0;return_list.length>s;s++){
+                    if(return_list[s].threadId == test[0].threadId){
+                        co+=1
+                    }
+                }
+                if(co == 0){
+                    return_list.push(test[0])
+                }
+            }
+        }
+        return res.status(200).json(return_list)
+    }catch(err){
+        return res.status(500).json("エラー")
+    }
 })
 module.exports = router

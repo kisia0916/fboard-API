@@ -11,6 +11,7 @@ const therad_page =require("./router/threads")
 const user_page = require("./router/user")
 const mess_page = require("./router/mess")
 const home_page = require("./router_pages/home")
+const search_page = require("./router_pages/search_page")
 const threadlist_page = require("./router_pages/threadList")
 const thread_page = require("./router_pages/thread._page");
 const mongoose = require("mongoose");
@@ -101,6 +102,7 @@ app.use("/api/user",user_page)
 app.use("/home",home_page)
 app.use("/threadlist",threadlist_page)
 app.use("/thread",thread_page)
+app.use("/search",search_page)
 
 io.on("connection",(socket)=>{
     console.log("socket")

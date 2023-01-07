@@ -1,4 +1,4 @@
-const return_create_thread = ()=>{
+    const return_create_thread = ()=>{
     let html = `
     <div class="loadOrPrompt" onclick = "delete_prompt()">
     <div class="promContent1" onmouseover="set_thread_flg()" onmouseleave = "reset_thrad_flg()">

@@ -1,7 +1,7 @@
 const return_home_new_thread = (userName,createAt,messages,mainMessage,threadId)=>{
     let thread_url = "thread/"+threadId;
     let thread = `
-            <div id = "${threadId}" class="newThreadWapp" onclick = "move_url_thread(this.id)">
+            <div id = "${threadId}" class="newThreadWapp test:${threadId}" onclick = "move_url_thread(this.id)">
             <div class="homeThreadTop1">
                 <div>
                     <img src="http://localhost:3000/profilePhotos/R%20(1).png" class="newThreadProfilePhoto">

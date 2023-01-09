@@ -3,7 +3,7 @@ html{
 }
 .topBar{
     background-color: #2d2d2ffa;
-    height: 64px;
+    height: 60px;
 }
 body{
     margin: 0;
@@ -235,7 +235,9 @@ margin-right: 3%;
     font-family: 'Franklin Gothic';
 
 }
-
+.topBarTitle{
+    cursor:pointer
+}
 .toolThread{
     display: flex;
     margin-right: 9%;

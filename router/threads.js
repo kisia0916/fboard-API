@@ -362,26 +362,37 @@ router.post("/search/:text",async(req,res)=>{
     let search_contents_list = search_contents.split(",")
     let return_list = []
     console.log(search_contents_list)
+    //search_contents_list.reverse()
     try{
         for (let i =0;search_contents_list.length>i;i++){
             let test = null
             try{
-                test = await MiniThread.find({threadName: { $regex:search_contents_list[i]}}) 
+                test = await MiniThread.find({threadName: { $regex:search_contents_list[i]}})
+                console.log(test)
             }catch{
                 test = [null]
             }
             //search_listの中身を複数含むスレッドがあると複数取得されるから直す
-            let co =0
+
             if(test[0] != null){
-                for (let s = 0;return_list.length>s;s++){
-                    if(return_list[s].threadId == test[0].threadId){
-                        co+=1
+                test.reverse()
+                //return_list.reverse()
+                for(let f = 0;test.length>f;f++){
+                    let co =0
+                    let duble_word = []
+                    for (let s = 0;return_list.length>s;s++){
+                        
+                        if(return_list[s].threadId == test[f].threadId){
+                            co+=1
+                            return_list.splice(s,1)
+                            return_list.unshift(test[f])
+                        }
                     }
-                }
-                if(co == 0){
-                    return_list.push(test[0])
-                }
+                    if(co == 0){
+                        return_list.push(test[f])
+                    }
             }
+        }
         }
         return res.status(200).json(return_list)
     }catch(err){

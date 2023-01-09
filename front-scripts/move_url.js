@@ -8,6 +8,15 @@ const move_url = (url)=>{
     analysis_url(location.pathname)
 
 }
+const move_url_home = ()=>{
+    //set_history(location.pathname)
+    console.log("kopfsdklfjdaskjgkl;ajwfoiw")
+    let next_url = '/'+"home";
+    window.history.pushState(null,"test",location.pathname)
+    history.replaceState('','',next_url);
+    analysis_url(location.pathname)
+
+}
 
 const move_url_thread = (url)=>{
     let next = "/thread/"+url

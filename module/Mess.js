@@ -28,6 +28,14 @@ const messageSchma = new mongoose.Schema({
         type:Boolean,
         default:false
     },
+    tweet_num:{
+        type:Number,
+        default:0
+    },
+    userName:{
+        type:String,
+        required:true
+    }
 },
 {timestamps:true})
 module.exports = mongoose.model("Mess",messageSchma)

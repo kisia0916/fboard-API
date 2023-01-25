@@ -7,9 +7,14 @@ const MiniThread = require("../module/MiniThread");
 const uuid = require("node-uuid");
 const Mess = require("../module/Mess");
 const { findById, count } = require("../module/User");
+const ThreadNums = require("../module/ThreadNums");
 router.post("/tweetmess",async(req,res)=>{
     let counter = 0;
     try{
+        let mini = await MiniThread.findOne({
+            threadId:req.body.threadSubId
+        })
+        console.log(mini)
         const newtweet = await new Tweet({
             threadSubId:req.body.threadSubId,
             tweetId2:uuid.v4(),
@@ -17,6 +22,8 @@ router.post("/tweetmess",async(req,res)=>{
             messText:req.body.messText,
             imgPath:req.body.imgPath,
             userId:req.body.userId,
+            userName:req.body.userName,
+            tweet_num:mini.tweetCounter+=1
         })
         const tweet = newtweet.save()
         //投稿したユーザーの履歴に追加する
@@ -63,7 +70,8 @@ router.post("/tweetmess",async(req,res)=>{
             }
         })
         //minithreadのtweetcounterを上げる
-        const MiniThread1 = await MiniThread.findOne({threadSubId:thread.threadSubId});
+        let MiniThread1 = await MiniThread.findOne({threadSubId:req.body.threadSubId});
+        console.log(MiniThread1)
         await MiniThread1.updateOne({
             $set:{
                 tweetCounter:MiniThread1.tweetCounter+=1
@@ -95,7 +103,7 @@ router.post("/deletetweet",async(req,res)=>{
 
 //投稿を取得する
 ////////////////////////////取得する順番がおかしいから修正してください
-router.get("/gettweet",async(req,res)=>{
+router.post("/gettweet",async(req,res)=>{
     try{
         let threadId = req.body.threadId;
         let page = req.body.page;
@@ -126,7 +134,20 @@ router.get("/gettweet",async(req,res)=>{
         console.log("エラー")
     }
 })
-
+router.post("/gettweet2",async(req,res)=>{
+    let page = req.body.page
+    let threadId = req.body.threadSubId
+    let get_num =10;
+    try{
+        let threadList = await Tweet.find({threadSubId:threadId,tweet_num:{$lte:get_num*Number(page),$gt:get_num*(Number(page)-1)}/*,tweet_num:{$gt:get_num*(Number(page)-1)}*/})
+        if (threadList.length == 0){
+            return res.status(200).json("メッセージがありません")
+        }
+        return res.status(200).json(threadList)
+    }catch{
+        return res.status(500).json("エラー")
+    }
+})
 //一番新しいツイートを取得する
 router.get("/getnewtweet",async(req,res)=>{
     let threadId = req.body.threadId
@@ -161,4 +182,7 @@ router.post("/deletetweetall",async(req,res)=>{
         await Tweet.remove({tweetId2:tweetLIst[i].tweetId2})
     }
 })
+// router.post("/gjgjgjgjg",async(req,res)=>{
+//     await Tweet.remove()
+// })
 module.exports = router

@@ -168,7 +168,9 @@ const setHistoryThread = async()=>{
     let History = await axios.post("/api/user/gethistory2",{
         userId:window.sessionStorage.getItem(['userId'])
     });
+    console.log(History.data)
     let HistoryThreadList = History.data.map((i)=>{
+
         let ThreadName = i.threadName;
         let MadeBy = i.madeBy;
         let TweetCounter = i.tweetCounter;

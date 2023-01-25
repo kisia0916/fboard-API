@@ -1,0 +1,110 @@
+.tweet_thread_tweet_wapp{
+    width: 97%;
+    /* height: 80px; */
+    margin: auto;
+    margin-bottom: 3px;
+    border-radius: 10px;
+    /* background-color: red; */
+    display: flex;
+}
+.tweet_thread_space_wapp:hover{
+    background-color:#404040b6;
+    /* display: block; */
+}
+.tweet_thread_space_wapp:hover .tweet_return_button{
+    /* background-color: red; */
+    display: inline;
+    background-color: rgb(3, 111, 189);
+    margin-left: 15px;
+    border-radius: 5px;
+    height: 25px;
+    display: flex;
+    /* display: none; */
+    /* background-color: aqua; */
+}
+.tweet_thread_left{
+    /* background-color: blue; */
+    width: 48px;
+    /* margin-top: 30px; */
+    margin-right: 10px;
+    margin-left: 14px;
+}
+.tweet_thread_left_img{
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+}
+.tweet_thread_center{
+    /* background-color: blueviolet; */
+    width: 100%;
+}
+.tweet_thread_center_name{
+    display: flex;
+    white-space: nowrap;
+
+}
+.tweet_thread_center_name_text{
+    color: white;
+    font-family: Arial,sans-serif;
+    font-size: 110%;
+    font-weight: 550;
+}
+.tweet_thread_center_message{
+    color: white;
+    font-family: Arial,sans-serif;
+    font-size: 110%;
+    margin-bottom: 5px;
+    /* font-weight: 550; */
+}
+.tweet_thread_center_createAt{
+    color: white;
+    font-family: Arial,sans-serif;
+    font-size: 90%;
+    font-weight: 400;
+    white-space: nowrap
+}
+.tweet_thread_tweet_me{
+
+}
+.fdsfdfdafa{
+    height: 75px;
+}
+.tweet_thread_list_bottom_space{
+    width: 100%;
+    height: 2px;
+}
+.tweet_thread_mess_title{
+    white-space: nowrap;
+    /* max-width: 300px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tweet_return_button{
+    background-color: red;
+    margin-left: 15px;
+    border-radius: 5px;
+    height: 25px;
+    display: flex;
+    display: none;
+}
+.tweet_thread_return_button_text{
+    white-space: nowrap;
+
+    color: white;
+    font-family: Arial,sans-serif;
+    font-size: 90%;
+    margin-right: 10px;
+    margin-top: 1px;
+}
+.tweet_thread_return_button_icon{
+    color: white;
+    font-size: 130%;
+}
+.tweet_thread_top_space{
+    height: 10px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

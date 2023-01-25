@@ -1,103 +1,75 @@
-const return_thread_tweet_page = ()=>{
+const return_thread_tweet_page = (thread_name,like_num,tweet_counter)=>{
     const html = `
-        <div class = "ThreadmainSpaceTop">
-        <div class="home_page_title">
-            Home - FBoardにようこそ
-        </div>
-        <div class="home_button">
+    <div class="tweet_thread_mess_main_wapp">
+    <div class="tweet_thread_mess_top">
+        <div class="tweet_thread_mess_top_wapp">
+            <span class="tweet_thread_mess_title">${thread_name}</span>
 
-        </div>
-    </div>
-    <div class="ThreadMainSpace">
-        <div class="Thread_tweet_box">
-            <div class="thread_AddFile_button">
+            <div class="tweet_thread_mess_tweet_num">
+                <div class="tweet_thread_mess_like">
+                    <span class="material-symbols-outlined tweet_thread_top_like_icon">
+                        bookmark
+                        </span>
+                    <span class="tweet_thread_mess_like_text">${like_num}</span>
+                </div>
+                <span class="material-symbols-outlined tweet_thread_mess_num_icon">
+                    forum
+                    </span>
 
-            </div>
-            <div class="thread_tweet_text_box">
-
-                    <textarea class="thread_tweet_text_tra"></textarea>
-                    
-            </div>
-            <div class="thread_send_tweet_button">
-                <span class = "thread_send_tweet_button_text">送信</span>
+                <span class="tweet_thread_mess_num_text">${tweet_counter}</span>
             </div>
         </div>
 
     </div>
-    <div class="thread_tweet_list">
+    <div class="tweet_thread_mess_main" id = "tweet_thread_mess_main_id">
+        <!-- <div class="gggggg">
 
-        <div class="thread_tweet_main_wapp_aaaa">
-            <div class="thread_tweet_main_wapp">
-                <div class="thread_tweet_main_top">
-                    <div class="thread_tweet_main_left">
-                        <div class="thread_tweet_main_top_img_wqapp">
-                            <img src="./DbubPH_XkAIyVdP.png" width="35px" height="35px" class="thread_tweet_main_top_img" >
-                        </div>
-                        <div class="thread_tweet_main_top_name_wapp">
-                            <span class="thread_tweet_main_top_name">ヒカキン</span>
-                        </div>
-                        <div class="thread_tweet_main_create_at_wapp">
-                            <span class="thread_tweet_main_create_at">2022年 12月 20日</span>
-                        </div>
-                    </div>
-                    <div class="thread_tweet_main_repry_wapp">
-                        <span class="material-symbols-outlined thread_tweet_main_reply_icon">
-                            reply
-                            </span>
-                        <span class="thread_tweet_main_reply">返信</span>
-                    </div>
-                </div>
-                <div class="thread_tweet_main_center">
-                    <div class="thread_tweet_main_center_text_wapp">
-                        <div class="thread_tweet_main_text_yoko">
-                            
-                        </div>
-                        <span class="thread_tweet_main_center_text">こんにちはああああああああああああああああああああああああああああああああああああああああ</span>
-                    </div>
-                </div>
-            </div>
         </div>
+        <div class="gggggg">
 
-
-
-        <div class="thread_tweet_main_wapp_aaaa">
-            <div class="thread_tweet_main_wapp">
-                <div class="thread_tweet_main_top">
-                    <div class="thread_tweet_main_left">
-                        <div class="thread_tweet_main_top_img_wqapp">
-                            <img src="./DbubPH_XkAIyVdP.png" width="35px" height="35px" class="thread_tweet_main_top_img">
-                        </div>
-                        <div class="thread_tweet_main_top_name_wapp">
-                            <span class="thread_tweet_main_top_name">ヒカキン</span>
-                        </div>
-                        <div class="thread_tweet_main_create_at_wapp">
-                            <span class="thread_tweet_main_create_at">2022年 12月 20日</span>
-                        </div>
-                    </div>
-                    <div class="thread_tweet_main_repry_wapp">
-                        <span class="material-symbols-outlined thread_tweet_main_reply_icon">
-                            reply
-                            </span>
-                        <span class="thread_tweet_main_reply">返信</span>
-                    </div>
-                </div>
-                <div class="thread_tweet_main_center">
-                    <div class="thread_tweet_main_center_text_wapp">
-                        <div class="thread_tweet_main_text_yoko">
-                            
-                        </div>
-                        <span class="thread_tweet_main_center_text">こんにちはああああああああああああああああああああああああああああああああああああああああ</span>
-                    </div>
-                </div>
-            </div>
         </div>
+        <div class="gggggg">
 
-
-
-
-
+        </div> -->
+        <div class="tweet_thread_list_bottom_space">
+            
+        </div>
+        <div class ="tweet_iremono">
+        </div>
+        <div class = "tweet_list_main_warpp">
+        </div>
 
     </div>
+    <div class="tweet_bottom_space">
+
+    </div>
+    <div class="box31">
+        <div class="box32">
+                <div class="tweet_add_media_button">
+                    <img src="http://localhost:3000/profilePhotos/R%20(1).png" class="ttggttg">
+                </div>
+                <input type = "text" class="tweet_send_input" placeholder=" メッセージを送信">
+                <div class="tweet_add_media_button1">
+                    <span class="material-symbols-outlined tweet_add_media_text">
+                        add
+                        </span>
+                </div>
+                <div class="tweet_send_button_warpp">
+                    <span class="material-symbols-outlined tweet_send_button">
+                        send
+                        </span>
+              
+                </div>
+                <div class="">
+
+                </div>
+            </div>
+            <!-- <input class="testtete"> -->
+    </div>
+    <div class="fdsfdfdafa">
+
+    </div>
+</div>
     `
     return html;
 }

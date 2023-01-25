@@ -35,7 +35,7 @@ body{
 .mainScreen{
     flex: 7.55;
     background-color:#343435;
-    height: 90vh;
+    height: calc(100vh - 60px);
     overflow: auto;
     /* scrollbar-width: none */
     ;

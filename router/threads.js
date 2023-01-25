@@ -361,6 +361,7 @@ router.post("/search/:text",async(req,res)=>{
     console.log(search_contents)
     let search_contents_list = search_contents.split(",")
     let return_list = []
+    let test_list_2 = []
     console.log(search_contents_list)
     //search_contents_list.reverse()
     try{
@@ -385,7 +386,9 @@ router.post("/search/:text",async(req,res)=>{
                         if(return_list[s].threadId == test[f].threadId){
                             co+=1
                             return_list.splice(s,1)
-                            return_list.unshift(test[f])
+                            test_list_2.push(test[f])
+                            // console.log(`jjjjjjjjjjj${test_list_2}`)
+                            // return_list.unshift(test[f])
                         }
                     }
                     if(co == 0){
@@ -393,6 +396,12 @@ router.post("/search/:text",async(req,res)=>{
                     }
             }
         }
+        }
+        if(test_list_2.length!=0){
+            test_list_2.reverse()
+            for (let i=0;test_list_2.length>i;i++){
+                return_list.unshift(test_list_2[i])
+            }
         }
         return res.status(200).json(return_list)
     }catch(err){

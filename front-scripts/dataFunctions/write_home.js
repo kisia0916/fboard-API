@@ -20,3 +20,6 @@ const set_new_threads = async()=>{
     new_threads.innerHTML = inhtml;
 
 }
+const write_tweet_first = ()=>{
+    
+}

@@ -74,6 +74,7 @@ router.post("/gethistory2",async(req,res)=>{
         let gethistory = []
         for (let i = 0;historyList.length>i;i++){
             let his1 = await MiniThread.findOne({threadId:historyList[i]})
+            console.log(his1)
             gethistory.push(his1)
         }
         return res.status(200).json(gethistory)
@@ -146,5 +147,6 @@ router.post("/setprofile",async(req,res)=>{
         return res.status(500).json("エラー")
     }
 })
+
 module.exports = router
 

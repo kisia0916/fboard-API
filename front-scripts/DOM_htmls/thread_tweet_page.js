@@ -49,17 +49,21 @@ const return_thread_tweet_page = (thread_name,like_num,tweet_counter)=>{
                     <img src="http://localhost:3000/profilePhotos/R%20(1).png" class="ttggttg">
                 </div>
                 <input type = "text" class="tweet_send_input" placeholder=" メッセージを送信">
-                <div class="tweet_add_media_button1">
-                    <span class="material-symbols-outlined tweet_add_media_text">
-                        add
-                        </span>
-                </div>
-                <div class="tweet_send_button_warpp">
-                    <span class="material-symbols-outlined tweet_send_button">
-                        send
-                        </span>
-              
-                </div>
+                    <label for="file">
+                        <div class="tweet_add_media_button1">
+                            <span class="material-symbols-outlined tweet_add_media_text">
+                                add
+                                </span>
+                        </div>
+                        <input type="file" id = "file" style="display:none">
+                    </label>
+                    <div class="tweet_send_button_warpp">
+                        <span class="material-symbols-outlined tweet_send_button">
+                            send
+                            </span>
+
+                    </div>
+
                 <div class="">
 
                 </div>
@@ -69,6 +73,7 @@ const return_thread_tweet_page = (thread_name,like_num,tweet_counter)=>{
     <div class="fdsfdfdafa">
 
     </div>
+
 </div>
     `
     return html;

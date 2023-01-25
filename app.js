@@ -2,6 +2,7 @@ const express = require("express");
 const app= express();
 const ejs = require("ejs")
 const fs = require("fs");
+// const helmet = require("helmet")
 const cookie = require("cookie");
 const body_pase = require("body-parser")
 const index_page = fs.readFileSync("./viwes/index.ejs","utf-8");
@@ -38,6 +39,7 @@ app.use(session({
 ))
 mongoose.connect("mongodb+srv://fumi:20080916@cluster0.ehufboy.mongodb.net/gyokuboard?retryWrites=true&w=majority").then(()=>console.log("connectionDB")).catch((err)=>console.log(err))
 app.use(express.json())
+
 app.use("/router", express.static("router"));
 app.use("/viwes",express.static("views"))
 app.use("/style",express.static("style"));

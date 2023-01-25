@@ -70,8 +70,8 @@ router.post("/tweetmess",async(req,res)=>{
             }
         })
         //minithreadのtweetcounterを上げる
-        let MiniThread1 = await MiniThread.findOne({threadSubId:req.body.threadSubId});
-        console.log(MiniThread1)
+        let MiniThread1 = await MiniThread.findOne({threadId:req.body.threadSubId});
+        console.log(req.body.threadSubId)
         await MiniThread1.updateOne({
             $set:{
                 tweetCounter:MiniThread1.tweetCounter+=1

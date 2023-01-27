@@ -11,6 +11,7 @@ const login_router = require("./router/login")
 const therad_page =require("./router/threads")
 const user_page = require("./router/user")
 const mess_page = require("./router/mess")
+const upload_page = require("./router/upload")
 const home_page = require("./router_pages/home")
 const search_page = require("./router_pages/search_page")
 const threadlist_page = require("./router_pages/threadList")
@@ -46,6 +47,8 @@ app.use("/style",express.static("style"));
 app.use("/profilePhotos",express.static("profilePhotos"));
 app.use("/front-scripts",express.static("front-scripts"));
 app.use("/router_pages",express.static("router_pages"));
+app.use("/photos",express.static("photos"))
+
 app.use(body_pase.json());//////////////////////////////   ここ重要
 app.use(body_pase.urlencoded({ extended: true }));//////
 app.use(express.static(path.join(__dirname, "js")));
@@ -99,6 +102,7 @@ app.use("/login",login_router)
 app.use("/api/thread",therad_page)
 app.use("/api/tweet",mess_page)
 app.use("/api/user",user_page)
+app.use("/api/upload",upload_page)
 
 //ここからページのルーティング設定
 app.use("/home",home_page)

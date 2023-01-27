@@ -55,7 +55,7 @@ const return_thread_tweet_page = (thread_name,like_num,tweet_counter)=>{
                                 add
                                 </span>
                         </div>
-                        <input type="file" id = "file" style="display:none">
+                        <input type="file" id = "file" style="display:none" onChange="write_select_file()">
                     </label>
                     <div class="tweet_send_button_warpp">
                         <span class="material-symbols-outlined tweet_send_button">

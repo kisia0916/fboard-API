@@ -103,7 +103,8 @@ const load_tweet_first = async(id)=>{
                 }
             }
             let createedAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
-            let tweet = return_tweet_dom(data.userName,data.messText,createedAt1)
+            console.log(data.imgPath)
+            let tweet = return_tweet_dom(data.userName,data.messText,createedAt1,data.imgPath)
             return tweet
         }).join("")
         warp_dom.innerHTML = write_list

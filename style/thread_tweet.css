@@ -239,3 +239,6 @@
     margin: auto;
     font-weight: 450;
 }
+.tweet_thread_tweet_img{
+    border-radius: 10px;
+}

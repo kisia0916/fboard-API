@@ -134,6 +134,8 @@
     border-radius: 15px;
     cursor: pointer;
     box-shadow: 2px 3px 15px -8px #272727;
+    display: flex;
+
     /* box-shadow: 2px 3px 15px -5px #47474747; */
 
 }
@@ -413,4 +415,23 @@
 .dammy{
     width: 10px;
     height: 10px;
+}
+/* .home_new_thread_right{
+    width: 30px;
+    height: 100%;
+
+} */
+/*
+.home_new_thread_left{
+    width: calc(100% - 125px);
+}
+*/ 
+.new_thread_img{
+    border-radius: 10px;
+    margin-top: 12px;
+    object-fit: cover;
+    margin-right: 20px;
+} 
+.home_new_thread_right{
+    /* width:calc(100% - 115px); */
 }

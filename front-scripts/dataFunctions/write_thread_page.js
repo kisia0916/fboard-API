@@ -2,6 +2,7 @@
 id1 = ""
 let now_tweet_page = 0
 load_flg = false
+let img_null_counter = true
 const get_thread_datas = async()=>{
     let data = await axios.post("/api/thread/getthread5",{
         threadId:id1
@@ -104,7 +105,12 @@ const load_tweet_first = async(id)=>{
             }
             let createedAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
             console.log(data.imgPath)
-            let tweet = return_tweet_dom(data.userName,data.messText,createedAt1,data.imgPath)
+            if(data.imgPath == null || data.imgPath == ""){
+                img_null_counter = "display:none"
+            }else{
+                img_null_counter = "display:inline"
+            }
+            let tweet = return_tweet_dom(data.userName,data.messText,createedAt1,data.imgPath,img_null_counter)
             return tweet
         }).join("")
         warp_dom.innerHTML = write_list

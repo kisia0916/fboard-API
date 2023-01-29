@@ -27,7 +27,8 @@ router.post("/newthread",async(req,res)=>{
                     threadSubId:uuid.v4(),
                     madeBy:req.body.username,
                     threadNum:setNum,
-                    profile:req.body.profile
+                    profile:req.body.profile,
+                    titleImgPath:req.body.imgPath
                 })
             let threadNumCounter = await ThreadNum.find().count()
             const newThreadNum = await new ThreadNum({
@@ -49,9 +50,22 @@ router.post("/newthread",async(req,res)=>{
                 threadId:threadId,
                 madeBy:req.body.username,
                 threadName:req.body.threadname,
-                threadNum:setNum
+                threadNum:setNum,
+                first_img:req.body.imgPath
             })
             const NewMiniThread1 = NewMiniThread.save()
+            const first_thread = await new Tweet({
+                threadSubId:threadId,
+                tweetId2:uuid.v4(),
+                returnTo:null,
+                messText:req.body.profile,
+                imgPath:req.body.imgPath,
+                userId:user._id,
+                userName:user.name,
+                tweet_num:1
+            })
+            const first_thread2 = first_thread.save()
+
             res.status(200).json("正常にスレッドが作成されました");
         }else{
             return res.status(500).json("エラーが発生しました")    

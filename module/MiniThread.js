@@ -28,5 +28,9 @@ const MiniThreadSchma = new mongoose.Schema({
         type:Number,
         default:0,
     },
+    first_img:{
+        type:String,
+        default:""
+    }
 },{timestamps:true})
 module.exports = mongoose.model("MiniThread",MiniThreadSchma)

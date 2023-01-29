@@ -48,6 +48,7 @@
             <span class="prompt_thread_text3">１レス目を作成</span>
             <textarea class="new_thread_tera2"></textarea>
         </div>
+        <input type = "file" id = "filst_tweet_img" onChange="write_select_file_2()">
         <div class="promContent9">
             <div class="dammy">
 

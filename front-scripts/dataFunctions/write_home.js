@@ -14,7 +14,17 @@ const set_new_threads = async()=>{
     console.log(thread_data)
     let inhtml = thread_data.data.map((data1)=>{
          console.log(data1)
-         let threadD = return_home_new_thread(data1.madeBy,data1.updatedAt,data1.tweets.length,data1.threadNname,data1.threadSubId);
+         let img_style = ""
+         let text_style = ""
+         if(data1.titleImgPath == "" || data1.titleImgPath == null){
+            img_style = "display:none"
+            text_style = "width:100%"
+         }else{
+            console.log("ss")
+            img_style = "display:inline"
+            text_style = "width:calc(100% - 115px);"
+         }
+         let threadD = return_home_new_thread(data1.madeBy,data1.updatedAt,data1.tweets.length,data1.threadNname,data1.threadSubId,img_style,text_style,data1.titleImgPath);
          return threadD;
     }).join("")
     new_threads.innerHTML = inhtml;

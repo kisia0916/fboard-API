@@ -186,7 +186,7 @@
 }
 .home_thread_bottom{
     display: flex;
-    margin-left: 4.5%;
+    margin-left: 0%;
 }
 .home_thread_create{
 
@@ -251,7 +251,8 @@
 .fkglr{
     background-color: #343333;
     height: 100%;
-    width: 5.5%;
+    width: 1.4%;
+    /* margin-left: ; */
 }
 .home_bottom_text{
     display: flex;
@@ -430,8 +431,10 @@
     border-radius: 10px;
     margin-top: 12px;
     object-fit: cover;
-    margin-right: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
 } 
 .home_new_thread_right{
     /* width:calc(100% - 115px); */
+    width: 100%;
 }

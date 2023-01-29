@@ -2,10 +2,20 @@ const return_home_new_thread = (userName,createAt,messages,mainMessage,threadId,
     let thread_url = "thread/"+threadId;
     let thread = `
             <div id = "${threadId}" class="newThreadWapp test:${threadId}" onclick = "move_url_thread(this.id)">
+
+            <div class = "home_new_thread_left" style=${img_css}>
+            <div class="new_thread_img_wapp">
+                <img src="http://${photo_path}" width="95px" height="95px" class="new_thread_img">
+            </div>
+        </div>
+
             <div class = "home_new_thread_right" style=${left_css}>
+
                 <div class="homeThreadTop1">
+                    
                     <div>
-                        <img src="http://localhost:3000/profilePhotos/R%20(1).png" class="newThreadProfilePhoto">
+
+    
                     </div>
                     <span class="home_thread_userName">${userName}</span>
                 </div> 
@@ -29,11 +39,7 @@ const return_home_new_thread = (userName,createAt,messages,mainMessage,threadId,
                     </div>
                 </div>
             </div>
-            <div class = "home_new_thread_left" style=${img_css}>
-                <div class="new_thread_img_wapp">
-                    <img src="http://${photo_path}" width="95px" height="95px" class="new_thread_img">
-                </div>
-            </div>
+
             </div>
     `
     return thread;

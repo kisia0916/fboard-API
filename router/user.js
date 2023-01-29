@@ -120,6 +120,7 @@ router.post("/getmythread2",async(req,res)=>{
 router.post("/getuserdata",async(req,res)=>{
     try{
         let data = await User.findById(req.body.userId);
+        //homenewthreadのアイコン取得で使用中、パスワードの変更の時にｍ気を付けるように
         return res.status(200).json(data);
     }catch{
         return res.status(500).json("エラー");

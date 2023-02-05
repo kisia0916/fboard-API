@@ -42,7 +42,21 @@ const writeThreadList = ()=>{
                 ThreadListFirst = data.data[0].threadNum;
                 let ThreadData = data.data;
                 //console.log(ThreadData)
+                //画像を取得
+                let img_ls = []
+                for (let i = 0;ThreadData.length>i;i++){
+                    console.log("test")
+                    let user_name = ThreadData[i].madeBy
+                    let img = await axios.post("/api/user/getuserimg",{
+                        name:user_name
+                    })
+                    img_ls.push(img.data)
+                }
+                console.log(img_ls)
+                let co = 0
                 let mapThread = ThreadData.map((i)=>{
+                    let img = img_ls[co]
+                    co+=1
                     thread_htmlId = null
                     console.log(i)
                     console.log(i.createdAt)
@@ -81,7 +95,7 @@ const writeThreadList = ()=>{
                     <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
                     <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
                     <div class="ThreadHead">
-                        <img src="http://localhost:3000/profilePhotos/R%20(1).png" width="39px" height="39px" class="ThreadIcon">
+                        <img src="${img}" width="39px" height="39px" class="ThreadIcon">
                         <span class="ThreadUserName">${i.madeBy}</span>
                     </div>
                     <div class="ThreadBody">
@@ -133,9 +147,19 @@ const reloadThread = async()=>{
     readCounter = 0
     return moreThread;
 }
+const get_user_icon = async(name)=>{
+    let return_imgs = []
+    for (let i = 0;name.length>i;i++){
+        let img = await axios.post("/api/user/getuserimg",{
+            name:name
+        })
+        return_imgs.push(img)
+    }
+    return return_imgs
+}
 document.getElementById('mainScreen').onscroll = async event => {
     //readCounter = 0
-    console.log("nowscloring")
+
     if(window.sessionStorage.getItem(["nowMainLink"]) == "/threadlist" && readCounter == 0){
      if (isFullScrolled(event)  && ThreadListRast != 0) {
         //readCounter = 0
@@ -143,6 +167,26 @@ document.getElementById('mainScreen').onscroll = async event => {
         let mainSc = document.querySelector(".inWapp"+ThreadListRast)
         const list2 =await reloadThread()
         let data = list2.data
+        let Thread_rast2 = ThreadListRast
+        // let img_ls = []
+        console.log(data)
+
+        // for (let i = 0;data.length>i;i++){
+        //     console.log(data)
+        //     let user_name1 = data[i].madeBy
+        //     let img =await axios.post("/api/user/getuserimg",{
+        //         name:user_name1
+        //     })
+        //     // img_ls.push(img.data)
+        //     // console.log(img_ls)
+        // }
+        ThreadListRast = data[data.length-1].threadNum
+
+        // let name_list = []
+        // for (let i =0; data.length>i;i++){
+        //     name_list.push(data[i].madeBy)
+        // }
+        // let imgs = await get_user_icon(name_list)
 
 
         let undata = data.map((i)=>{
@@ -175,12 +219,16 @@ document.getElementById('mainScreen').onscroll = async event => {
                 thread_htmlId = "likeNum"
             }
             let createdAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
+            // let user_img_data = axios.post("/api/user/getuserimg",{
+            //     name:i.madeBy
+            // })
+            // console.log(user_img_data)
             return`
             <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
             <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
             <div class = "clickButton">
                 <div class="ThreadHead">
-                    <img src="http://localhost:3000/profilePhotos/R%20(1).png" width="39px" height="39px" class="ThreadIcon">
+                    <img src="http://localhost:3000/profilePhotos/R%20(1).png" width="39px" height="39px" class="ThreadIcon" id = "threadIcon:${i.threadId}">
                     <span class="ThreadUserName">${i.madeBy}</span>
                 </div>
                 <div class="ThreadBody">
@@ -210,11 +258,23 @@ document.getElementById('mainScreen').onscroll = async event => {
             </div>
             `
         }).join("")
-        ThreadListRast = data[data.length-1].threadNum
         mainSc.insertAdjacentHTML('afterend',undata)
         //readCounter = 0;
         console.log(ThreadListRast)
-        // send_thread()
+        // send_thread()//
+        //画像セット
+
+        for (let i = 0;data.length>i;i++){
+            console.log(data)
+            let user_name1 = data[i].madeBy
+            let img =await axios.post("/api/user/getuserimg",{
+                name:user_name1
+            })
+            let set_thread = document.getElementById(`threadIcon:${data[i].threadId}`)
+            set_thread.src = img.data
+            // img_ls.push(img.data)
+            // console.log(img_ls)
+        }
     }
 }
   }
@@ -263,12 +323,15 @@ const write_new_thread_one = async(i)=>{
         thread_htmlId = "likeNum"
     }
     let createdAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
+    let img = await axios.post("/api/user/getuserimg",{
+        name:i.madeBy
+    })
     let return_html = `
     <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
     <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
     <div class = "clickButton">
         <div class="ThreadHead">
-            <img src="http://localhost:3000/profilePhotos/R%20(1).png" width="39px" height="39px" class="ThreadIcon">
+            <img src="${img.data}" width="39px" height="39px" class="ThreadIcon">
             <span class="ThreadUserName">${i.madeBy}</span>
         </div>
         <div class="ThreadBody">

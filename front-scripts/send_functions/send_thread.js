@@ -9,7 +9,11 @@ const send_thread = async()=>{
     //ここで画像保存
     get_select_file_thread(first_file)
     console.log(fileName_2)
-    fileName_2 = "localhost:3000/photos/tweet_photos/"+fileName_2
+    if(fileName_2){
+        fileName_2 = "localhost:3000/photos/tweet_photos/"+fileName_2
+    }else{
+        fileName_2 = ""
+    }
     await axios.post("/api/thread/newthread",{
         threadname:threadName,
         username:userName,

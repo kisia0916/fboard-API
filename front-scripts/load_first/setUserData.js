@@ -18,6 +18,9 @@ window.sessionStorage.setItem(['userId'],userId)
 console.log(window.sessionStorage.getItem(['userId']))
 window.sessionStorage.setItem(["nowMainLink"],"/");
 window.sessionStorage.setItem(["nowThreadName"],"");
+//アイコン設定
+let icon_img = document.getElementById("sampling")
+
 //ユーザー情報を取得して保存  
 const getUserdata = async()=>{
     const DateDom = document.querySelector(".MybirthDay")
@@ -27,6 +30,7 @@ const getUserdata = async()=>{
             //userId:"6370a229ee5eba84f6e0f47c"
             userId:userId
         })
+        
         //window.sessionStorage.setItem(['userName'],user.data)
         window.sessionStorage.setItem(['Name'],data.data.name);
         window.sessionStorage.setItem(['pass'],data.data.pass);
@@ -36,8 +40,10 @@ const getUserdata = async()=>{
         window.sessionStorage.setItem(['profilePhoto'],data.data.profliePhoto)
         window.sessionStorage.setItem(['createAt'],data.data.createdAt);
         window.sessionStorage.setItem(['profile'],data.data.profileMess);
-
+        // window.sessionStorage.setItem(["profileImg"],data.data.profliePhoto)
         console.log(data.data);
+        //アイコン設定
+        icon_img.src =  window.sessionStorage.getItem(["profilePhoto"])
         change_date();
         console.log(window.sessionStorage.getItem(['Name']))
         DateDom.innerHTML = create_date;
@@ -132,10 +138,11 @@ const setLikeThread = async()=>{
                 let LikeThreadTitle = i.threadName;
                 let LikeThreadMadeBy = i.madeBy;
                 let LikeThreadTweetNum = i.tweetCounter
+                let photo = window.sessionStorage.getItem(["profilePhoto"])
                 return `
                     <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
                     <div class="LeftBarThreadTop">
-                        <img src="../profilePhotos/no-userimage (1).png" width="32px" height="32px" class="LeftBarImg">
+                        <img src="${photo}" width="32px" height="32px" class="LeftBarImg">
                         <span class="LeftBarThreadName">${LikeThreadMadeBy}</span>
                     </div>
                     <div class="LeftHreadMain">
@@ -174,10 +181,12 @@ const setHistoryThread = async()=>{
         let ThreadName = i.threadName;
         let MadeBy = i.madeBy;
         let TweetCounter = i.tweetCounter;
+        let photo = window.sessionStorage.getItem(["profilePhoto"])
+
         return`
                 <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
                 <div class="LeftBarThreadTop">
-                    <img src="../profilePhotos/no-userimage (1).png" width="32px" height="32px" class="LeftBarImg">
+                    <img src="${photo}" width="32px" height="32px" class="LeftBarImg">
                     <span class="LeftBarThreadName">${MadeBy}</span>
                 </div>
                 <div class="LeftHreadMain">
@@ -216,10 +225,12 @@ const setMyThread = async()=>{
         let ThreadName = i.threadName;
         let MadeBy = i.madeBy;
         let TweetCounter = i.tweetCounter;
+        let photo = window.sessionStorage.getItem(["profilePhoto"])
+
         return`
                 <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
                 <div class="LeftBarThreadTop">
-                    <img src="../profilePhotos/no-userimage (1).png" width="32px" height="32px" class="LeftBarImg">
+                    <img src="${photo}" width="32px" height="32px" class="LeftBarImg">
                     <span class="LeftBarThreadName">${MadeBy}</span>
                 </div>
                 <div class="LeftHreadMain">

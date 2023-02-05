@@ -31,6 +31,13 @@ search_input.addEventListener("keypress",async(e)=>{
                 }).join("")
                 let writeSpace = document.querySelector(".WriteHread");
                 writeSpace.innerHTML = write_dom
+                for (let i = 0;threadList.data.length>i;i++){
+                    let thread = document.getElementById(`threadIcon:${threadList.data[i].threadId}`)
+                    let img = await axios.post("/api/user/getuserimg",{
+                        name:threadList.data[i].madeBy
+                    })
+                    thread.src = img.data
+                }
             }
         }
         

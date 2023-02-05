@@ -24,11 +24,12 @@ const return_seatch_thread = (i)=>{
         }
     }
     let createedAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
+
     return`
     <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
     <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
     <div class="ThreadHead">
-        <img src="http://localhost:3000/profilePhotos/R%20(1).png" width="39px" height="39px" class="ThreadIcon">
+        <img src="" width="39px" height="39px" class="ThreadIcon" id = "threadIcon:${i.threadId}">
         <span class="ThreadUserName">${i.madeBy}</span>
     </div>
     <div class="ThreadBody">

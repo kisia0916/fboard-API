@@ -148,6 +148,14 @@ router.post("/setprofile",async(req,res)=>{
         return res.status(500).json("エラー")
     }
 })
-
+router.post("/getuserimg",async(req,res)=>{
+    try{
+        let user_name = req.body.name
+        let user = await User.findOne({name:user_name})
+        return res.status(200).json(user.profliePhoto)
+    }catch{
+        return res.status(500).json("エラー")
+    }
+})
 module.exports = router
 

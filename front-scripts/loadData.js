@@ -108,75 +108,85 @@ const reloadThread = async()=>{
     console.log(moreThread.data)
     return moreThread;
 }
-document.getElementById('mainScreen').onscroll = async event => {
-    if (isFullScrolled(event) && ThreadListRast != 0) {
+const get_user_icon = async(name)=>{
+    let return_imgs = []
+    for (let i = 0;name.length>i;i++){
+        let img = await axios.post("/api/user/getuserimg",{
+            name:name
+        })
+        return_imgs.push(img)
+    }
+    return return_imgs
+}
+// document.getElementById('mainScreen').onscroll = async event => {
+//     if (isFullScrolled(event) && ThreadListRast != 0) {
         
-        let mainSc = document.querySelector(".inWapp"+ThreadListRast)
-        const list2 =await reloadThread()
-        let data = list2.data
+//         let mainSc = document.querySelector(".inWapp"+ThreadListRast)
+//         const list2 =await reloadThread()
+//         let data = list2.data
 
 
-        let undata = data.map((i)=>{
-            let createyear = "";
-            let createmonth = "";
-            let createday = "";
-            for(let s = 0;i.createdAt.length>s;s++){
-              if(s<4){
-                  createyear+=i.createdAt[s];
-              }else if(s>4&&s<7){
-                  createmonth+=i.createdAt[s];
-              }else if(s>7 && s<10){
-                  createday+=i.createdAt[s];
-              }
-            }
-            let createdAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
-            return`
-            <div class="Thread" id = "${i.threadId}" onclick = setLike(this.id)>
-            <div class = "clickButton">
-                <div class="ThreadHead">
-                    <img src="./DbubPH_XkAIyVdP.png" width="40px" height="40px" class="ThreadIcon">
-                    <span class="ThreadUserName">${i.madeBy}</span>
-                </div>
-                <div class="ThreadBody">
-                    <span class="ThreadTitle">${i.threadName}</span>
-                </div>
+//         let undata = data.map((i)=>{
+//             let createyear = "";
+//             let createmonth = "";
+//             let createday = "";
+//             for(let s = 0;i.createdAt.length>s;s++){
+//               if(s<4){
+//                   createyear+=i.createdAt[s];
+//               }else if(s>4&&s<7){
+//                   createmonth+=i.createdAt[s];
+//               }else if(s>7 && s<10){
+//                   createday+=i.createdAt[s];
+//               }
+//             }
+//             let createdAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
+//             return`
+//             <div class="Thread" id = "${i.threadId}" onclick = setLike(this.id)>
+//             <div class = "clickButton">
+//                 <div class="ThreadHead">
+//                     <img src="./DbubPH_XkAIyVdP.png" width="40px" height="40px" class="ThreadIcon">
+//                     <span class="ThreadUserName">${i.madeBy}</span>
+//                 </div>
+//                 <div class="ThreadBody">
+//                     <span class="ThreadTitle">${i.threadName}</span>
+//                 </div>
 
-            <div class="ThreadBottom">
-                    <span class="ThreadCreateSend">投稿日：</span>
-                    <span class="ThreadCreateDate">${createdAt1}</span>
-                    <div class="ThreadButton">
-                        <div class="seeNum">
-                            <span class="material-symbols-outlined ThreadTweetNumIcon">
-                                forum
-                                </span>
-                            <span class="TweetCounterText">${i.tweetCounter}</span>
-                        </div>
-                        <div class="likeNum" onmouseover="setflg()" onmouseleave="resetflg()">
-                            <span class="material-symbols-outlined ThreadLikeCounterIcon">
-                                bookmark
-                                </span>
-                                <span class="LileCounterText">${i.likenNum}</span>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-            </div>
-            `
-        }).join("")
-        ThreadListRast = data[data.length-1].threadNum
-        mainSc.insertAdjacentHTML('afterend',undata)
-        readCounter = 0;
-    }
-  }
+//             <div class="ThreadBottom">
+//                     <span class="ThreadCreateSend">投稿日：</span>
+//                     <span class="ThreadCreateDate">${createdAt1}</span>
+//                     <div class="ThreadButton">
+//                         <div class="seeNum">
+//                             <span class="material-symbols-outlined ThreadTweetNumIcon">
+//                                 forum
+//                                 </span>
+//                             <span class="TweetCounterText">${i.tweetCounter}</span>
+//                         </div>
+//                         <div class="likeNum" onmouseover="setflg()" onmouseleave="resetflg()">
+//                             <span class="material-symbols-outlined ThreadLikeCounterIcon">
+//                                 bookmark
+//                                 </span>
+//                                 <span class="LileCounterText">${i.likenNum}</span>
+//                         </div>
+//                     </div>
+//                     </div>
+//             </div>
+//             </div>
+//             `
+//         }).join("")
+//         ThreadListRast = data[data.length-1].threadNum
+//         mainSc.insertAdjacentHTML('afterend',undata)
+//         readCounter = 0;
+//     }
+//   }
   
-  function isFullScrolled(event) {
-    // ブラウザの設定にもよるので、完全に一番下までいっていなくても許容するための調整値
-    const adjustmentValue = 60
-    const positionWithAdjustmentValue = event.target.clientHeight + event.target.scrollTop + adjustmentValue
-    if (positionWithAdjustmentValue >= event.target.scrollHeight && readCounter == 0){
-        console.log(readCounter)
-        readCounter = 1;
-        return positionWithAdjustmentValue >= event.target.scrollHeight
-    }
+//   function isFullScrolled(event) {
+//     // ブラウザの設定にもよるので、完全に一番下までいっていなくても許容するための調整値
+//     const adjustmentValue = 60
+//     const positionWithAdjustmentValue = event.target.clientHeight + event.target.scrollTop + adjustmentValue
+//     if (positionWithAdjustmentValue >= event.target.scrollHeight && readCounter == 0){
+//         console.log(readCounter)
+//         readCounter = 1;
+//         return positionWithAdjustmentValue >= event.target.scrollHeight
+//     }
     
-  }
+//   }

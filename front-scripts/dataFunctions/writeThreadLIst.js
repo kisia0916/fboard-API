@@ -44,13 +44,22 @@ const writeThreadList = ()=>{
                 //console.log(ThreadData)
                 //画像を取得
                 let img_ls = []
+                let img = null
                 for (let i = 0;ThreadData.length>i;i++){
                     console.log("test")
                     let user_name = ThreadData[i].madeBy
-                    let img = await axios.post("/api/user/getuserimg",{
-                        name:user_name
-                    })
-                    img_ls.push(img.data)
+                    console.log(ThreadData[i].first_img)
+                    console.log(ThreadData[i].titleImgPath)
+                    if (!ThreadData[i].first_img){
+                        img = await axios.post("/api/user/getuserimg",{
+                            name:user_name
+                        })
+                        img_ls.push(img.data)
+
+                    }else{
+                        img = "http://"+ThreadData[i].first_img
+                        img_ls.push(img)
+                    }
                 }
                 console.log(img_ls)
                 let co = 0
@@ -95,9 +104,11 @@ const writeThreadList = ()=>{
                     <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
                     <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
                     <div class="ThreadHead">
-                        <img src="${img}" width="39px" height="39px" class="ThreadIcon">
-                        <span class="ThreadUserName">${i.madeBy}</span>
+                        <img src="${img}" width="90px" height="90px" class="ThreadIcon">
                     </div>
+                    <div class = "thread_left_main">
+                    <span class="ThreadUserName">${i.madeBy}</span>
+
                     <div class="ThreadBody">
                         <span class="ThreadTitle">${i.threadName}</span>
                     </div>
@@ -118,6 +129,7 @@ const writeThreadList = ()=>{
                                         <span class="LileCounterText" id = "*${i.threadId}">${i.likenNum}</span>
                                 </div>
                             </div>
+                    </div>
                     </div>
                 </div>
                 <input type = "hidden" id = "ThreadId" value = ${i.threadId}>
@@ -227,10 +239,13 @@ document.getElementById('mainScreen').onscroll = async event => {
             <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
             <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
             <div class = "clickButton">
+            <div class = "Thread_flex_warpp">
                 <div class="ThreadHead">
-                    <img src="http://localhost:3000/profilePhotos/R%20(1).png" width="39px" height="39px" class="ThreadIcon" id = "threadIcon:${i.threadId}">
-                    <span class="ThreadUserName">${i.madeBy}</span>
+                    <img src="" width="90px" height="90px" class="ThreadIcon" id = "threadIcon:${i.threadId}">
                 </div>
+                <div class = "thread_left_main">
+                <span class="ThreadUserName">${i.madeBy}</span>
+
                 <div class="ThreadBody">
                     <span class="ThreadTitle">${i.threadName}</span>
                 </div>
@@ -253,6 +268,8 @@ document.getElementById('mainScreen').onscroll = async event => {
                         </div>
                     </div>
                     </div>
+                    </div>
+                </div>
             </div>
             </div>
             </div>
@@ -330,10 +347,13 @@ const write_new_thread_one = async(i)=>{
     <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
     <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
     <div class = "clickButton">
+    <div class = "Thread_flex_warpp">
         <div class="ThreadHead">
-            <img src="${img.data}" width="39px" height="39px" class="ThreadIcon">
-            <span class="ThreadUserName">${i.madeBy}</span>
+            <img src="${img.data}" width="90px" height="90px" class="ThreadIcon" id = "threadIcon:${i.threadId}">
         </div>
+        <div class = "thread_left_main">
+        <span class="ThreadUserName">${i.madeBy}</span>
+
         <div class="ThreadBody">
             <span class="ThreadTitle">${i.threadName}</span>
         </div>
@@ -356,6 +376,8 @@ const write_new_thread_one = async(i)=>{
                 </div>
             </div>
             </div>
+            </div>
+        </div>
     </div>
     </div>
     </div>

@@ -5,7 +5,7 @@ const return_home_new_thread = (userName,createAt,messages,mainMessage,threadId,
 
             <div class = "home_new_thread_left" style=${img_css}>
             <div class="new_thread_img_wapp">
-                <img src="http://${photo_path}" width="93px" height="93px" class="new_thread_img">
+                <img src="http://${photo_path}" width="91px" height="91px" class="new_thread_img">
             </div>
         </div>
 

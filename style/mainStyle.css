@@ -109,6 +109,7 @@
     margin-bottom: 14px;
     cursor: pointer;
     border-radius: 15px;
+    display: flex;
 }
 .Thread:hover{
     transform: translateY(-1.2px);
@@ -126,9 +127,18 @@
     font-family: 'Franklin Gothic';
 }
 .ThreadIcon{
-    border-radius: 50%;
+    /* border-radius: 50%; */
+    border-radius: 10px;
     margin-left: 20px;
-    margin-top:12px;
+    /* margin-top:10px; */
+    margin-top: 12.5%;
+}
+.ThreadIcon1{
+    /* border-radius: 50%; */
+    /* border-radius: 10px;
+    margin-left: 20px;
+    margin-top:0px;
+    margin-top: 0px; */
 }
 .ThreadHead{
     display: flex;
@@ -141,15 +151,15 @@
     color: rgba(255, 255, 255, 0.814);
     font-size: 150%;
     margin-left: 11px;
-    margin-top: 10px;
+    margin-top: 9px;
 
     font-weight: 650;
 }
 .ThreadBody{
     margin-top: 0px;
-    margin-left: 5.5%;
+    margin-left: 15px;
     margin-right: 1.5%;
-    height: 100%;
+    /* height: 100%; */
 
 }
 .ThreadTitle{
@@ -267,9 +277,20 @@
     display: flex;
     align-items: center;
     White-space: nowrap;
-    margin-left: 5.6%;
+    margin-left: 15px;
 }
 .ThreaCounterText{
     display: flex;
     margin-top:5px;
+}
+.thread_left_main{
+    width: calc(100% - 110px);
+}
+.clickButton{
+    display: flex;
+    width: 100%;
+}
+.Thread_flex_warpp{
+    display: flex;
+    width: 100%;
 }

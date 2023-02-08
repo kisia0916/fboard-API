@@ -138,11 +138,11 @@ const setLikeThread = async()=>{
                 let LikeThreadTitle = i.threadName;
                 let LikeThreadMadeBy = i.madeBy;
                 let LikeThreadTweetNum = i.tweetCounter
-                let photo = window.sessionStorage.getItem(["profilePhoto"])
+                let photo = ""
                 return `
                     <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
                     <div class="LeftBarThreadTop">
-                        <img src="${photo}" width="32px" height="32px" class="LeftBarImg">
+                        <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_like:${i.threadId}">
                         <span class="LeftBarThreadName">${LikeThreadMadeBy}</span>
                     </div>
                     <div class="LeftHreadMain">
@@ -166,6 +166,14 @@ const setLikeThread = async()=>{
                 `;
             }).join("")
             leftThreadWappDom.innerHTML = mapThread;
+            let img = null
+            for (let i = 0;likeThread.data.length>i;i++){
+                img = await axios.post("/api/user/getuserimg",{
+                    name:likeThread.data[i].madeBy
+                })
+                img = img.data
+                document.getElementById("left_bar_like:"+likeThread.data[i].threadId).src = img
+            }
 }
 //setLikeThread()
 
@@ -186,7 +194,7 @@ const setHistoryThread = async()=>{
         return`
                 <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
                 <div class="LeftBarThreadTop">
-                    <img src="${photo}" width="32px" height="32px" class="LeftBarImg">
+                    <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_history:${i.threadId}">
                     <span class="LeftBarThreadName">${MadeBy}</span>
                 </div>
                 <div class="LeftHreadMain">
@@ -208,6 +216,14 @@ const setHistoryThread = async()=>{
     }).join("")
     leftThreadWappDom.innerHTML = HistoryThreadList;
     console.log(History.data);
+    let img = null
+    for (let i = 0;History.data.length>i;i++){
+        img = await axios.post("/api/user/getuserimg",{
+            name:History.data[i].madeBy
+        })
+        img = img.data
+        document.getElementById("left_bar_history:"+History.data[i].threadId).src = img
+    }
 
 }
 //setHistoryThread()
@@ -230,7 +246,7 @@ const setMyThread = async()=>{
         return`
                 <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
                 <div class="LeftBarThreadTop">
-                    <img src="${photo}" width="32px" height="32px" class="LeftBarImg">
+                    <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_mythread:${i.threadId}">
                     <span class="LeftBarThreadName">${MadeBy}</span>
                 </div>
                 <div class="LeftHreadMain">
@@ -255,6 +271,14 @@ const setMyThread = async()=>{
     }).join("")
     leftThreadWappDom.innerHTML = MyThreadList;
     console.log(History.data);
+    // let img = null
+    // for (let i = 0;MyThread.data.length>i;i++){
+    //     img = await axios.post("/api/user/getuserimg",{
+    //         name:MyThread.data[i].madeBy
+    //     })
+    //     img = img.data
+    //     document.getElementById("left_bar_mythread:"+MyThread.data[i].threadId).src = img
+    // }
 }
 //profileを取得して表示
 let radio_button1 = document.getElementById("tab_radio_A").checked;

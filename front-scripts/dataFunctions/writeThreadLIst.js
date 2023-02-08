@@ -340,16 +340,23 @@ const write_new_thread_one = async(i)=>{
         thread_htmlId = "likeNum"
     }
     let createdAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
-    let img = await axios.post("/api/user/getuserimg",{
-        name:i.madeBy
-    })
+    let img = null
+    if(i.first_img){
+        img = "http://"+i.first_img
+    }else{
+        img = await axios.post("/api/user/getuserimg",{
+            name:i.madeBy
+        })
+        img = img.data
+    }
+
     let return_html = `
     <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
     <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
     <div class = "clickButton">
     <div class = "Thread_flex_warpp">
         <div class="ThreadHead">
-            <img src="${img.data}" width="90px" height="90px" class="ThreadIcon" id = "threadIcon:${i.threadId}">
+            <img src="${img}" width="90px" height="90px" class="ThreadIcon" id = "threadIcon:${i.threadId}">
         </div>
         <div class = "thread_left_main">
         <span class="ThreadUserName">${i.madeBy}</span>

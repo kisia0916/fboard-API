@@ -48,7 +48,7 @@ const set_new_threads = async()=>{
          if(data1.titleImgPath == "" || data1.titleImgPath == null){
             img_style = ""
             text_style = "width:100%"
-            data1.titleImgPath = "localhost:3000/profilePhotos/R%20(1).png"
+            data1.titleImgPath = ""
          }else{
             console.log("ss")
             img_style = ""
@@ -58,7 +58,15 @@ const set_new_threads = async()=>{
          return threadD;
     }).join("")
     new_threads.innerHTML = inhtml;
-
+    for (let i = 0;thread_data.data.length>i;i++){
+        if (thread_data.data[i].titleImgPath == ""){
+            let thread = document.getElementById("home_new_threadId:"+thread_data.data[i].threadSubId)
+            let profileImg = await axios.post("/api/user/getuserimg",{
+                name:thread_data.data[i].madeBy
+            })
+            thread.src = profileImg.data
+        }
+    }
 }
 const write_tweet_first = ()=>{
     

@@ -29,9 +29,11 @@ const return_seatch_thread = (i)=>{
     <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
     <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
     <div class="ThreadHead">
-        <img src="" width="39px" height="39px" class="ThreadIcon" id = "threadIcon:${i.threadId}">
-        <span class="ThreadUserName">${i.madeBy}</span>
+        <img src="" width="90px" height="90px" class="ThreadIcon" id = "search_thread_id:${i.threadId}">
     </div>
+    <div class = "thread_left_main">
+    <span class="ThreadUserName">${i.madeBy}</span>
+
     <div class="ThreadBody">
         <span class="ThreadTitle">${i.threadName}</span>
     </div>
@@ -53,8 +55,10 @@ const return_seatch_thread = (i)=>{
                 </div>
             </div>
     </div>
+    </div>
 </div>
 <input type = "hidden" id = "ThreadId" value = ${i.threadId}>
 </div>
     `
+
 }

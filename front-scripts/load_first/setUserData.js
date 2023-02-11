@@ -129,12 +129,14 @@ const delet_like = async(id)=>{
 const leftThreadWappDom = document.getElementById("liftBarWP")
 const setLikeThread = async()=>{
     window.sessionStorage.setItem(["nowLeftBarLink1"],"/like")
+            
+                let likeThread = await axios.post("/api/user/getlike2",{
+                    userId:window.sessionStorage.getItem(['userId'])
+                })
 
-            let likeThread = await axios.post("/api/user/getlike2",{
-                userId:window.sessionStorage.getItem(['userId'])
-            })
-            console.log(likeThread.data[0])
+            console.log(likeThread.data)
             let mapThread = likeThread.data.map((i)=>{
+            
                 let LikeThreadTitle = i.threadName;
                 let LikeThreadMadeBy = i.madeBy;
                 let LikeThreadTweetNum = i.tweetCounter
@@ -164,15 +166,18 @@ const setLikeThread = async()=>{
 
             </div>
                 `;
+            
             }).join("")
             leftThreadWappDom.innerHTML = mapThread;
             let img = null
             for (let i = 0;likeThread.data.length>i;i++){
-                img = await axios.post("/api/user/getuserimg",{
-                    name:likeThread.data[i].madeBy
-                })
-                img = img.data
-                document.getElementById("left_bar_like:"+likeThread.data[i].threadId).src = img
+                // if(likeThread.data[i] != null){
+                    img = await axios.post("/api/user/getuserimg",{
+                        name:likeThread.data[i].madeBy
+                    })
+                    img = img.data
+                    document.getElementById("left_bar_like:"+likeThread.data[i].threadId).src = img
+                
             }
 }
 //setLikeThread()
@@ -184,46 +189,50 @@ const setHistoryThread = async()=>{
         userId:window.sessionStorage.getItem(['userId'])
     });
     console.log(History.data)
+
     let HistoryThreadList = History.data.map((i)=>{
+        if (i != null){
+            let ThreadName = i.threadName;
+            let MadeBy = i.madeBy;
+            let TweetCounter = i.tweetCounter;
+            let photo = window.sessionStorage.getItem(["profilePhoto"])
 
-        let ThreadName = i.threadName;
-        let MadeBy = i.madeBy;
-        let TweetCounter = i.tweetCounter;
-        let photo = window.sessionStorage.getItem(["profilePhoto"])
+            return`
+                    <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
+                    <div class="LeftBarThreadTop">
+                        <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_history:${i.threadId}">
+                        <span class="LeftBarThreadName">${MadeBy}</span>
+                    </div>
+                    <div class="LeftHreadMain">
+                        <span class="LeftBarThreadTitle">${ThreadName}</span>
+                    </div>
+                    <div class="LeftBarThreadBottom">
+                            <div class="LeftThreadTweetCounter">
+                                <span class="material-symbols-outlined LeftThreadTweetIcon">
+                                    forum
+                                    </span>
+                                <span class="LeftTweetCounterText">${TweetCounter}</span>
+                            </div>
+                    </div>
 
-        return`
-                <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
-                <div class="LeftBarThreadTop">
-                    <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_history:${i.threadId}">
-                    <span class="LeftBarThreadName">${MadeBy}</span>
-                </div>
-                <div class="LeftHreadMain">
-                    <span class="LeftBarThreadTitle">${ThreadName}</span>
-                </div>
-                <div class="LeftBarThreadBottom">
-                        <div class="LeftThreadTweetCounter">
-                            <span class="material-symbols-outlined LeftThreadTweetIcon">
-                                forum
-                                </span>
-                            <span class="LeftTweetCounterText">${TweetCounter}</span>
-                        </div>
                 </div>
 
             </div>
-
-        </div>
-        `;
+            `;
+        }
     }).join("")
-    leftThreadWappDom.innerHTML = HistoryThreadList;
-    console.log(History.data);
-    let img = null
-    for (let i = 0;History.data.length>i;i++){
-        img = await axios.post("/api/user/getuserimg",{
-            name:History.data[i].madeBy
-        })
-        img = img.data
-        document.getElementById("left_bar_history:"+History.data[i].threadId).src = img
-    }
+        leftThreadWappDom.innerHTML = HistoryThreadList;
+        console.log(History.data);
+        let img = null
+        for (let i = 0;History.data.length>i;i++){
+            if(History.data[i] != null){
+                img = await axios.post("/api/user/getuserimg",{
+                    name:History.data[i].madeBy
+                })
+                img = img.data
+                document.getElementById("left_bar_history:"+History.data[i].threadId).src = img
+            }
+        }
 
 }
 //setHistoryThread()
@@ -238,36 +247,38 @@ const setMyThread = async()=>{
     });
     console.log(MyThread)
     let MyThreadList = MyThread.data.map((i)=>{
-        let ThreadName = i.threadName;
-        let MadeBy = i.madeBy;
-        let TweetCounter = i.tweetCounter;
-        let photo = window.sessionStorage.getItem(["profilePhoto"])
+        if(i != null){
+            let ThreadName = i.threadName;
+            let MadeBy = i.madeBy;
+            let TweetCounter = i.tweetCounter;
+            let photo = window.sessionStorage.getItem(["profilePhoto"])
 
-        return`
-                <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
-                <div class="LeftBarThreadTop">
-                    <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_mythread:${i.threadId}">
-                    <span class="LeftBarThreadName">${MadeBy}</span>
-                </div>
-                <div class="LeftHreadMain">
-                    <span class="LeftBarThreadTitle">${ThreadName}</span>
-                </div>
-                <div class="LeftBarThreadBottom">
-                        <div class="LeftThreadTweetCounter">
-                            <span class="material-symbols-outlined LeftThreadTweetIcon">
-                                forum
-                                </span>
-                            <span class="LeftTweetCounterText">${TweetCounter}</span>
-                        </div>
-                        <div class="delteThreadButton" id = "mythread:${i.threadId}" onclick = "delete_thread(this.id)" onmouseover="set_leftFLG()" onmouseleave="reset_leftFLG()">
-                            <span class="LeftThreadDelete">削除</span>
-                        </div>
+            return`
+                    <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
+                    <div class="LeftBarThreadTop">
+                        <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_mythread:${i.threadId}">
+                        <span class="LeftBarThreadName">${MadeBy}</span>
+                    </div>
+                    <div class="LeftHreadMain">
+                        <span class="LeftBarThreadTitle">${ThreadName}</span>
+                    </div>
+                    <div class="LeftBarThreadBottom">
+                            <div class="LeftThreadTweetCounter">
+                                <span class="material-symbols-outlined LeftThreadTweetIcon">
+                                    forum
+                                    </span>
+                                <span class="LeftTweetCounterText">${TweetCounter}</span>
+                            </div>
+                            <div class="delteThreadButton" id = "mythread:${i.threadId}" onclick = "delete_thread(this.id)" onmouseover="set_leftFLG()" onmouseleave="reset_leftFLG()">
+                                <span class="LeftThreadDelete">削除</span>
+                            </div>
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
-        `;
+            `;
+        }
     }).join("")
     leftThreadWappDom.innerHTML = MyThreadList;
     console.log(History.data);

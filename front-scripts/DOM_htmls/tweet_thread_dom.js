@@ -1,4 +1,4 @@
-const return_tweet_dom = (user_name,tweet_mess,create_at,img_path,img_css)=>{
+const return_tweet_dom = (user_name,tweet_mess,create_at,img_path,img_css,tweet_Id)=>{
     let html = `
     <div class="tweet_thread_space_wapp">
     <div class="tweet_thread_top_space">
@@ -7,7 +7,7 @@ const return_tweet_dom = (user_name,tweet_mess,create_at,img_path,img_css)=>{
     <div class="tweet_thread_tweet_wapp">
 
         <div class="tweet_thread_left">
-            <img src="http://localhost:3000/profilePhotos/R%20(1).png" class="tweet_thread_left_img">
+            <img src="http://localhost:3000/profilePhotos/R%20(1).png" class="tweet_thread_left_img" id = "tweet_mess_id:${tweet_Id}">
         </div>
         <div class="tweet_thread_center">
 

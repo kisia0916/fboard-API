@@ -30,16 +30,25 @@ router.post("/getLike2",async(req,res)=>{
         console.log(likeList)
         for (let i = 0;likeList.length>i;i++){
             let wad = await ThreadNums.findOne({threadId:likeList[i]})
-            if(wad.wasdelete == false){
-                let likeThread = await MiniThread.findOne({threadId:likeList[i]})
-                threadList.push(likeThread)
+            console.log(wad)
+            if(wad !=null){
+                if(wad.wasdelete == false){
+                    let likeThread = await MiniThread.findOne({threadId:likeList[i]})
+                    threadList.push(likeThread)
+                }else{
+                    await user.updateOne({
+                        $pull:{
+                            like:likeList[i]
+                        }
+                    })
+                    console.log("fffffffffffffffffffffffff")
+                }
             }else{
                 await user.updateOne({
                     $pull:{
                         like:likeList[i]
                     }
                 })
-                console.log("fffffffffffffffffffffffff")
             }
         }
         return res.status(200).json(threadList)
@@ -109,6 +118,14 @@ router.post("/getmythread2",async(req,res)=>{
         for (let i = 0;myThreadList.length>i;i++){
             let mythread =await MiniThread.findOne({threadId:myThreadList[i]})
             threadList.push(mythread)
+            console.log(mythread)
+            if(mythread == null){
+                await myuser.updateOne({
+                    $pull:{
+                        like:myThreadList[i]
+                    }
+                })
+            }
         }
         return res.status(200).json(threadList)
     }catch{

@@ -18,7 +18,8 @@ const send_thread = async()=>{
         threadname:threadName,
         username:userName,
         profile:firstTweet,
-        imgPath:fileName_2
+        imgPath:fileName_2,
+        tags:["プログラミング","雑談"]
     })
     let new_thread = await axios.get("/api/thread/getnewthread")
     ThreadListFirst = new_thread.data[0].threadNum-1

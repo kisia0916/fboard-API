@@ -21,23 +21,41 @@ search_input.addEventListener("keypress",async(e)=>{
                 ss = 0
             }
             console.log(ss)
-            let seatch_page_dom = return_search_page(search_text,ss)
+            let seatch_page_dom =  return_search_page(search_text,ss)
             mainSpace.innerHTML = seatch_page_dom
+            let img = null
+
             // document.querySelector(".ThreaCounterText").textContent
             if(ss>0){
                 let write_dom = threadList.data.map((i)=>{
                     let re_html = return_seatch_thread(i)
                     return re_html
                 }).join("")
+
                 let writeSpace = document.querySelector(".WriteHread");
                 writeSpace.innerHTML = write_dom
+                let img = null
                 for (let i = 0;threadList.data.length>i;i++){
-                    let thread = document.getElementById(`threadIcon:${threadList.data[i].threadId}`)
-                    let img = await axios.post("/api/user/getuserimg",{
-                        name:threadList.data[i].madeBy
-                    })
-                    thread.src = img.data
+
+                
+                    if (threadList.data[i].first_img != "" && threadList.data[i].first_img != null){
+                        img = "http://"+threadList.data[i].first_img
+                    }else{
+                        img = await axios.post("/api/user/getuserimg",{
+                            name:threadList.data[i].madeBy
+                        })
+                        img = img.data
+                    }
+                    let icon_dom = document.getElementById("search_thread_id:"+threadList.data[i].threadId)
+                    icon_dom.src = img
                 }
+                // for (let i = 0;threadList.data.length>i;i++){
+                //     let thread = document.getElementById(`threadIcon:${threadList.data[i].threadId}`)
+                //     let img = await axios.post("/api/user/getuserimg",{
+                //         name:threadList.data[i].madeBy
+                //     })
+                //     thread.src = img.data
+                // }
             }
         }
         
@@ -58,7 +76,7 @@ const search_thread_write = async(url)=>{
             }) 
             // move_url_search_thread(text2)
             let search_text2 = search_text.replace("&","　")
-            let seatch_page_dom = return_search_page(search_text,threadList.data.length)
+            let seatch_page_dom =  return_search_page(search_text,threadList.data.length)
             console.log(threadList.data)
             // move_url_search_thread(url) 
             mainSpace.innerHTML = seatch_page_dom
@@ -68,6 +86,21 @@ const search_thread_write = async(url)=>{
             }).join("")
             let writeSpace = document.querySelector(".WriteHread");
             writeSpace.innerHTML = write_dom
+            let img = null
+            for (let i = 0;threadList.data.length>i;i++){
+
+            
+                if (threadList.data[i].first_img != "" && threadList.data[i].first_img != null){
+                    img = "http://"+threadList.data[i].first_img
+                }else{
+                    img = await axios.post("/api/user/getuserimg",{
+                        name:threadList.data[i].madeBy
+                    })
+                    img = img.data
+                }
+                let icon_dom = document.getElementById("search_thread_id:"+threadList.data[i].threadId)
+                icon_dom.src = img
+            }
     }
 }
 
@@ -113,6 +146,7 @@ const fff10_func = async()=>{
         console.log(ss)
         let seatch_page_dom = return_search_page(text2,ss)
         mainSpace.innerHTML = seatch_page_dom
+        
         // document.querySelector(".ThreaCounterText").textContent
         if(ss>0){
             let write_dom = threadList.data.map((i)=>{
@@ -121,6 +155,22 @@ const fff10_func = async()=>{
             }).join("")
             let writeSpace = document.querySelector(".WriteHread");
             writeSpace.innerHTML = write_dom
+            let img = null
+            for (let i = 0;threadList.data.length>i;i++){
+
+            
+                if (threadList.data[i].first_img != "" && threadList.data[i].first_img != null){
+                    img = "http://"+threadList.data[i].first_img
+                }else{
+                    img = await axios.post("/api/user/getuserimg",{
+                        name:threadList.data[i].madeBy
+                    })
+                    img = img.data
+                }
+                let icon_dom = document.getElementById("search_thread_id:"+threadList.data[i].threadId)
+                icon_dom.src = img
+            }
+            
         }
     }
 }

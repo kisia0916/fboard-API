@@ -27,7 +27,11 @@ const write_thread_page = async(id)=>{
     // console.log(return_datas.tweetCounter)
     // if(return_datas/2)
     console.log(return_datas.threadName)
-    const thread_html = return_thread_tweet_page(return_datas.threadName,return_datas.likenNum,return_datas.tweetCounter)
+    let icon = await axios.post("/api/user/getuserimg",{
+        name:window.sessionStorage.getItem(["Name"])
+    })
+    console.log(icon)
+    const thread_html = return_thread_tweet_page(return_datas.threadName,return_datas.likenNum,return_datas.tweetCounter,icon.data)
     mainScreen.innerHTML = thread_html;
     await load_tweet_first(id)
     let el = document.querySelector('.tweet_thread_mess_main');
@@ -110,10 +114,19 @@ const load_tweet_first = async(id)=>{
             }else{
                 img_null_counter = "display:inline"
             }
-            let tweet = return_tweet_dom(data.userName,data.messText,createedAt1,data.imgPath,img_null_counter)
+            let tweet = return_tweet_dom(data.userName,data.messText,createedAt1,data.imgPath,img_null_counter,data.tweetId2)
             return tweet
         }).join("")
         warp_dom.innerHTML = write_list
+        let img = null
+        for (let i = 0;tweet_list.data.length>i;i++){
+            console.log(tweet_list.data[i])
+            img = await axios.post("/api/user/getuserimg",{
+                name:tweet_list.data[i].userName
+            })
+            let icon = document.getElementById("tweet_mess_id:"+tweet_list.data[i].tweetId2)
+            icon.src = img.data
+        }
         console.log("annko")
     }
 }

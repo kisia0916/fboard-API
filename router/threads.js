@@ -28,7 +28,8 @@ router.post("/newthread",async(req,res)=>{
                     madeBy:req.body.username,
                     threadNum:setNum,
                     profile:req.body.profile,
-                    titleImgPath:req.body.imgPath
+                    titleImgPath:req.body.imgPath,
+                    tags:req.body.tags
                 })
             let threadNumCounter = await ThreadNum.find().count()
             const newThreadNum = await new ThreadNum({
@@ -51,7 +52,8 @@ router.post("/newthread",async(req,res)=>{
                 madeBy:req.body.username,
                 threadName:req.body.threadname,
                 threadNum:setNum,
-                first_img:req.body.imgPath
+                first_img:req.body.imgPath,
+                tags:req.body.tags
             })
             const NewMiniThread1 = NewMiniThread.save()
             const first_thread = await new Tweet({

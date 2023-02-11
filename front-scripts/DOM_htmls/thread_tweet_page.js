@@ -1,4 +1,4 @@
-const return_thread_tweet_page = (thread_name,like_num,tweet_counter)=>{
+const return_thread_tweet_page = (thread_name,like_num,tweet_counter,img)=>{
     const html = `
     <div class="tweet_thread_mess_main_wapp">
     <div class="tweet_thread_mess_top">
@@ -46,7 +46,7 @@ const return_thread_tweet_page = (thread_name,like_num,tweet_counter)=>{
     <div class="box31">
         <div class="box32">
                 <div class="tweet_add_media_button">
-                    <img src="http://localhost:3000/profilePhotos/R%20(1).png" class="ttggttg">
+                    <img src="${img}" class="ttggttg">
                 </div>
                 <input type = "text" class="tweet_send_input" placeholder=" メッセージを送信">
                     <label for="file">

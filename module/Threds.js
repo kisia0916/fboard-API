@@ -39,6 +39,10 @@ const threadSchema = new mongoose.Schema({
     titleImgPath:{
         type:String,
         default:""
+    },
+    tags:{
+        type:Array,
+        default:[]
     }
 },{timestamps:true})
 module.exports = mongoose.model("Threads",threadSchema);

@@ -54,7 +54,23 @@ const set_new_threads = async()=>{
             img_style = ""
             text_style = ""
          }
-         let threadD = return_home_new_thread(data1.madeBy,data1.updatedAt,data1.tweets.length,data1.threadNname,data1.threadSubId,img_style,text_style,data1.titleImgPath);
+         let tag_list = data1.tags
+         let tag_doms = ""
+         console.log(tag_list)
+         for (let i = 0;tag_list.length>i;i++){
+             let color =""
+             console.log(tag_color)
+             for (let s = 0;tag_color.length>s;s++){
+                 console.log(tag_color[s])
+                 if(tag_color[s][0] == tag_list[i]){
+                     
+                     color = tag_color[s][1]
+                 }
+             }
+             tag_doms+= return_tag_dom1(tag_list[i],color)
+             
+         }
+         let threadD = return_home_new_thread(data1.madeBy,data1.updatedAt,data1.tweets.length,data1.threadNname,data1.threadSubId,img_style,text_style,data1.titleImgPath,tag_doms);
          return threadD;
     }).join("")
     new_threads.innerHTML = inhtml;

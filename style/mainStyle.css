@@ -11,7 +11,7 @@
 .ThreadCreateBox{
     height: 6%;
     flex: 2;
-    margin-top: 0.7%;
+    margin-top: 0.5%;
     display: flex;
     min-height: 60px;
     border-bottom:2px solid #39393b;
@@ -26,12 +26,12 @@
     overflow: hidden;
     color: white;
     font-family: 'Franklin Gothic';
-    font-size: 180%;
+    font-size: 170%;
     display: flex;
     align-items: center;
     font-weight: 650;
     margin-left: 3.8%;
-    margin-top: 10px;
+    margin-top: 9px;
     user-select:none;
 }
 .ThreadCreateBox{
@@ -144,7 +144,7 @@
     display: flex;
 }
 .ThreadUserName{
-    display: flex;
+    /* display: flex; */
     font-family: Arial,sans-serif;
 
     align-items: center;
@@ -152,6 +152,11 @@
     font-size: 150%;
     margin-left: 11px;
     margin-top: 9px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* text-overflow: ellipsis; */
 
     font-weight: 650;
 }
@@ -167,7 +172,6 @@
     color: white;
     font-weight: 650;
     font-size: 155%;
-
     table-layout: fixed;
     word-wrap: break-word;
 }
@@ -293,4 +297,58 @@
 .Thread_flex_warpp{
     display: flex;
     width: 100%;
+}
+.thread_top_block_warpp{
+    display: flex;
+    justify-content: space-between;
+}
+.thread_top_tags_warpp{
+    display: flex;
+
+
+}
+
+.thread_tag_main{
+    display: flex;
+    background-color: #2f2f34;
+    border-color: red;
+    height: 22px;
+    margin-top: 12px;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+.thread_tag_main1{
+    display: flex;
+    background-color: #2f2f34;
+    border-color: red;
+    height: 22px;
+    margin-top: 3px;
+    border-radius: 8px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+.thread_tag_color{
+    width: 12px;
+    height: 12px;
+    /* background-color: rgb(253, 253, 113); */
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 4px;
+    border-radius: 50%;
+}
+.thread_tag_color1{
+    width: 12px;
+    height: 12px;
+    /* background-color: orange; */
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 4px;
+    border-radius: 50%;
+}
+.thread_tags_text{
+    margin-right: 8px;
+    font-size: 90%;
+    color: white;
+    font-family: 'Franklin Gothic';
+    white-space: nowrap;
 }

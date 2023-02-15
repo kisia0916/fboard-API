@@ -13,33 +13,45 @@
             <span class="prompt_thread_text2">タグを指定</span>
             <div class="cp_sl01_wapp">
                 <div class="cp_ipselect cp_sl01">
-                    <select>
+                    <select id = "first_select">
+                    <option>未設定</option>
+                    <option>雑談</option>
+                    <option>プログラミング</option>
+                    <option>ゲーム</option>
+                    <option>質問</option>
+                    <option>ハードウエア</option>
+                    <option>極秘</option>
+                    <option>バグ報告</option>
+                    <option>タグリクエスト</option>
+                    <option>その他</option>
+                    </select>
+                </div>
+                <div class="cp_ipselect cp_sl01">
+                    <select id = "second_select">
                         <option>未設定</option>
                         <option>雑談</option>
                         <option>プログラミング</option>
                         <option>ゲーム</option>
+                        <option>質問</option>
+                        <option>ハードウエア</option>
                         <option>極秘</option>
+                        <option>バグ報告</option>
+                        <option>タグリクエスト</option>
                         <option>その他</option>
                     </select>
                 </div>
                 <div class="cp_ipselect cp_sl01">
-                    <select>
-                        <option>未設定</option>
-                        <option>雑談</option>
-                        <option>プログラミング</option>
-                        <option>ゲーム</option>
-                        <option>極秘</option>
-                        <option>その他</option>
-                    </select>
-                </div>
-                <div class="cp_ipselect cp_sl01">
-                    <select >
-                        <option>未設定</option>
-                        <option>雑談</option>
-                        <option>プログラミング</option>
-                        <option>ゲーム</option>
-                        <option>極秘</option>
-                        <option>その他</option>
+                    <select id = "third_select">
+                    <option>未設定</option>
+                    <option>雑談</option>
+                    <option>プログラミング</option>
+                    <option>ゲーム</option>
+                    <option>質問</option>
+                    <option>ハードウエア</option>
+                    <option>極秘</option>
+                    <option>バグ報告</option>
+                    <option>タグリクエスト</option>
+                    <option>その他</option>
                     </select>
                 </div>
             </div>

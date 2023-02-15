@@ -24,7 +24,22 @@ const return_seatch_thread = (i)=>{
         }
     }
     let createedAt1 = createyear+"年"+" "+createmonth+"月"+ createday+"日"; 
-
+    let tag_list = i.tags
+    let tag_doms = ""
+    console.log(tag_list)
+    for (let i = 0;tag_list.length>i;i++){
+        let color =""
+        console.log(tag_color)
+        for (let s = 0;tag_color.length>s;s++){
+            console.log(tag_color[s])
+            if(tag_color[s][0] == tag_list[i]){
+                
+                color = tag_color[s][1]
+            }
+        }
+        tag_doms+= return_tag_dom(tag_list[i],color)
+        
+    }
     return`
     <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
     <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
@@ -32,7 +47,15 @@ const return_seatch_thread = (i)=>{
         <img src="" width="90px" height="90px" class="ThreadIcon" id = "search_thread_id:${i.threadId}">
     </div>
     <div class = "thread_left_main">
+    <div class = "thread_top_block_warpp">
+                    
     <span class="ThreadUserName">${i.madeBy}</span>
+
+    <div class = "thread_top_tags_warpp">
+        ${tag_doms}
+    
+    </div>
+</div>
 
     <div class="ThreadBody">
         <span class="ThreadTitle">${i.threadName}</span>

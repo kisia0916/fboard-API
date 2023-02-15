@@ -9,6 +9,9 @@ const uuid = require("node-uuid");
 const { findById, findOne } = require("../module/User");
 const { find } = require("../module/ThreadNums");
 const getThreadNum = 7;
+
+
+const tags = ["プログラミング","雑談","質問","ゲーム","ハードウエア","極秘","その他","バグ報告","タグリクエスト","お知らせ"]
 router.post("/newthread",async(req,res)=>{
 
     try{
@@ -22,6 +25,16 @@ router.post("/newthread",async(req,res)=>{
             }else{
                 setNum = 0;
             }
+            let main_tag = []
+            for (let i = 0;req.body.tags.length>i;i++){
+                console.log(i)
+                let flg = tags.indexOf(req.body.tags[i])
+                if(flg != -1){
+                    console.log("aa")
+                    main_tag.push(req.body.tags[i])
+                }
+            }
+            console.log(req.body.tags)
             const newthread = await new Thread({
                     threadNname:req.body.threadname,
                     threadSubId:uuid.v4(),
@@ -29,7 +42,7 @@ router.post("/newthread",async(req,res)=>{
                     threadNum:setNum,
                     profile:req.body.profile,
                     titleImgPath:req.body.imgPath,
-                    tags:req.body.tags
+                    tags:main_tag
                 })
             let threadNumCounter = await ThreadNum.find().count()
             const newThreadNum = await new ThreadNum({
@@ -53,7 +66,7 @@ router.post("/newthread",async(req,res)=>{
                 threadName:req.body.threadname,
                 threadNum:setNum,
                 first_img:req.body.imgPath,
-                tags:req.body.tags
+                tags:main_tag
             })
             const NewMiniThread1 = NewMiniThread.save()
             const first_thread = await new Tweet({

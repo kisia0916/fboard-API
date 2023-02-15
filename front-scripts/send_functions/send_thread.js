@@ -14,12 +14,19 @@ const send_thread = async()=>{
     }else{
         fileName_2 = ""
     }
+    //タグを取得
+    let tags = []
+    tags.push(document.getElementById("first_select").value)
+    tags.push(document.getElementById("second_select").value)
+    tags.push(document.getElementById("third_select").value)
+
+
     await axios.post("/api/thread/newthread",{
         threadname:threadName,
         username:userName,
         profile:firstTweet,
         imgPath:fileName_2,
-        tags:["プログラミング","雑談"]
+        tags:tags
     })
     let new_thread = await axios.get("/api/thread/getnewthread")
     ThreadListFirst = new_thread.data[0].threadNum-1

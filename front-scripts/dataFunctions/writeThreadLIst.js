@@ -63,6 +63,7 @@ const writeThreadList = ()=>{
                 }
                 console.log(img_ls)
                 let co = 0
+                let tag_doms = ""
                 let mapThread = ThreadData.map((i)=>{
                     let img = img_ls[co]
                     co+=1
@@ -100,6 +101,29 @@ const writeThreadList = ()=>{
                     if (thread_htmlId == null){
                         thread_htmlId = "likeNum"
                     }
+                    let tag_list = i.tags
+                    tag_doms = ""
+                    // if(i.tags != undefined){
+                    //     tag_doms = i.tags.map((i)=>{
+                    //         let dom = return_tag_dom(i)
+                    //         return dom
+                    //     }).join("")
+                    // }
+                    console.log(tag_list)
+                    for (let i = 0;tag_list.length>i;i++){
+                        let color =""
+                        console.log(tag_color)
+                        for (let s = 0;tag_color.length>s;s++){
+                            console.log(tag_color[s])
+                            if(tag_color[s][0] == tag_list[i]){
+                                
+                                color = tag_color[s][1]
+                            }
+                        }
+                        tag_doms+= return_tag_dom(tag_list[i],color)
+                        
+                    }
+                    console.log(tag_doms)
                     return`
                     <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
                     <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
@@ -107,8 +131,14 @@ const writeThreadList = ()=>{
                         <img src="${img}" width="90px" height="90px" class="ThreadIcon">
                     </div>
                     <div class = "thread_left_main">
-                    <span class="ThreadUserName">${i.madeBy}</span>
-
+                    <div class = "thread_top_block_warpp">
+                    
+                        <span class="ThreadUserName">${i.madeBy}</span>
+                    
+                        <div class = "thread_top_tags_warpp">
+                            ${tag_doms}
+                        </div>
+                    </div>
                     <div class="ThreadBody">
                         <span class="ThreadTitle">${i.threadName}</span>
                     </div>
@@ -137,6 +167,7 @@ const writeThreadList = ()=>{
                     `
                 }).join("")
                 writeSpace.innerHTML = mapThread;
+
             }
             setMainThread()
 
@@ -200,7 +231,7 @@ document.getElementById('mainScreen').onscroll = async event => {
         // }
         // let imgs = await get_user_icon(name_list)
 
-
+        let tag_doms = ""
         let undata = data.map((i)=>{
             let createyear = "";
             let createmonth = "";
@@ -235,6 +266,22 @@ document.getElementById('mainScreen').onscroll = async event => {
             //     name:i.madeBy
             // })
             // console.log(user_img_data)
+            let tag_list = i.tags
+            tag_doms = ""
+            console.log(tag_list)
+            for (let i = 0;tag_list.length>i;i++){
+                let color =""
+                console.log(tag_color)
+                for (let s = 0;tag_color.length>s;s++){
+                    console.log(tag_color[s])
+                    if(tag_color[s][0] == tag_list[i]){
+                        
+                        color = tag_color[s][1]
+                    }
+                }
+                tag_doms+= return_tag_dom(tag_list[i],color)
+                
+            }
             return`
             <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
             <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
@@ -244,7 +291,14 @@ document.getElementById('mainScreen').onscroll = async event => {
                     <img src="" width="90px" height="90px" class="ThreadIcon" id = "threadIcon:${i.threadId}">
                 </div>
                 <div class = "thread_left_main">
+                <div class = "thread_top_block_warpp">
+                    
                 <span class="ThreadUserName">${i.madeBy}</span>
+            
+                <div class = "thread_top_tags_warpp">
+                    ${tag_doms}                
+                </div>
+            </div>
 
                 <div class="ThreadBody">
                     <span class="ThreadTitle">${i.threadName}</span>
@@ -349,7 +403,22 @@ const write_new_thread_one = async(i)=>{
         })
         img = img.data
     }
-
+    let tag_list = i.tags
+    let tag_doms = ""
+    console.log(tag_list)
+    for (let i = 0;tag_list.length>i;i++){
+        let color =""
+        console.log(tag_color)
+        for (let s = 0;tag_color.length>s;s++){
+            console.log(tag_color[s])
+            if(tag_color[s][0] == tag_list[i]){
+                
+                color = tag_color[s][1]
+            }
+        }
+        tag_doms+= return_tag_dom(tag_list[i],color)
+        
+    }
     let return_html = `
     <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
     <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
@@ -359,7 +428,14 @@ const write_new_thread_one = async(i)=>{
             <img src="${img}" width="90px" height="90px" class="ThreadIcon" id = "threadIcon:${i.threadId}">
         </div>
         <div class = "thread_left_main">
+        <div class = "thread_top_block_warpp">
+                    
         <span class="ThreadUserName">${i.madeBy}</span>
+    
+        <div class = "thread_top_tags_warpp">
+            ${tag_doms}
+        </div>
+    </div>
 
         <div class="ThreadBody">
             <span class="ThreadTitle">${i.threadName}</span>

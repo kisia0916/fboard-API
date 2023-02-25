@@ -175,4 +175,3 @@ router.post("/getuserimg",async(req,res)=>{
     }
 })
 module.exports = router
-

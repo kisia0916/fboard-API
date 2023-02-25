@@ -334,15 +334,22 @@ document.getElementById('mainScreen').onscroll = async event => {
         console.log(ThreadListRast)
         // send_thread()//
         //画像セット
-
+        let img = ""
         for (let i = 0;data.length>i;i++){
             console.log(data)
             let user_name1 = data[i].madeBy
-            let img =await axios.post("/api/user/getuserimg",{
-                name:user_name1
-            })
-            let set_thread = document.getElementById(`threadIcon:${data[i].threadId}`)
-            set_thread.src = img.data
+            // console.log(data[i].first_img)
+            if (data[i].first_img == "" || !data[i].first_img){
+                img =await axios.post("/api/user/getuserimg",{
+                    name:user_name1
+                })
+                img = img.data
+            }else{
+                img = "http://"+data[i].first_img
+            }
+            let thread_class = data[i].threadId
+            let set_thread = document.getElementById(`threadIcon:${thread_class}`)
+            set_thread.src = img
             // img_ls.push(img.data)
             // console.log(img_ls)
         }

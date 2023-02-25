@@ -26,6 +26,8 @@ router.post("/newthread",async(req,res)=>{
                 setNum = 0;
             }
             let main_tag = []
+            let send_box_value_2 = req.body.threadname.replace(/</g,"&lt;").replace(/>/g,"&gt;")
+
             for (let i = 0;req.body.tags.length>i;i++){
                 console.log(i)
                 let flg = tags.indexOf(req.body.tags[i])
@@ -36,7 +38,7 @@ router.post("/newthread",async(req,res)=>{
             }
             console.log(req.body.tags)
             const newthread = await new Thread({
-                    threadNname:req.body.threadname,
+                    threadNname:send_box_value_2,
                     threadSubId:uuid.v4(),
                     madeBy:req.body.username,
                     threadNum:setNum,
@@ -63,7 +65,7 @@ router.post("/newthread",async(req,res)=>{
             const NewMiniThread = await new MiniThread({
                 threadId:threadId,
                 madeBy:req.body.username,
-                threadName:req.body.threadname,
+                threadName:send_box_value_2,
                 threadNum:setNum,
                 first_img:req.body.imgPath,
                 tags:main_tag

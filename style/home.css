@@ -168,11 +168,20 @@
     font-weight: 650;
     margin-left: 11px;
     margin-top: 1px;
+    white-space: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 .homeThreadTop1{
     display: flex;
-    padding-top: 9px;
+    padding-top: 8px;
+    justify-content: space-between;
 
+}
+.fjfjfioi{
+    display: flex;
 }
 .home_thread_text{
     font-family: Arial,sans-serif;
@@ -182,6 +191,8 @@
     /* margin-left: 5.4%; */
     table-layout: fixed;
     word-wrap: break-word;
+    margin-right: 1.5%;
+
 
 }
 .home_thread_bottom{
@@ -246,7 +257,8 @@
 }
 .home_thread_main{
     display: flex;
-
+    width: 100%;
+    margin-right: 1.5%;
 }
 .fkglr{
     background-color: #343333;
@@ -436,5 +448,7 @@
 } 
 .home_new_thread_right{
     /* width:calc(100% - 115px); */
-    width: 100%;
+    width: calc(100% - 111px - 5px);
+    margin-left: 3px;
+    margin-right: 0%;
 }

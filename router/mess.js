@@ -15,11 +15,12 @@ router.post("/tweetmess",async(req,res)=>{
             threadId:req.body.threadSubId
         })
         console.log(mini)
+        let send_box_value_2 = req.body.messText.replace(/</g,"&lt;").replace(/>/g,"&gt;")
         const newtweet = await new Tweet({
             threadSubId:req.body.threadSubId,
             tweetId2:uuid.v4(),
             returnTo:req.body.returnTo,
-            messText:req.body.messText,
+            messText:send_box_value_2,
             imgPath:req.body.imgPath,
             userId:req.body.userId,
             userName:req.body.userName,

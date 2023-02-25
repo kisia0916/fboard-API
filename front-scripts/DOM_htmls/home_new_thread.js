@@ -7,13 +7,13 @@ const return_home_new_thread = (userName,createAt,messages,mainMessage,threadId,
         <img src="http://${photo_path}" width="91px" height="91px" class="new_thread_img " id = "home_new_threadId:${threadId}">
     </div>
 </div>
-    <div class = "home_new_thread_right" style=${left_css}>
+    <div class = "home_new_thread_right">
         <div class="homeThreadTop1">
             
-            <div>
-
-            </div>
             <span class="home_thread_userName">${userName}</span>
+            <div class = "fjfjfioi">
+                ${tag_dom}
+            </div>
         </div> 
         <div class="home_thread_main">
             <div class="fkglr">

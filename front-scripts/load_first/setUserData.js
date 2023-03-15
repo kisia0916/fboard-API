@@ -97,9 +97,9 @@ async function change_date(){
 const delet_like = async(id)=>{
     let threadid = id.split(":")
 
-    await axios.post("/api/thread/deletelike",{
+    await axios.post("/api/thread/deletelike2",{
         userId:window.sessionStorage.getItem(["userId"]),
-        subThreadId:threadid[1]
+        threadId:threadid[1]
     })
     setLikeThread()
 
@@ -123,7 +123,6 @@ const delet_like = async(id)=>{
     }
     window.sessionStorage.setItem(["userLike"],like)
 
-    // console.log(delete_like_list)
 }
 //お気に入りスレッドを取得 して表示
 const leftThreadWappDom = document.getElementById("liftBarWP")
@@ -145,7 +144,7 @@ const setLikeThread = async()=>{
                     <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
                     <div class="LeftBarThreadTop">
                         <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_like:${i.threadId}">
-                        <span class="LeftBarThreadName">${LikeThreadMadeBy}</span>
+                        <span class="LeftBarThreadName">${change_xss(LikeThreadMadeBy)}</span>
                     </div>
                     <div class="LeftHreadMain">
                         <span class="LeftBarThreadTitle">${LikeThreadTitle}</span>
@@ -201,7 +200,7 @@ const setHistoryThread = async()=>{
                     <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
                     <div class="LeftBarThreadTop">
                         <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_history:${i.threadId}">
-                        <span class="LeftBarThreadName">${MadeBy}</span>
+                        <span class="LeftBarThreadName">${change_xss(MadeBy)}</span>
                     </div>
                     <div class="LeftHreadMain">
                         <span class="LeftBarThreadTitle">${ThreadName}</span>
@@ -257,7 +256,7 @@ const setMyThread = async()=>{
                     <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
                     <div class="LeftBarThreadTop">
                         <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_mythread:${i.threadId}">
-                        <span class="LeftBarThreadName">${MadeBy}</span>
+                        <span class="LeftBarThreadName">${change_xss(MadeBy)}</span>
                     </div>
                     <div class="LeftHreadMain">
                         <span class="LeftBarThreadTitle">${ThreadName}</span>

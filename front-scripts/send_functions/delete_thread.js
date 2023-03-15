@@ -1,10 +1,6 @@
 const delete_thread = async(id)=>{
     let threadid = id.split(":")
-    await axios.post("/api/thread/deletethread2",{
-        threadId:threadid[1],
-        userId:window.sessionStorage.getItem(["userId"])
-    })
-    setMyThread()
+
     if(window.sessionStorage.getItem(["nowMainLink"]) == "/home"){
         let te = document.getElementById(threadid[1])
         console.log(te)
@@ -19,4 +15,12 @@ const delete_thread = async(id)=>{
             te2.remove()
         }
     }
+    let delete_thread = document.getElementById(threadid[1])
+    delete_thread.remove()
+    await axios.post("/api/thread/deletethread2",{
+        threadId:threadid[1],
+        userId:window.sessionStorage.getItem(["userId"])
+    })
+    // setMyThread()
+
 }

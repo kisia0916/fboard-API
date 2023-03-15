@@ -11,10 +11,10 @@
 .ThreadCreateBox{
     height: 6%;
     flex: 2;
-    margin-top: 0.5%;
+    margin-top: 3px;
     display: flex;
     min-height: 60px;
-    border-bottom:2px solid #39393b;
+    border-bottom:2px solid #414141;
     padding-bottom: 0px;
 }
 .WriteHread{
@@ -26,12 +26,12 @@
     overflow: hidden;
     color: white;
     font-family: 'Franklin Gothic';
-    font-size: 170%;
+    font-size: 163%;
     display: flex;
     align-items: center;
     font-weight: 650;
     margin-left: 3.8%;
-    margin-top: 9px;
+    margin-top: 5px;
     user-select:none;
 }
 .ThreadCreateBox{
@@ -77,11 +77,11 @@
     width: fit-content;
     display: flex;
     justify-content: center;
-    margin-top: 0.2%;
+    margin-top: 0.1%;
     margin-right: 3%;
     /* background-color: rgba(247, 242, 101, 0.828);;; */
     background-color: rgba(255, 233, 92, 0.931);
-    height: 41px;
+    height: 38px;
     padding-right: 1%;
     border-radius: 15px;
     margin-left: 1%;
@@ -164,6 +164,7 @@
     margin-top: 0px;
     margin-left: 15px;
     margin-right: 1.5%;
+    /* min-height: 37px; */
     /* height: 100%; */
 
 }
@@ -301,6 +302,7 @@
 .thread_top_block_warpp{
     display: flex;
     justify-content: space-between;
+    min-height: 45px;
 }
 .thread_top_tags_warpp{
     display: flex;

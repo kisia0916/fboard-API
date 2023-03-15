@@ -1,0 +1,36 @@
+.tag_list_top_title{
+    color: white;
+    font-size: 160%;
+    font-weight: 550;
+    display: flex;
+    margin-top: 8px;
+    margin-left: 3.8%;
+    font-family: Franklin Gothic;
+}
+.tag_list_top{
+    display: flex;
+}
+.tag_list_top_tag{
+    display: flex;
+    background-color: #242427;
+    margin-top:11px;
+    margin-left: 20px;
+    height: 28px;
+
+    border-radius: 8px;
+}
+.tag_list_top_tag_text{
+    margin-right: 9px;
+    margin-top: 2px;
+    font-family: Franklin Gothic;
+    color: white;
+}
+.tag_list_top_tag_color{
+    width: 15px;
+    height: 15px;
+    background-color: aqua;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 6px;
+    border-radius: 50%;
+}

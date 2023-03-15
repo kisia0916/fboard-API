@@ -2,6 +2,8 @@ let thread_flg = false
 let first_file = null
 let fileName_2 = ""
 const send_thread = async()=>{
+    let button = document.querySelector(".new_thread_create_button1")
+    button.remove()
     let threadName = document.querySelector(".new_thread_tera").value
     let userName = window.sessionStorage.getItem(["Name"])
     let firstTweet = document.querySelector(".new_thread_tera2").value

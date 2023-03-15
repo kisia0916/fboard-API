@@ -36,8 +36,12 @@ const analysis_url = (now_url)=>{
         console.log("unkookooko")
         window.sessionStorage.setItem(["nowMainLink"],"/search/"+url_contents[2])
 
+    }else if(url_contents[1] == "tags"){
+        let tag_name = url_contents[2]
+        write_tags_page("雑談")
+        
     }else{
-        //404
+
     }
     console.log(url_contents)
 }

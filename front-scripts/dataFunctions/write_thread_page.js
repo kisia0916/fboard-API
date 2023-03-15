@@ -26,11 +26,12 @@ const write_thread_page = async(id)=>{
     }
     // console.log(return_datas.tweetCounter)
     // if(return_datas/2)
-    console.log(return_datas.threadName)
+
     let icon = await axios.post("/api/user/getuserimg",{
         name:window.sessionStorage.getItem(["Name"])
     })
     console.log(icon)
+
     const thread_html = return_thread_tweet_page(return_datas.threadName,return_datas.likenNum,return_datas.tweetCounter,icon.data)
     mainScreen.innerHTML = thread_html;
     await load_tweet_first(id)
@@ -114,7 +115,8 @@ const load_tweet_first = async(id)=>{
             }else{
                 img_null_counter = "display:inline"
             }
-            let tweet = return_tweet_dom(data.userName,data.messText,createedAt1,data.imgPath,img_null_counter,data.tweetId2)
+            let user = change_xss(data.userName)
+            let tweet = return_tweet_dom(user,data.messText,createedAt1,data.imgPath,img_null_counter,data.tweetId2)
             return tweet
         }).join("")
         warp_dom.innerHTML = write_list

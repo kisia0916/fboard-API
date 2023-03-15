@@ -1,5 +1,9 @@
 let ThreadListRast = 0;
 let ThreadListFirst = 0
+function change_xss(mess){
+    let xss_text = mess.replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    return xss_text
+}
 const writeThreadList = ()=>{
     document.title = "FBoard-ThreadList"
     let mainScreen = document.querySelector(".mainScreen");
@@ -133,7 +137,7 @@ const writeThreadList = ()=>{
                     <div class = "thread_left_main">
                     <div class = "thread_top_block_warpp">
                     
-                        <span class="ThreadUserName">${i.madeBy}</span>
+                        <span class="ThreadUserName">${change_xss(i.madeBy)}</span>
                     
                         <div class = "thread_top_tags_warpp">
                             ${tag_doms}
@@ -152,7 +156,7 @@ const writeThreadList = ()=>{
                                         </span>
                                     <span class="TweetCounterText">${i.tweetCounter}</span>
                                 </div>
-                                <div id = "+${i.threadId}"class="${thread_htmlId} lineNUM" onmouseover="setflg()" onmouseleave="resetflg()" onclick ="setLike(this.id)">
+                                <div id = "+${i.threadId}"class="${thread_htmlId} lineNUM" onmouseover="setflg()" onmouseleave="resetflg()" onclick ="setLike2(this.id)">
                                     <span class="material-symbols-outlined ThreadLikeCounterIcon">
                                         bookmark
                                         </span>
@@ -293,7 +297,7 @@ document.getElementById('mainScreen').onscroll = async event => {
                 <div class = "thread_left_main">
                 <div class = "thread_top_block_warpp">
                     
-                <span class="ThreadUserName">${i.madeBy}</span>
+                <span class="ThreadUserName">${change_xss(i.madeBy)}</span>
             
                 <div class = "thread_top_tags_warpp">
                     ${tag_doms}                
@@ -437,7 +441,7 @@ const write_new_thread_one = async(i)=>{
         <div class = "thread_left_main">
         <div class = "thread_top_block_warpp">
                     
-        <span class="ThreadUserName">${i.madeBy}</span>
+        <span class="ThreadUserName">${change_xss(i.madeBy)}</span>
     
         <div class = "thread_top_tags_warpp">
             ${tag_doms}

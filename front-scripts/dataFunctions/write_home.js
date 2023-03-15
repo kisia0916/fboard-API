@@ -70,7 +70,8 @@ const set_new_threads = async()=>{
              tag_doms+= return_tag_dom1(tag_list[i],color)
              
          }
-         let threadD = return_home_new_thread(data1.madeBy,data1.updatedAt,data1.tweets.length,data1.threadNname,data1.threadSubId,img_style,text_style,data1.titleImgPath,tag_doms);
+         let user = change_xss(data1.madeBy)
+         let threadD = return_home_new_thread(user, data1.updatedAt,data1.tweets.length,data1.threadNname,data1.threadSubId,img_style,text_style,data1.titleImgPath,tag_doms);
          return threadD;
     }).join("")
     new_threads.innerHTML = inhtml;

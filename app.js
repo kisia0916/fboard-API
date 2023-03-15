@@ -16,6 +16,7 @@ const home_page = require("./router_pages/home")
 const search_page = require("./router_pages/search_page")
 const threadlist_page = require("./router_pages/threadList")
 const thread_page = require("./router_pages/thread._page");
+const tags_page = require("./router_pages/tag_pages")
 const mongoose = require("mongoose");
 const session = require("express-session");
 const http = require("http");
@@ -41,12 +42,12 @@ app.use(session({
 mongoose.connect("mongodb+srv://fumi:20080916@cluster0.ehufboy.mongodb.net/gyokuboard?retryWrites=true&w=majority").then(()=>console.log("connectionDB")).catch((err)=>console.log(err))
 app.use(express.json())
 
-app.use("/router", express.static("router"));
+// app.use("/router", express.static("router"));
 app.use("/viwes",express.static("views"))
 app.use("/style",express.static("style"));
 app.use("/profilePhotos",express.static("profilePhotos"));
 app.use("/front-scripts",express.static("front-scripts"));
-app.use("/router_pages",express.static("router_pages"));
+// app.use("/router_pages",express.static("router_pages"));
 app.use("/photos",express.static("photos"))
 
 app.use(body_pase.json());//////////////////////////////   ここ重要
@@ -109,7 +110,7 @@ app.use("/home",home_page)
 app.use("/threadlist",threadlist_page)
 app.use("/thread",thread_page)
 app.use("/search",search_page)
-
+app.use("/tags",tags_page)
 io.on("connection",(socket)=>{
     console.log("socket")
 })

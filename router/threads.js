@@ -187,11 +187,13 @@ router.post("/setlike",async(req,res)=>{
             if (likeUser.like[i] == req.body.subThreadId){
                 console.log("aaaaaaa")
                 counter+=1;
-                await MiniThread1.updateOne({
-                    $set:{
-                        likenNum:MiniThread1.likenNum-1
-                    }
-                })
+                if (MiniThread1.likenNum>0){
+                    await MiniThread1.updateOne({
+                        $set:{
+                            likenNum:MiniThread1.likenNum-1
+                        }
+                    })
+                }
                 await likeUser.updateOne({
                     $pull:{
                         like:req.body.subThreadId
@@ -215,7 +217,13 @@ router.post("/setlike",async(req,res)=>{
         }
     }
 
-        if (counter == 0){
+    if (counter == 0){
+        if (likeThread.likes.indexOf(req.body.userId) == -1){
+            await likeUser.updateOne({
+                $push:{
+                    like:threadId///お気に入りにサブIDを指定する
+                }
+            })
             await MiniThread1.updateOne({
                 $set:{
                     likenNum:MiniThread1.likenNum+1
@@ -226,20 +234,96 @@ router.post("/setlike",async(req,res)=>{
                     likes:req.body.userId
                 }
             })
-            //MiniThread1 = await MiniThread.findOne({threadId:threadId})
 
-            console.log(MiniThread1)
+        //MiniThre  ad1 = await MiniThread.findOne({threadId:threadId})
         }
-        if (counter == 0){
-            await likeUser.updateOne({
-                $push:{
-                    like:threadId///お気に入りにサブIDを指定する
-                }
-            })
-        }
+        console.log(MiniThread1)
+    }
+    if (counter == 0){
+
+    }
         return res.status(200).json("お気に入りに追加しました")
     }catch(err){
         return res.status(500).json("エラーが発生しました");
+    }
+})
+router.post("/setlike2",async(req,res)=>{
+    let userId = req.body.userId
+    let threadId1 = req.body.threadId
+    try{
+        let user_data = await User.findOne({_id:userId})
+        let user_like = user_data.like
+        console.log(user_like)
+        let now_thread = await MiniThread.findOne({threadId:threadId1})
+        if (user_like.indexOf(threadId1) == -1 && now_thread.likes.indexOf(userId) == -1){
+            //お気に入りに登録
+            console.log("fff")
+            await user_data.updateOne({
+                $push:{
+                    like:threadId1
+                }
+            })
+        
+            console.log("fff２")
+
+            console.log("fff３")
+
+            let now_thread_num = now_thread.likenNum
+
+            await now_thread.updateOne({
+                $set:{
+                    likenNum:now_thread_num+1,
+                    likes:userId
+                }
+            })
+            console.log("fff４")
+
+            return res.status(200).json("成功しました")
+        }else{
+            return res.status(200).json("登録に失敗しました")
+        }
+    }catch{
+        return res.status(500).json("エラー")
+    }
+})
+router.post("/deletelike2",async(req,res)=>{
+    let threadId = req.body.threadId
+    let userId = req.body.userId
+    console.log("kidou")
+    try{
+        let user_data = await User.findOne({_id:userId})
+        let user_like = user_data.like
+        console.log(user_like)
+        console.log(user_like.indexOf(threadId))
+        if(user_like.indexOf(threadId) > -1){
+            //お気に入りから削除
+            await user_data.updateOne({
+                $pull:{
+                    like:threadId
+                }
+            })
+            let now_thread = await MiniThread.findOne({threadId:threadId})
+            console.log("fff３")
+
+            let now_thread_num = now_thread.likenNum
+            if(now_thread_num>0){
+                await now_thread.updateOne({
+                    $set:{
+                        likenNum:now_thread_num-1
+                    }
+                })
+                await now_thread.updateOne({
+                    $pull:{
+                        likes:userId
+                    }
+                })
+            }
+            return res.status(200).json("成功しました")
+        }else{
+            return res.status(200).json("解除に失敗しました")
+        }
+    }catch{
+        return res.status(500).json("エラー")
     }
 })
 router.post("/deletelike",async(req,res)=>{
@@ -437,6 +521,31 @@ router.post("/search/:text",async(req,res)=>{
         return res.status(200).json(return_list)
     }catch(err){
         return res.status(500).json("エラー")
+    }
+})
+
+router.post("/getfirsttags",async(req,res)=>{
+    let tag_name = req.body.tag
+    let get_num = 10
+    try{
+        let threads = await MiniThread.find({tags:tag_name}).limit(get_num).sort({ $natural: -1 });
+        return res.status(200).json(threads)
+    }catch{
+        return res.status(500).json("エラー")
+    }
+})
+router.post("/getnexttags",async(req,res)=>{
+
+    let get_num = 10
+    let tag_name = req.body.tag
+    let rastnum = req.body.rastnum
+    try{
+
+        let threads = await MiniThread.find({tags:tag_name,threadNum:{$lt:rastnum}}).limit(10).sort({ $natural: -1 })
+        return res.status(200).json(threads)
+    }catch{
+        return res.status(500).json("エラー")
+
     }
 })
 module.exports = router

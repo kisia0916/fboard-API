@@ -35,6 +35,10 @@ const MiniThreadSchma = new mongoose.Schema({
     tags:{
         type:Array,
         default:[]
+    },
+    likes:{
+        type:Array,
+        default:[]
     }
 },{timestamps:true})
 module.exports = mongoose.model("MiniThread",MiniThreadSchma)

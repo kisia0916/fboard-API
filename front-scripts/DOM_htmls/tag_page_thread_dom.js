@@ -1,5 +1,5 @@
 const return_tag_thread = (i)=>{
-
+    let name = i.madeBy.replace(/</g,"&lt;").replace(/>/g,"&gt;")
     let html = `
         <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
         <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
@@ -9,7 +9,7 @@ const return_tag_thread = (i)=>{
         <div class = "thread_left_main">
         <div class = "thread_top_block_warpp">
                         
-        <span class="ThreadUserName">${i.madeBy}</span>
+        <span class="ThreadUserName">${name}</span>
 
         <div class = "thread_top_tags_warpp">
             ${""}

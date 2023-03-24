@@ -38,7 +38,8 @@ const analysis_url = (now_url)=>{
 
     }else if(url_contents[1] == "tags"){
         let tag_name = url_contents[2]
-        write_tags_page("雑談")
+        write_tags_page(tag_name)
+        window.sessionStorage.setItem(["nowMainLink"],"/tags/"+tag_name)
         
     }else{
 

@@ -15,7 +15,7 @@ const reset_tag_flg = ()=>{
 }
 
 const return_tag_dom = (tag_text,color)=>{
-    let tag_html = `<div class = "thread_tag_main" onmouseover="set_tag_flg()" onmouseleave="reset_tag_flg()" onclick = "">
+    let tag_html = `<div class = "thread_tag_main" onmouseover="set_tag_flg()" id = "${tag_text}"onmouseleave="reset_tag_flg()" onclick = "move_url_tag_page(this.id)">
     <div class = "thread_tag_color1" style = "background-color:${color}">
 
     </div>

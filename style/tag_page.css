@@ -34,3 +34,29 @@
     margin-top: 6px;
     border-radius: 50%;
 }
+.read_more_button{
+    width: 90%;
+    height: 50px;
+    background-color:rgba(255, 233, 92, 0.871);
+    margin-bottom: 100px;
+    border-radius: 10px;
+    margin: auto;
+    border:solid 2px rgb(250, 228, 82);
+    display: flex;
+    cursor: pointer;
+
+}
+.read_more_button:hover{
+    background-color:rgba(250, 232, 117, 0.871);
+    
+}
+.bottom_spacee{
+    width: 30px;
+    height: 35px;
+
+}
+.read_more_button_text{
+    margin: auto;
+    font-family: Arial,sans-serif;
+    font-weight: 550;
+}

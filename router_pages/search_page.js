@@ -12,8 +12,10 @@ router.get("/:text",async(req,res,text)=>{
         })
         console.log(req.params.id)
         //setCookie("userId",req.session.userId,res);
-        res.clearCookie("userId1")
         res.cookie("userId1",req.session.userId,{})
+        res.cookie("pass",req.session.pass,{})
+        res.cookie("name",req.session.name1,{})
+        // res.cookie("userId1",req.session.userId,{})
         res.writeHead(200,{"Content-Type":"text/html"});
         res.write(index_render)
         res.end()

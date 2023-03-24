@@ -1,4 +1,5 @@
 let cookie_data = document.cookie
+console.log(cookie_data)
 let userId = "";
 let userLike = null;
 let userHistory = null;
@@ -12,6 +13,19 @@ for (let i= 0;cookie_data.length>i;i++){
     }
     if (cookie_data[i] == "="){
         counter = 1;
+    }
+}
+cookie_data = cookie_data.split(";")
+console.log(cookie_data)
+
+for (let i = 0;cookie_data.length>i;i++){
+    let split_data = cookie_data[i].split("=")
+    console.log(split_data)
+    if(split_data[0]== " userId1" || split_data[0]== "userId1"){
+        
+        userId = split_data[1]
+        // console.log(userId)
+        break
     }
 }
 window.sessionStorage.setItem(['userId'],userId)

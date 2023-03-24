@@ -370,15 +370,15 @@ router.post("/deletelike",async(req,res)=>{
     }
 })
 //スレッドを取得
-router.get("/getthread1",async(req,res)=>{
-    let page = req.body.page;
-    try{
-        let threadList = await Thread.find({wasdelete:false}).sort({ $natural: -1 }).limit(6*page);
-        return res.status(200).json(threadList)
-    }catch{
-        return res.status(500).json("エラー")
-    }
-})
+// router.get("/getthread1",async(req,res)=>{
+//     let page = req.body.page;
+//     try{
+//         let threadList = await Thread.find({wasdelete:false}).sort({ $natural: -1 }).limit(6*page);
+//         return res.status(200).json(threadList)
+//     }catch{
+//         return res.status(500).json("エラー")
+//     }
+// })
 //こっちでは最後のスレッド番号以下の物を取得する
 router.post("/getthread2",async(req,res)=>{
     let rastThread = req.body.rastThread;
@@ -526,7 +526,7 @@ router.post("/search/:text",async(req,res)=>{
 
 router.post("/getfirsttags",async(req,res)=>{
     let tag_name = req.body.tag
-    let get_num = 10
+    let get_num = 21//取得したい個数+1の数を入れる
     try{
         let threads = await MiniThread.find({tags:tag_name}).limit(get_num).sort({ $natural: -1 });
         return res.status(200).json(threads)
@@ -536,13 +536,15 @@ router.post("/getfirsttags",async(req,res)=>{
 })
 router.post("/getnexttags",async(req,res)=>{
 
-    let get_num = 10
+    let get_num = 11//取得したい数+1の数を設定
     let tag_name = req.body.tag
     let rastnum = req.body.rastnum
+    // console.log("aaaa"+tag_name)
     try{
-
-        let threads = await MiniThread.find({tags:tag_name,threadNum:{$lt:rastnum}}).limit(10).sort({ $natural: -1 })
-        return res.status(200).json(threads)
+        if(tags.indexOf(tag_name) != -1){
+            let threads = await MiniThread.find({tags:tag_name,threadNum:{$lt:rastnum}}).limit(get_num).sort({ $natural: -1 })
+            return res.status(200).json(threads)
+        }
     }catch{
         return res.status(500).json("エラー")
 

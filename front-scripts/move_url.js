@@ -72,3 +72,10 @@ const move_url_threadList = (url)=>{
         analysis_url(location.pathname)
     }
 }
+
+const move_url_tag_page = (url)=>{
+    let next = "/tags/"+url
+    window.history.pushState(null,"test",location.pathname)
+    history.replaceState('','',next);
+    analysis_url(location.pathname)
+}

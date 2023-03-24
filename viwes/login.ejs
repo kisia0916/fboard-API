@@ -8,14 +8,31 @@
 
     <h1><%=title%></h1>
     <form method="post" action="/login">
-		<input type="text" name="name">
-        <input type="text" name="pass">
+		<input type="text" name="name" id = "name">
+        <input type="text" name="pass" id = "pass">
 		<input type="submit" value="送信する" onclick="" return false>
 	</form>
     <span><%=mess%></span>
     <script src ="/socket.io/socket.io.js"></script>
     <script>
         let socket = io();
+
+        let cookie = document.cookie
+        if(cookie){
+            cookie = cookie.split(";")
+
+            for(let i= 0;cookie.length>i;i++){
+                let split_cookie = cookie[i].split("=")
+                console.log(split_cookie)
+                if(split_cookie[0] == " name" || split_cookie[0] == "name"){
+                    document.getElementById("name").value = decodeURI(split_cookie[1])
+
+                }else if(split_cookie[0] == " pass" || split_cookie[0] == "pass"){
+                    document.getElementById("pass").value = split_cookie[1]
+
+                }
+            }
+        }
     </script>
 </body>
 </html>

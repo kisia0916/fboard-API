@@ -33,6 +33,8 @@ router.post("/",async(req,res,text)=>{
             req.session.name1 = name;
             req.session.pass1 = pass;
             req.session.userId = userId;
+            req.session.pass = user.pass
+            
             res.redirect('/')
 
         }else{

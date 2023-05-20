@@ -1,9 +1,10 @@
 .tag_list_top_title{
     color: white;
-    font-size: 160%;
+    font-size: 145%;
     font-weight: 550;
     display: flex;
     margin-top: 8px;
+    margin-bottom: 8px;
     margin-left: 3.8%;
     font-family: Franklin Gothic;
 }
@@ -24,11 +25,12 @@
     margin-top: 2px;
     font-family: Franklin Gothic;
     color: white;
+    font-size: 100%;
 }
 .tag_list_top_tag_color{
     width: 15px;
     height: 15px;
-    background-color: aqua;
+    /* background-color: aqua; */
     margin-right: 5px;
     margin-left: 5px;
     margin-top: 6px;

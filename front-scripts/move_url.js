@@ -1,4 +1,5 @@
 let ffffffffffffffffff = false
+let left_flg_1 = false
 const move_url = (url)=>{
     //set_history(location.pathname)
     console.log("kopfsdklfjdaskjgkl;ajwfoiw")
@@ -19,13 +20,17 @@ const move_url_home = ()=>{
 }
 
 const move_url_thread = (url)=>{
-    let next = "/thread/"+url
-    window.history.pushState(null,"test",location.pathname)
-    history.replaceState('','',next);
-    analysis_url(location.pathname)
+    console.log("いきてます")
+
+    if(ffffffffffffffffff == false){
+        let next = "/thread/"+url
+        window.history.pushState(null,"test",location.pathname)
+        history.replaceState('','',next);
+        analysis_url(location.pathname)
+    }
 }
 const move_url_thread_left = (url)=>{
-    if (ffffffffffffffffff == false){
+    if (left_flg_1 == false){
         let next = "/thread/"+url
         window.history.pushState(null,"test",location.pathname)
         history.replaceState('','',next);
@@ -43,12 +48,12 @@ const move_url_thread_left = (url)=>{
 // }
 const move_url_search_thread = (text)=>{
     // let text2 = text.replace(",","&")
-    let text2 = text//decodeURI(text)
-    // let text3 = text2.replace(",","&")
-    let next = "/search/"+text2
-    window.history.pushState(null,"test",location.pathname)
-    history.replaceState('','',next);
-    analysis_url(location.pathname)
+        let text2 = text//decodeURI(text)
+        // let text3 = text2.replace(",","&")
+        let next = "/search/"+text2
+        window.history.pushState(null,"test",location.pathname)
+        history.replaceState('','',next);
+        analysis_url(location.pathname)
 }
 const move_url_search_thread_2 = (text)=>{
     let text2 = decodeURI(text)
@@ -60,12 +65,30 @@ const move_url_search_thread_2 = (text)=>{
 }
 const set_leftFLG = ()=>{
     ffffffffffffffffff = true
+    console.log("a")
 }
 const reset_leftFLG = ()=>{
     ffffffffffffffffff = false
 }
+const set_leftFLG_2 = ()=>{
+    left_flg_1 = true
+    console.log("a")
+}
+const reset_leftFLG_2 = ()=>{
+    left_flg_1 = false
+}
 const move_url_threadList = (url)=>{
-    if (!mouseFLG){
+    console.log("vv")
+    if(!mouseFLG){
+        let next = "/thread/"+url
+        window.history.pushState(null,"test",location.pathname)
+        history.replaceState('','',next);
+        analysis_url(location.pathname)
+    }
+}
+const move_url_threadList2 = (url)=>{
+    // console.log("vv")
+    if(!mouseFLG){
         let next = "/thread/"+url
         window.history.pushState(null,"test",location.pathname)
         history.replaceState('','',next);
@@ -74,8 +97,11 @@ const move_url_threadList = (url)=>{
 }
 
 const move_url_tag_page = (url)=>{
-    let next = "/tags/"+url
-    window.history.pushState(null,"test",location.pathname)
-    history.replaceState('','',next);
-    analysis_url(location.pathname)
+    // if(ffffffffffffffffff == false){
+        let next = "/tags/"+url
+        window.history.pushState(null,"test",location.pathname)
+        history.replaceState('','',next);
+        analysis_url(location.pathname)
+        ffffffffffffffffff = true
+    // }
 }

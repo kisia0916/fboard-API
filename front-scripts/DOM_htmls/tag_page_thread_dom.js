@@ -1,8 +1,9 @@
-const return_tag_thread = (i)=>{
+const return_tag_thread = (i,tag_doms)=>{
     let name = i.madeBy.replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    mouseFLG = false
     let html = `
         <div class=${"inWapp"+i.threadNum} id = "threadlist:${i.threadId}">
-        <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList(this.id)">
+        <div class="Thread" id = "${i.threadId}" onclick ="move_url_threadList2(this.id)" >
         <div class="ThreadHead">
             <img src="" width="90px" height="90px" class="ThreadIcon" id = "search_thread_id:${i.threadId}">
         </div>
@@ -12,7 +13,7 @@ const return_tag_thread = (i)=>{
         <span class="ThreadUserName">${name}</span>
 
         <div class = "thread_top_tags_warpp">
-            ${""}
+            ${tag_doms}
         
         </div>
     </div>

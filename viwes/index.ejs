@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="../photos/tweet_photos/1675328090482f_f_object_153_s512_f_object_153_0bg.png">
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/mainStyle.css">
     <link rel="stylesheet" href="../style/LeftBar.css">
@@ -14,7 +15,7 @@
     <link rel="stylesheet" href="../style/thread_tweet.css">
     <link rel="stylesheet" href="../style/thread_tweet_main.css">
     <link rel="stylesheet" href="../style/tag_page.css">
-
+    <link rel="stylesheet" href="../style/loading.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -24,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <script src="../front-scripts/finish_load.js"></script>
-
+    <script src="/socket.io/socket.io.js"></script>
 <body>
     <!-- <div class="loading">
     </div> -->
@@ -183,6 +184,10 @@
     <script src="../front-scripts/DOM_htmls/tags_page_dom.js"></script>
     <script src="../front-scripts/DOM_htmls/tag_page_thread_dom.js"></script>
     <script src="../front-scripts/load_first/setUserData.js"></script>
+    <script src="../front-scripts/socket_files/socket_on.js"></script>
+    <script src="../front-scripts/socket_files/socket_emit.js"></script>
+
+
     <script src="../front-scripts/loadData.js"></script>
     <script src="../front-scripts/clickThread.js"></script>
     <script src="../front-scripts/setLike.js"></script>

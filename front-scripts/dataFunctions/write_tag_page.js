@@ -1,8 +1,10 @@
 let rast_num_tag_page = 0
 const write_tags_page = async(tag)=>{
+    // mouseFLG = false
     tag = decodeURI(tag)
+    document.title = `FBoard-tag-${tag}`
     let mainScreen = document.querySelector(".mainScreen");
-    mainScreen.innerHTML = return_tags_page_dom()
+    mainScreen.innerHTML = return_tags_page_dom(tag)
     let first_threads = await axios.post("/api/thread/getfirsttags",{
         tag:tag,
     })
@@ -16,7 +18,22 @@ const write_tags_page = async(tag)=>{
      }
     let page_main = first_threads.data.map((i)=>{
         console.log(i)
-        let thread_dom = return_tag_thread(i)
+        let tag_list = i.tags
+        let tag_doms = ""
+        for (let i = 0;tag_list.length>i;i++){
+            let color =""
+            console.log(tag_color)
+            for (let s = 0;tag_color.length>s;s++){
+                console.log(tag_color[s])
+                if(tag_color[s][0] == tag_list[i]){
+                    
+                    color = tag_color[s][1]
+                }
+            }
+            tag_doms+= return_tag_dom(tag_list[i],color)
+            
+        }
+        let thread_dom = return_tag_thread(i,tag_doms)
         // console.log(thread_dom)
 
         return thread_dom
@@ -56,7 +73,22 @@ const reload_more_threads_tag = async(tag_name)=>{
     console.log(more_thread.data)
     let more_thread_main = more_thread.data.map((i)=>{
         // console.log(i)
-        let thread_dom = return_tag_thread(i)
+        let tag_list = i.tags
+        let tag_doms = ""
+        for (let i = 0;tag_list.length>i;i++){
+            let color =""
+            console.log(tag_color)
+            for (let s = 0;tag_color.length>s;s++){
+                console.log(tag_color[s])
+                if(tag_color[s][0] == tag_list[i]){
+                    
+                    color = tag_color[s][1]
+                }
+            }
+            tag_doms+= return_tag_dom(tag_list[i],color)
+            
+        }
+        let thread_dom = return_tag_thread(i,tag_doms)
         return thread_dom
         
     }).join("")

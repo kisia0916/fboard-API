@@ -9,29 +9,37 @@
 }
 .tweet_thread_space_wapp:hover{
     background-color:#404040b6;
+    /* background-color:#585858b6; */
+
     /* display: block; */
 }
 .tweet_thread_space_wapp:hover .tweet_return_button{
     /* background-color: red; */
     display: inline;
-    background-color: rgb(3, 111, 189);
+    background-color: rgba(247, 222, 59, 0.931);
     margin-left: 15px;
     border-radius: 5px;
     height: 25px;
     display: flex;
+    cursor: pointer;
     /* display: none; */
     /* background-color: aqua; */
 }
+.tweet_return_button:hover{
+    background-color: rgb(255, 233, 86) !important;
+    /* border: solid 2px rgba(255, 208, 0, 0.931) */
+}
+
 .tweet_thread_left{
     /* background-color: blue; */
     width: 48px;
     /* margin-top: 30px; */
-    margin-right: 10px;
-    margin-left: 14px;
+    margin-right: 8px;
+    margin-left: 15px;
 }
 .tweet_thread_left_img{
-    width: 41px;
-    height: 41px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 .tweet_thread_center{
@@ -53,7 +61,7 @@
     color: white;
     font-family: Arial,sans-serif;
     font-size: 110%;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     /* font-weight: 550; */
 }
 .tweet_thread_center_createAt{
@@ -92,19 +100,37 @@
 .tweet_thread_return_button_text{
     white-space: nowrap;
 
-    color: white;
+    color: black;
     font-family: Arial,sans-serif;
-    font-size: 90%;
+    font-size: 95%;
     margin-right: 10px;
-    margin-top: 1px;
+    margin-top: 2px;
 }
-.tweet_thread_return_button_icon{
-    color: white;
-    font-size: 130%;
+.ffrrfrfgrg{
+    color: black;
+    font-size: 130% !important;
+    margin-top: 1px;
 }
 .tweet_thread_top_space{
     height: 10px;
     width: 100%;
     margin: 0;
     padding: 0;
+}
+.tweet_thread_top_space_2{
+    height: 3px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.tweet_thread_top_space_3{
+    /* height: 2.5px; */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.tweet_tag_main{
+    background-color: rgb(66, 66, 66);
+    margin-top: 10px;
+    cursor: pointer;
 }

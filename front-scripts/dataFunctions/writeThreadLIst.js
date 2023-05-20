@@ -11,25 +11,23 @@ const writeThreadList = ()=>{
     let thread_htmlId = null
     if (true){
             const ThreadList = `
-                <div class="mainScreenWapp">
-                            <div class="ThreadListTop">
-                                <span class="ThreadListTopText">Home - ThreadList</span>
-                            </div>
-                            <div class="ThreadCreateBox">
-                                    
-                                    <div class="createInputWapp">
-                                            <input type="text" class="createThreadInput" placeholder="スレッドのタイトル">
-                                    </div>
-                                    <div class="sendThreadButton">
-
-
-                                            <span class="createThreadButton" onclick = "write_prompt()">スレッドを投稿</span>
-                                    </div>
-                            </div>
-                            <span class="ThreaCounterText">4件のスレッド</span>
-                            <div class="WriteHread">
-                            </div>
-                </div>
+            <div class="mainScreenWapp">
+            <div class="ThreadListTop">
+                <span class="ThreadListTopText">Home - ThreadList</span>
+            </div>
+            <div class="ThreadCreateBox">
+                    
+                    <div class="createInputWapp">
+                            <input type="text" class="createThreadInput" placeholder="スレッドのタイトル">
+                    </div>
+                    <div class="sendThreadButton">
+                            <span class="createThreadButton" onclick = "write_prompt()">スレッドを投稿</span>
+                    </div>
+            </div>
+            <span class="ThreaCounterText">4件のスレッド</span>
+            <div class="WriteHread">
+            </div>
+</div>
             `;
             mainScreen.innerHTML = ThreadList;
             let writeSpace = document.querySelector(".WriteHread");
@@ -318,7 +316,7 @@ document.getElementById('mainScreen').onscroll = async event => {
                                 </span>
                             <span class="TweetCounterText">${i.tweetCounter}</span>
                         </div>
-                        <div id = "+${i.threadId}"class="${thread_htmlId}" onmouseover="setflg()" onmouseleave="resetflg()"onclick = "setLike(this.id)">
+                        <div id = "+${i.threadId}"class="${thread_htmlId}" onmouseover="setflg()" onmouseleave="resetflg()"onclick = "setLike2(this.id)">
                             <span class="material-symbols-outlined ThreadLikeCounterIcon">
                                 bookmark
                                 </span>
@@ -462,7 +460,7 @@ const write_new_thread_one = async(i)=>{
                         </span>
                     <span class="TweetCounterText">${i.tweetCounter}</span>
                 </div>
-                <div id = "+${i.threadId}"class="${thread_htmlId}" onmouseover="setflg()" onmouseleave="resetflg()"onclick = "setLike(this.id)">
+                <div id = "+${i.threadId}"class="${thread_htmlId}" onmouseover="setflg()" onmouseleave="resetflg()"onclick = "setLike2(this.id)">
                     <span class="material-symbols-outlined ThreadLikeCounterIcon">
                         bookmark
                         </span>

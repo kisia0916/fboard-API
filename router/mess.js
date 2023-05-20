@@ -138,7 +138,7 @@ router.post("/gettweet",async(req,res)=>{
 router.post("/gettweet2",async(req,res)=>{
     let page = req.body.page
     let threadId = req.body.threadSubId
-    let get_num =10;
+    let get_num =11;
     try{
         let threadList = await Tweet.find({threadSubId:threadId,tweet_num:{$lte:get_num*Number(page),$gt:get_num*(Number(page)-1)}/*,tweet_num:{$gt:get_num*(Number(page)-1)}*/})
         if (threadList.length == 0){
@@ -159,11 +159,42 @@ router.get("/getnewtweet",async(req,res)=>{
         return res.status(500).json("エラー")
     }
 })
-const deleteTweet = async(req,res,deleteTweet)=>{
-    if (deleteTweet.userId == req.body.userId){
-        await Tweet.remove({_id:req.body.tweetId})
+router.post("/gettweet3",async(req,res)=>{
+    try{
+        let rast_num = req.body.rast_num
+        let threadId =req.body.threadId
+        let tweet =await Tweet.find({threadSubId:threadId,tweet_num:{$lt:rast_num}}).limit(15).sort({ $natural: -1 })
+        return res.status(200).json(tweet)
+    }catch{
+        return res.status(500).json("エラー")
     }
-}
+})
+router.post("/gettweet4",async(req,res)=>{
+    try{
+        // let screen_size = req.body.screen_size
+        // console.log("aaa"+screen_size)
+        let threadId = req.body.threadId
+        let thread = await Tweet.find({threadSubId:threadId}).limit(20).sort({ $natural: -1 })
+        return res.status(200).json(thread)
+    }catch{
+        return res.status(500).json("エラー")
+
+    }
+})
+// const deleteTweet = async(req,res,deleteTweet)=>{
+//     if (deleteTweet.userId == req.body.userId){
+//         await Tweet.remove({_id:req.body.tweetId})
+//     }
+// }
+router.post("/getreprytweet",async(req,res)=>{
+    try{
+        let tweetId = req.body.tweetId
+        let tweet = await Tweet.findOne({tweetId2:tweetId})
+        return res.status(200).json(tweet)
+    }catch{
+        return res.status(500).json("エラー")
+    }
+})
 router.get("/test1",async(req,res)=>{
     let test2 = ["635930406977cc13da00c20f"]
     let test3 = []
@@ -177,12 +208,12 @@ router.get("/test1",async(req,res)=>{
         console.log("取得失敗")
     }
 })
-router.post("/deletetweetall",async(req,res)=>{
-    let tweetLIst = await Tweet.find();
-    for (let i =0;tweetLIst.length>i;i++){
-        await Tweet.remove({tweetId2:tweetLIst[i].tweetId2})
-    }
-})
+// router.post("/deletetweetall",async(req,res)=>{
+//     let tweetLIst = await Tweet.find();
+//     for (let i =0;tweetLIst.length>i;i++){
+//         await Tweet.remove({tweetId2:tweetLIst[i].tweetId2})
+//     }
+// })
 // router.post("/gjgjgjgjg",async(req,res)=>{
 //     await Tweet.remove()
 // })

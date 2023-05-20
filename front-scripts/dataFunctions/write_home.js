@@ -61,7 +61,7 @@ const set_new_threads = async()=>{
              let color =""
              console.log(tag_color)
              for (let s = 0;tag_color.length>s;s++){
-                 console.log(tag_color[s])
+                //  console.log(tag_color[s])
                  if(tag_color[s][0] == tag_list[i]){
                      
                      color = tag_color[s][1]

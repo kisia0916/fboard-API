@@ -79,7 +79,7 @@ router.post("/newthread",async(req,res)=>{
                 imgPath:req.body.imgPath,
                 userId:user._id,
                 userName:user.name,
-                tweet_num:1
+                tweet_num:0
             })
             const first_thread2 = first_thread.save()
 
@@ -408,7 +408,7 @@ router.post("/getthread3",async(req,res)=>{
             let mainThreadList = await MiniThread.find({threadNum:{$lt:rastNum}}).sort({$natural:-1}).limit(6)
             return res.status(200).json(mainThreadList)
         }else if (rastNum == -1){
-            let mainThreadList2 = await MiniThread.find().sort({$natural:-1}).limit(6)
+            let mainThreadList2 = await MiniThread.find().sort({$natural:-1}).limit(8)
             return res.status(200).json(mainThreadList2)
         }
 

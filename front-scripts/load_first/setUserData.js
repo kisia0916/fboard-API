@@ -170,7 +170,7 @@ const setLikeThread = async()=>{
                                     </span>
                                 <span class="LeftTweetCounterText">${LikeThreadTweetNum}</span>
                             </div>
-                            <div class="delteThreadButton" id = "left:${i.threadId}" onclick= "delet_like(this.id)" onmouseover="set_leftFLG()" onmouseleave="reset_leftFLG()">
+                            <div class="delteThreadButton" id = "left:${i.threadId}" onclick= "delet_like(this.id)" onmouseover="set_leftFLG_2()" onmouseleave="reset_leftFLG_2()">
                                 <span class="LeftThreadDelete" >解除</span>
                             </div>
                     </div>
@@ -211,7 +211,7 @@ const setHistoryThread = async()=>{
             let photo = window.sessionStorage.getItem(["profilePhoto"])
 
             return`
-                    <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread(this.id)">
+                    <div class="LeftBarThread" id = ${i.threadId} onclick = "move_url_thread_left(this.id)">
                     <div class="LeftBarThreadTop">
                         <img src="${photo}" width="32px" height="32px" class="LeftBarImg" id = "left_bar_history:${i.threadId}">
                         <span class="LeftBarThreadName">${change_xss(MadeBy)}</span>

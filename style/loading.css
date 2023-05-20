@@ -1,0 +1,56 @@
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 10px solid rgba(255, 241, 152, 0.042);;
+    border-top-color: rgba(255, 233, 92, 0.931);
+    animation: spin013151 1s linear infinite;
+    border-radius: 100%;
+    display: flex;
+    /* margin: auto; */
+    /* margin-left: calc(100% / 2 - 18%);
+     */
+    
+    margin-top: calc(100% - 90%);
+    
+    /* margin-left: 20px; */
+    /* padding-right: 20px; */
+
+  }
+  
+  @keyframes spin013151 {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+.load_space{
+  background-color: #343435;;
+  /* background-color:rgba(255, 0, 0, 0.463); */
+
+  /* width: 100%; */
+  
+  background-color: red;
+  border-right: solid 1px red;
+  height:calc(100vh - 104px);
+  /* position:relative !important; */
+  
+}
+.tweet_thread_load_warpp{
+}
+.load_space{
+  position: absolute;
+  z-index: 100;
+  /* width: 100%; */
+  /* height: 100%; */
+  display: flex;
+  /* text-align: center; */
+  /* margin-left: 30px; */
+  width: 300%;
+  /* margin: auto; */
+}
+.tweet_thread_mess_main{
+  /* position: absolute; */
+  position: relative;
+
+
+}

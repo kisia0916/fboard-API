@@ -17,6 +17,7 @@ const search_page = require("./router_pages/search_page")
 const threadlist_page = require("./router_pages/threadList")
 const thread_page = require("./router_pages/thread._page");
 const tags_page = require("./router_pages/tag_pages")
+const socket_fun_1 = require("./socket_functions/socket1")
 const mongoose = require("mongoose");
 const session = require("express-session");
 const http = require("http");
@@ -26,6 +27,8 @@ const path = require("path");
 const router = require("./router/login");
 const User = require("./module/User");
 const { escape } = require("querystring");
+const change_page = require("./socket_functions/socket1");
+
 
 app.set('trust proxy', 1)
 app.use(session({
@@ -111,12 +114,73 @@ app.use("/threadlist",threadlist_page)
 app.use("/thread",thread_page)
 app.use("/search",search_page)
 app.use("/tags",tags_page)
+
+//ここからsocketの処理
+let user_list = []
+let user_id_list = []
+let user_pos = {
+    home:[],
+    threadList:[],
+    tags:[],
+    seatch:[],
+    thread:[
+        {threadId:"",user:[]}
+    ]
+}
+
 io.on("connection",(socket)=>{
-    console.log("socket")
+    let userId = ""//roomIdと兼用
+    change_page(socket,"a","b")
+    socket.on("connection_data",(data)=>{
+        if(user_id_list.indexOf(data.id) == -1){
+            user_list.push(data)
+            user_id_list.push(data.id)
+            userId = data.id
+            socket.join(userId)
+            io.to(userId).emit("checkonline_req",{tset:"hello"})
+
+            console.log(user_list,user_id_list)
+        }else{
+            console.log(user_list)
+            socket.join(userId)
+            io.to(userId).emit("checkonline_req",{tset:"hello"})
+        }
+    })
+    socket.on("changepage",(data)=>{
+        if(userId != ""){
+            let id = data.id
+            let obj = user_list[user_id_list.indexOf(userId)]
+            user_list[user_id_list.indexOf(userId)] = change_page(socket,obj,data.next)
+            console.log(user_list[user_id_list.indexOf(userId)])
+
+        }
+    })
+    socket.on("newtweet",(data)=>{
+
+    })
+    //切断処理
+    socket.on("disconnect",()=>{
+        // let a = user_list[user_id_list.indexOf("63da6b28a0f6599e689c6227")].clientCounte)
+        // if(user_list[user_id_list.indexOf(userId)].clientCounter <= 0){
+        //     user_list.splice(1,user_id_list.indexOf(userId))
+        //     user_id_list.splice(1,user_id_list.indexOf(userId))
+        //     console.log(user_id_list,user_list)
+        // }
+        if(userId != ""){
+            console.log("ooooooooooooooooooooo")
+            io.to(userId).emit("check_discon_user_state",{name:userId})
+            // user_list.splice(user_id_list.indexOf(userId),1)
+            // user_id_list.splice(user_id_list.indexOf(userId),1)
+            // socket.emit("checkonline_req",)
+            // console.log(user_id_list,user_list)
+        }
+    })
 })
+
 server.listen(3000,()=>{
     console.log("server run")
 })
+
 // function setCookie(key,value,res){
 //     let cookie = escape(value);
 //     res.setHeader('Set-Cookie',[cookie]);

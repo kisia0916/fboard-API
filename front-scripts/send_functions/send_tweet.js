@@ -25,15 +25,17 @@ const send_tweet = async()=>{
             "threadSubId":split_url[2],
             "messText":send_box_value_2,
             "imgPath":filename,
-            "returnTo":null,
+            "returnTo":now_repry,
             "userId":window.sessionStorage.getItem(["userId"]),
             "userName":window.sessionStorage.getItem(["Name"])
         })
         if(send.data == "ツイートに成功しました"){
             console.log("ツイート成功")
             filename = null
+            delete_repry_tweet()
         }else{
             console.log("ツイート失敗")
+            delete_repry_tweet()
         }
     }
 }

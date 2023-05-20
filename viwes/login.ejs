@@ -8,14 +8,12 @@
 
     <h1><%=title%></h1>
     <form method="post" action="/login">
-		<input type="text" name="name" id = "name">
-        <input type="text" name="pass" id = "pass">
+		<input type="text" name="name" id = "name" autocomplete="current-password">
+        <input type="password" name="pass" id = "pass" autocomplete="current-password">
 		<input type="submit" value="送信する" onclick="" return false>
 	</form>
     <span><%=mess%></span>
-    <script src ="/socket.io/socket.io.js"></script>
     <script>
-        let socket = io();
 
         let cookie = document.cookie
         if(cookie){

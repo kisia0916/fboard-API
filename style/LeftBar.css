@@ -6,9 +6,9 @@
 
 
     width: 92%;
-    margin-top: 15px;
+    margin-top: 12px;
     margin-left: 4.1%; 
-    border-radius: 15px;
+    border-radius: 12px;
     margin-bottom: 0;
     padding: 0;
     transform: translateY(-1px);
@@ -25,6 +25,10 @@
     font-size: 135%;
     font-weight: 650;
     margin-top: 10px;
+    /* display: flex; */
+    /* text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; */
 }
 .LeftBarThreadTop{
     display: flex;
@@ -102,26 +106,28 @@
 .sddsdsd{
     /* background-color: blue; */
     overflow: auto;
-    height: 80vh;
+    height: calc(100vh - 51px - 138px - 50px);
+    /* overflow: visible; */
+
 }
 
 @media screen and (min-height: 900px) {
     .last_box{
-        height: 30px;
+        /* height: 30px; */
 
         display: flex;
     }
 }
 @media screen and (max-height: 900px) {
     .last_box{
-        height: 40px;
+        /* height: 40px; */
 
         display: flex;
     }
 }
 @media screen and (max-height: 850px) {
     .last_box{
-        height: 100px;
+        /* height: 100px; */
 
         display: flex;
     }
@@ -129,12 +135,13 @@
 .yokonisitai{
     display: flex;
 
-    margin-top: 10px;
+    margin-top: 4.5px;
 
 }
 .yokonisitai2{
     display: flex; 
     margin-left: 25px;
+    margin-left: 6%;
 }
 
 .barFollownum{
@@ -157,7 +164,7 @@ border-radius: 10px;
     height: 100%;
     background-color: #3c3c3d;
     color: white;
-    height: 60px;
+    height: 53px;
     font-size: 106%;
     min-height: 30px;
 }
@@ -174,8 +181,9 @@ border-radius: 10px;
     outline: none;
   }
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
     height: 20px;
+    
     }
     ::-webkit-scrollbar-track {
     background-color: #3c3c3d;
